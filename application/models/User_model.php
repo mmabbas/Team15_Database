@@ -29,7 +29,7 @@
 
             if($result->num_rows() == 1)
             {
-                return $result->row(0)->loginID;
+                return $result->row(0)->userID;
             }
             else{
                 return false;
@@ -39,7 +39,7 @@
         //check username exists
         public function check_username_exists($username)
         {
-            $query = $this->db->get_where('login', array('loginID' => $username));
+            $query = $this->db->get_where('cardholder', array('loginID' => $username));
             if(empty($query->row_array()))
             {
                 return true;

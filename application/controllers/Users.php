@@ -20,10 +20,10 @@ class Users extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             //Encrypt Password
-            //$enc_password = md5($this->input->post('password'));
-            //$this->user_model->register($enc_password);
-            $password = $this->input->post('password');
-            $this->user_model->register('password');
+            $enc_password = md5($this->input->post('password'));
+            $this->user_model->register($enc_password);
+            //$password = $this->input->post('password');
+            //$this->user_model->register('password');
 
             //set message
             $this->session->set_flashdata('user_registered', 'You are now registered and can log in');
@@ -45,10 +45,10 @@ class Users extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             //get username
-            $username = $this->input->post('loginID');
+            $username = $this->input->post('username');
             //get and encrypt password
-            $password = $this->input->post('password');
-            //$password = md5($this->input->post('password'));
+            //$password = $this->input->post('password');
+            $password = md5($this->input->post('password'));
 
             //Login user
             $user_id = $this->user_model->login($username, $password);
@@ -57,8 +57,8 @@ class Users extends CI_Controller
                 die('SUCCESS');
                 //Create Session
                 //set message
-            $this->session->set_flashdata('user_loggedin', 'You are now logged in');
-            redirect('home');
+            //$this->session->set_flashdata('user_loggedin', 'You are now logged in');
+            //redirect('home');
             } else {
                 //set message
                 $this->session->set_flashdata('login_failed', 'Login is invalid');
