@@ -8,22 +8,32 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="<?php echo base_url(); ?>">Team 15 Library App</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="<?php echo base_url(); ?>">Team 15 Library App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                    <a class="nav-link" href="<?php echo base_url(); ?>">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="<?php echo base_url(); ?>about">About</a>
+                </li>
             </div>
-            <div id="navbar">
-                <ul class="nav navbar-nav">
-                    <li><a href="<?php echo base_url(); ?>">Home</a></li>
-                    <li><a href="<?php echo base_url(); ?>about">About</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar:right">
-                    <li><a href="<?php echo base_url(); ?>users/login">Login</a></li>
-                    <li><a href="<?php echo base_url(); ?>users/register">Register</a></li>
-
-                </ul>
-            </div>
+            <ul class="navbar-nav ml-auto">
+                <?php if(!$this->session->userdata('logged_in')) : ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url(); ?>users/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url(); ?>users/register">Register</a>
+                </li>
+                <?php endif; ?>
+                <?php if($this->session->userdata('logged_in')) : ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url(); ?>users/logout">Logout</a>
+                </li>
+                <?php endif; ?>
+            </ul>
         </div>
     </nav>
 
