@@ -40,16 +40,12 @@
             <input type="password" class="form-control" name="password2" placeholder="Confirm Password">
         </div>
         <div><Label>User Type</Label></div>
-        <!-- Group of material radios - option 1 -->
-        <div class="form-group">
-            <input type="radio" class="form-check-input" id="student" name="userType">
-            <label class="form-check-label" for="student">Student</label>
-        </div>
 
-        <!-- Group of material radios - option 2 -->
         <div class="form-group">
-            <input type="radio" class="form-check-input" id="faculty" name="userType" checked>
-            <label class="form-check-label" for="faculty">Faculty</label>
+            <select name = "usertype">
+                <option value = 1>Student</option>
+                <option value = 2>Faculty</option>
+            </select>
         </div>
     </div>
 </div>

@@ -65,7 +65,7 @@ class Users extends CI_Controller
 
                 //set message
                 $this->session->set_flashdata('user_loggedin', 'You are now logged in');
-                redirect('home');
+                redirect('users/dashboard');
             } else {
                 //set message
                 $this->session->set_flashdata('login_failed', 'Login is invalid');
@@ -83,6 +83,20 @@ class Users extends CI_Controller
         $this->session->unset_userdata('username');
         $this->session->set_flashdata('user_loggedout', 'You are now logged out');
         redirect('users/login');
+    }
+
+    public function dashboard()
+    {
+        if(!$this->session->userdata['logged_in'])
+        {
+            $this->session->set_flashdata('not_signed_in', 'You are not signed in. Please sign in');
+            redirect('users/login');
+        }
+        $data['title'] = 'Dashboard';
+
+        $this->load->view('templates/header');
+        $this->load->view('users/dashboard');
+        $this->load->view('templates/footer');
     }
 
     //Check if username exists
