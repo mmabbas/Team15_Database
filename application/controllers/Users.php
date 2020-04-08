@@ -13,6 +13,8 @@ class Users extends CI_Controller
         $this->form_validation->set_rules('email', 'Email', 'required|callback_check_email_exists');
         $this->form_validation->set_rules('password', 'Password', 'required');
         $this->form_validation->set_rules('password2', 'Confirm Password', 'matches[password]');
+        $this->form_validation->set_rules('usertype', 'User Type', 'required');
+
 
         if ($this->form_validation->run() === FALSE) {
             $this->load->view('templates/header');

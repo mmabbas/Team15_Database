@@ -11,7 +11,7 @@
                 'loginID' => $this->input->post('username'),
                 'password' => $enc_password,
                 'age' => $this->input->post('age'),
-                'userType' =>$this->input->post('student'),
+                'userType' =>$this->input->post('usertype'),
             );
 
             //insert user
