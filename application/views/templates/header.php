@@ -15,7 +15,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                    <a class="nav-link" href="<?php echo base_url(); ?>">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="<?php echo base_url(); ?>users/dashboard">Dashboard <span class="sr-only">(current)</span></a>
                     <a class="nav-link" href="<?php echo base_url(); ?>about">About</a>
                 </li>
             </div>
@@ -69,6 +69,10 @@
 
         <?php if ($this->session->flashdata('user_loggedout')) : ?>
             <?php echo '<p class="alert alert-success">' . $this->session->flashdata('user_loggedout') . '</p>'; ?>
+        <?php endif; ?>
+
+        <?php if ($this->session->flashdata('not_signed_in')) : ?>
+            <?php echo '<p class="alert alert-danger">' . $this->session->flashdata('not_signed_in') . '</p>'; ?>
         <?php endif; ?>
 
         <?php if ($this->session->flashdata('category_deleted')) : ?>
