@@ -22,6 +22,9 @@
             <ul class="navbar-nav ml-auto">
                 <?php if(!$this->session->userdata('logged_in')) : ?>
                 <li class="nav-item">
+                    <a class="nav-link" href="<?php echo base_url(); ?>users/adminLogin">Admin Portal</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="<?php echo base_url(); ?>users/login">Login</a>
                 </li>
                 <li class="nav-item">

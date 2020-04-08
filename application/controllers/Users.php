@@ -76,6 +76,48 @@ class Users extends CI_Controller
         }
     }
 
+    public function adminLogin()
+    {
+        $data['title'] = 'Sign In';
+
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('templates/header');
+            $this->load->view('users/adminLogin', $data);
+            $this->load->view('templates/footer');
+        } else {
+            //get username
+            $username = $this->input->post('username');
+            //get and encrypt password
+            $password = $this->input->post('password');
+            //$password = md5($this->input->post('password'));
+
+            //Login user
+            $user_id = $this->user_model->admin_login($username, $password);
+
+            if ($user_id) {
+                //Create Session
+                $user_data = array(
+                    'user_id' => $user_id,
+                    'username' => $username,
+                    'logged_in' => true
+                );
+
+                $this->session->set_userdata($user_data);
+
+                //set message
+                $this->session->set_flashdata('user_loggedin', 'You are now logged in');
+                redirect('users/adminDashboard');
+            } else {
+                //set message
+                $this->session->set_flashdata('login_failed', 'Login is invalid');
+                redirect('users/adminLogin');
+            }
+        }
+    }
+
     //Log User Out
     public function logout()
     {
@@ -98,6 +140,20 @@ class Users extends CI_Controller
 
         $this->load->view('templates/header');
         $this->load->view('users/dashboard');
+        $this->load->view('templates/footer');
+    }
+
+    public function adminDashboard()
+    {
+        if(!$this->session->userdata['logged_in'])
+        {
+            $this->session->set_flashdata('not_signed_in', 'You are not signed in. Please sign in');
+            redirect('users/adminLogin');
+        }
+        $data['title'] = 'Admin Dashboard';
+
+        $this->load->view('templates/header');
+        $this->load->view('users/adminDashboard');
         $this->load->view('templates/footer');
     }
 

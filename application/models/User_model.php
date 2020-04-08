@@ -36,6 +36,24 @@
             }
 
         }
+        public function admin_login($username, $password)
+        {
+            //validate
+            $this->db->where('loginID', $username);
+            $this->db->where('password', $password);
+
+            $result = $this->db->get('employee');
+
+            if($result->num_rows() == 1)
+            {
+                return $result->row(0)->employeeID;
+            }
+            else{
+                return false;
+            }
+
+        }
+
         //check username exists
         public function check_username_exists($username)
         {
