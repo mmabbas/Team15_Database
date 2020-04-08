@@ -121,4 +121,28 @@ class Users extends CI_Controller
             return false;
         }
     }
+
+    public function checkedOut()
+    {
+        $data['title'] = 'Checked Out';
+        $this->load->view('templates/header');
+        $this->load->view('users/checkedOut');
+        $this->load->view('templates/footer');
+    }
+
+    public function searchBar()
+    {
+        $data['title'] = 'Search Bar';
+        $this->load->view('templates/header');
+        $this->load->view('users/searchBar');
+        $this->load->view('templates/footer');
+    }
+
+    public function reserveStatus()
+    {
+        $data['title'] = 'Reservation Status';
+        $this->load->view('templates/header');
+        $this->load->view('users/reserveStatus');
+        $this->load->view('templates/footer');
+    }
 }
