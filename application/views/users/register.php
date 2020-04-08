@@ -2,7 +2,8 @@
 
 <?php echo form_open('users/register'); ?>
 <div class="row">
-    <div class="col-md-4 col-md-offset-4">
+    <div class="col-md-12">
+        <br>
         <h2 class="text-center"><?= $title; ?></h2>
         <div class="form-group">
             <Label>Name</Label>

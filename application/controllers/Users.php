@@ -54,23 +54,39 @@ class Users extends CI_Controller
             $user_id = $this->user_model->login($username, $password);
 
             if ($user_id) {
-                die('SUCCESS');
                 //Create Session
+                $user_data = array(
+                    'user_id' => $user_id,
+                    'username' => $username,
+                    'logged_in' => true
+                );
+
+                $this->session->set_userdata($user_data);
+
                 //set message
-            //$this->session->set_flashdata('user_loggedin', 'You are now logged in');
-            //redirect('home');
+                $this->session->set_flashdata('user_loggedin', 'You are now logged in');
+                redirect('home');
             } else {
                 //set message
                 $this->session->set_flashdata('login_failed', 'Login is invalid');
                 redirect('users/login');
             }
-
-            
         }
     }
 
+    //Log User Out
+    public function logout()
+    {
+        //Unset user data
+        $this->session->unset_userdata('logged_in');
+        $this->session->unset_userdata('user_id');
+        $this->session->unset_userdata('username');
+        $this->session->set_flashdata('user_loggedout', 'You are now logged out');
+        redirect('users/login');
+    }
+
     //Check if username exists
-    function check_username_exists($username)
+    public function check_username_exists($username)
     {
         $this->form_validation->set_message('check_username_exists', 'That username is taken. Please choose a different one');
 
@@ -81,7 +97,7 @@ class Users extends CI_Controller
         }
     }
 
-    function check_email_exists($email)
+    public function check_email_exists($email)
     {
         $this->form_validation->set_message('check_email_exists', 'That email is taken. Please choose a different one');
 
