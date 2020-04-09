@@ -39,4 +39,19 @@ class Adminportal extends CI_Controller
         $this->load->view('adminfuncs/issueItem');
         $this->load->view('templates/footer');
     }
+
+    public function adminReservations()
+    {
+        $data['title'] = 'View All Reservations';
+        $data['reservations'] = $this->reservation_model->get_reservations();
+        //print_r(($data['reservations']));
+        if(empty($data['reservations']))
+        {
+            $this->session->set_flashdata('no_reservations', 'There are no reservations at the moment');
+            redirect('users/dashboard');
+        }
+        $this->load->view('templates/header');
+        $this->load->view('adminfuncs/adminReservations', $data);
+        $this->load->view('templates/footer');
+    }
 }

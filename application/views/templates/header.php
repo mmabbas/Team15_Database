@@ -78,8 +78,8 @@
             <?php echo '<p class="alert alert-danger">' . $this->session->flashdata('not_signed_in') . '</p>'; ?>
         <?php endif; ?>
 
-        <?php if ($this->session->flashdata('category_deleted')) : ?>
-            <?php echo '<p class="alert alert-success">' . $this->session->flashdata('category_deleted') . '</p>'; ?>
+        <?php if ($this->session->flashdata('no_reservations')) : ?>
+            <?php echo '<p class="alert alert-danger">' . $this->session->flashdata('no_reservations') . '</p>'; ?>
         <?php endif; ?>
 
         <?php if ($this->session->flashdata('item_added')) : ?>

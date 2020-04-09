@@ -199,8 +199,16 @@ class Users extends CI_Controller
     public function reserveStatus()
     {
         $data['title'] = 'Reservation Status';
+        //$data['reservations'] = $this->reservation_model->get_reservations();
+        $data['reservations'] = $this->reservation_model->get_reservations($this->session->userdata['user_id']);
+        //print_r(($data['reservations']));
+        if(empty($data['reservations']))
+        {
+            $this->session->set_flashdata('no_reservations', 'You don\'t have any reservations');
+            redirect('users/dashboard');
+        }
         $this->load->view('templates/header');
-        $this->load->view('users/reserveStatus');
+        $this->load->view('users/reserveStatus', $data);
         $this->load->view('templates/footer');
     }
 }
