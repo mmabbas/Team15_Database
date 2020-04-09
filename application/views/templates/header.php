@@ -8,37 +8,80 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <a class="navbar-brand" href="<?php echo base_url(); ?>">Team 15 Library App</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                    <a class="nav-link" href="<?php echo base_url(); ?>users/dashboard">Dashboard <span class="sr-only">(current)</span></a>
-                    <a class="nav-link" href="<?php echo base_url(); ?>about">About</a>
-                </li>
-            </div>
-            <ul class="navbar-nav ml-auto">
-                <?php if(!$this->session->userdata('logged_in')) : ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url(); ?>users/adminLogin">Admin Portal</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url(); ?>users/login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url(); ?>users/register">Register</a>
-                </li>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto">
+                <a class="nav-link" href="<?php echo base_url(); ?>users/dashboard">Dashboard <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="<?php echo base_url(); ?>about">About</a>
+                <?php if (!$this->session->userdata('logged_in')) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url(); ?>users/adminLogin">Admin Portal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url(); ?>users/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url(); ?>users/register">Register</a>
+                    </li>
                 <?php endif; ?>
-                <?php if($this->session->userdata('logged_in')) : ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url(); ?>users/logout">Logout</a>
-                </li>
+                <?php if ($this->session->userdata('logged_in')) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url(); ?>users/logout">Logout</a>
+                    </li>
                 <?php endif; ?>
             </ul>
+
+            <form class="form-inline">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="searchText" placeholder="Search Books..." name="searchTest">
+                    <span class="input-group-btn">
+                        <button class="btn btn-light" type="button" onclick="pageRedirect();">Search</button>
+                    </span>
+                </div>
+            </form>
         </div>
     </nav>
+
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script>
+            function pageRedirect() {
+                var search = $('#searchText').val(); {
+                    if (window.location.href != "<?php echo base_url(); ?>pages/search") {
+                        window.location.href = "<?php echo base_url(); ?>pages/search";
+                        if (search != '') {
+                            load_data(search);
+                        }
+                    }
+                    if (search != '') {
+                        load_data(search);
+                    } else {
+                        load_data();
+                    }
+                }
+            }
+
+
+            function load_data(query) {
+                $.ajax({
+                    url: "<?php echo base_url(); ?>getitem/getData",
+                    method: "POST",
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
+                        $('#items').html(data);
+                    }
+                })
+            }
+        </script>
+    </head>
+
+
 
     <div class="container">
         <!-- Flash messages -->

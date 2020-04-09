@@ -17,6 +17,7 @@ class Fetch_item extends CI_Model {
     if($query != ''){
       $this->db->like('title', $query);
       $this->db->or_like('author', $query);
+      $this->db->or_like('distributor', $query);
     }
     //$this->db->order_by('itemID', 'DESC');
     return $this->db->get()->result();

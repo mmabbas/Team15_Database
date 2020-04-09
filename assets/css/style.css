@@ -24,3 +24,12 @@
   border-color: red;
   width: 100%
 }
+
+.btn-search {
+  background: #c0c0c0;
+  border-radius: 0;
+  color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #1c1c1c;
+}
