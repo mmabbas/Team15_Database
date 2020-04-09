@@ -183,8 +183,15 @@ class Users extends CI_Controller
     public function checkedOut()
     {
         $data['title'] = 'Checked Out';
+        //$data['Checked Out'] = $this
+        $data['items'] = $this->checkedOut_model->get_items($this->session->userdata['user_id']);
+        if(empty($data['items']))
+        {
+            $this->session->set_flashdata('none_checkedOut', 'You don\'t have any items checked out');
+            redirect('users/dashboard');
+        }
         $this->load->view('templates/header');
-        $this->load->view('users/checkedOut');
+        $this->load->view('users/checkedOut', $data);
         $this->load->view('templates/footer');
     }
 

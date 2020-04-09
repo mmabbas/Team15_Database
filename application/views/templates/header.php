@@ -85,3 +85,7 @@
         <?php if ($this->session->flashdata('item_added')) : ?>
             <?php echo '<p class="alert alert-success">' . $this->session->flashdata('item_added') . '</p>'; ?>
         <?php endif; ?>
+
+        <?php if ($this->session->flashdata('none_checkedOut')) : ?>
+            <?php echo '<p class="alert alert-danger">' . $this->session->flashdata('none_checkedOut') . '</p>'; ?>
+        <?php endif; ?>
