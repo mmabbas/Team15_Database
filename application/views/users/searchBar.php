@@ -14,7 +14,7 @@
   <div class="items-container">
     <div id="items"></div>
   </div>
-  
+
 </body>
 
 <head>
