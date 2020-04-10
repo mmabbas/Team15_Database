@@ -218,4 +218,13 @@ class Users extends CI_Controller
         $this->load->view('users/reserveStatus', $data);
         $this->load->view('templates/footer');
     }
+	
+	public function checkout_cart_view()
+	{
+		$this->load->model('checkout_cart_model');
+		$data['item'] = $this->checkout_cart_model->fetch_all();
+		$this->load->view('templates/header');
+		$this->load->view('users\checkout_cart_view', $data);
+		$this->load->view('templates/footer');
+	}
 }
