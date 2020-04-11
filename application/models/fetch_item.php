@@ -1,6 +1,5 @@
 <?php
 class Fetch_item extends CI_Model {
-  protected $primaryKey = 'SongID';
   function get_item(){
     //select * from item
     $query = $this->db->get("item");
