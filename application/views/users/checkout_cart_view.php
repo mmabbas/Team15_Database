@@ -10,23 +10,23 @@
 
  <div class="col-lg-10 col-md-5">
   <div class="table-responsive">
-   <h3 align="center">Checkout Cart</h3><br />
+   <h3 align="center">Item List</h3><br />
    <?php
 
    foreach($item as $row)
    {
     echo '
-	<div>
+	<div class="col-md-4" style="padding:16px; align="center">
 	 <h4>'.$row->title.' </h4>
-	 <input type="text" id="'.$row->itemID.'" /><br />
-	 <button type="button" name="add_cart" class="btn btn-success add_cart" 
-	 data-title = "'.$row->title.'" 
-	 data-itemID="'.$row->itemID.'" \>Add to Cart</button>
-	</div>
+	 <h5>'.$row->author.' </h5>
+     <input type="text" name="quantity" class="form-control quantity" id="'.$row->itemID.'" /><br />
+     <button type="button" name="add_cart" class="btn btn-success add_cart" data-productname="'.$row->title.'" data-itemID="'.$row->itemID.'" />Add to Cart</button>
+    </div>
 	';	
    }
    ?>
-
+  </div>
+ </div>
  <div class="col-lg-10 col-md-5">
   <div id="cart_details">
    <h3 align="center">Cart is Empty</h3>
@@ -42,30 +42,30 @@ $(document).ready(function(){
  $('.add_cart').click(function(){
   var itemID = $(this).data("itemID");
   var title = $(this).data("title");
-  //var item_quantity = $('#' + itemID).val();
-  /*if(quantity != '' && quantity > 0)
+  var quantity = $('#' + itemID).val();
+  
+  if(quantity != '' && quantity > 0)
   {
    $.ajax
    (
    {
     url:"<?php echo base_url(); ?>checkout_cart/add",
     method:"POST",
-    data:{item_id:item_id, item_name:item_name, quantity:quantity},
+    data:{itemID:itemID, title:title, quantity:quantity},
     success:function(data)
     {
-     alert("Item Added into Cart");
+     alert("Item added into Cart");
      $('#cart_details').html(data);
-     $('#' + item_id).val('');
+     $('#' + itemID).val('');
     }
    }
    );
   }
   else
   {
-   alert("Please Enter quantity");
+   alert("Please enter quantity");
   }
  }
- */
  );
 
  $('#cart_details').load("<?php echo base_url(); ?>checkout_cart/load");
@@ -74,16 +74,19 @@ $(document).ready(function(){
   var row_id = $(this).attr("id");
   if(confirm("Are you sure you want to remove this?"))
   {
-   $.ajax({
+   $.ajax
+   (
+   {
     url:"<?php echo base_url(); ?>checkout_cart/remove",
     method:"POST",
     data:{row_id:row_id},
     success:function(data)
     {
-     alert("item removed from Cart");
+     alert("item removed from your cart");
      $('#cart_details').html(data);
     }
-   });
+   }
+   );
   }
   else
   {
@@ -92,16 +95,19 @@ $(document).ready(function(){
  });
 
  $(document).on('click', '#clear_cart', function(){
-  if(confirm("Are you sure you want to clear cart?"))
+  if(confirm("Are you sure you want to clear your cart?"))
   {
-   $.ajax({
+   $.ajax
+   (
+   {
     url:"<?php echo base_url(); ?>checkout_cart/clear",
     success:function(data)
     {
-     alert("Your cart has been clear...");
+     alert("Your cart has been cleared...");
      $('#cart_details').html(data);
     }
-   });
+   }
+   );
   }
   else
   {
