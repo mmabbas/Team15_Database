@@ -68,7 +68,7 @@ class Users extends CI_Controller
 
                 //set message
                 $this->session->set_flashdata('user_loggedin', 'You are now logged in');
-                redirect('users/dashboard');
+                redirect('users/newDash');
             } else {
                 //set message
                 $this->session->set_flashdata('login_failed', 'Login is invalid');
@@ -131,6 +131,41 @@ class Users extends CI_Controller
         redirect('users/login');
     }
 
+    public function adminDashboard()
+    {
+        if(!$this->session->userdata['logged_in'])
+        {
+            $this->session->set_flashdata('not_signed_in', 'You are not signed in. Please sign in');
+            redirect('users/login');
+        }
+        $data['title'] = 'Dashboard';
+        
+
+        $data['reservations'] = $this->reservation_model->getActiveCount();
+        $data['checkOuts'] = $this->checkedOut_model->getActiveCount();
+        $data['totalTitles'] = $this->fetch_item->getCount();
+        $data['userCount'] = $this->user_model->getCount();
+        $data['latestReservations'] = $this->reservation_model->getLatest();
+
+        $this->load->view('templates/header');
+        $this->load->view('adminfuncs/adminDash', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function newDash()
+    {
+        $data['firstName'] = $this->user_model->getName($this->session->userdata['user_id']);
+        $data['activeCheckOuts'] = $this->checkedOut_model->activeCheckout($this->session->userdata['user_id']);
+        $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']);
+        $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']);
+        $data['latestReservations'] = $this->reservation_model->getUserReservations($this->session->userdata['user_id']);
+        $this->load->view('templates/header');
+        $this->load->view('users/newDash', $data);
+        $this->load->view('templates/footer');
+
+
+    }
+
     public function dashboard()
     {
         if(!$this->session->userdata['logged_in'])
@@ -185,7 +220,8 @@ class Users extends CI_Controller
     public function checkedOut()
     {
         $data['title'] = 'Checked Out';
-        //$data['Checked Out'] = $this
+        $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']);
+        $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']);
         $data['items'] = $this->checkedOut_model->get_items($this->session->userdata['user_id']);
         if(empty($data['items']))
         {
@@ -208,13 +244,13 @@ class Users extends CI_Controller
     public function reserveStatus()
     {
         $data['title'] = 'Reservation Status';
-        //$data['reservations'] = $this->reservation_model->get_reservations();
-        $data['reservations'] = $this->reservation_model->get_reservations($this->session->userdata['user_id']);
-        //print_r(($data['reservations']));
+        $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']);
+        $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']);
+        $data['reservations'] = $this->reservation_model->getUserReservations($this->session->userdata['user_id']);
         if(empty($data['reservations']))
         {
             $this->session->set_flashdata('no_reservations', 'You don\'t have any reservations');
-            redirect('users/dashboard');
+            redirect('users/newDash');
         }
         $this->load->view('templates/header');
         $this->load->view('users/reserveStatus', $data);
@@ -228,26 +264,5 @@ class Users extends CI_Controller
 		$this->load->view('templates/header');
 		$this->load->view('users\checkout_cart_view', $data);
 		$this->load->view('templates/footer');
-    }
-    
-    public function adminDashboard()
-    {
-        /*if(!$this->session->userdata['logged_in'])
-        {
-            $this->session->set_flashdata('not_signed_in', 'You are not signed in. Please sign in');
-            redirect('users/login');
-        }
-        $data['title'] = 'Dashboard';
-        */
-
-        $data['reservations'] = $this->reservation_model->getActiveCount();
-        $data['checkOuts'] = $this->checkedOut_model->getActiveCount();
-        $data['totalTitles'] = $this->fetch_item->getCount();
-        $data['userCount'] = $this->user_model->getCount();
-        $data['latestReservations'] = $this->reservation_model->getLatest();
-
-        $this->load->view('templates/header');
-        $this->load->view('adminfuncs/newDash', $data);
-        $this->load->view('templates/footer');
     }
 }

@@ -8,9 +8,16 @@ class Pages extends CI_Controller
         }
         $data['title'] = ucfirst($page);
 
-        $this->load->view('templates/header');
-        $this->load->view('pages/' . $page, $data);
-        $this->load->view('templates/footer');
+        if ($page != 'home') {
+            $this->load->view('templates/header');
+            $this->load->view('pages/' . $page, $data);
+            $this->load->view('templates/footer');
+        }
+        else
+        {
+            $this->load->view('pages/' . $page, $data);
+            $this->load->view('templates/footer');
+        }
     }
 
     public function search()

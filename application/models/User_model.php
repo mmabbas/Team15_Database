@@ -83,6 +83,13 @@ class User_model extends CI_Model
         return $this->db->get()->result();
     }
 
+    public function getName($userID)
+    {
+        $this->db->where('userID', $userID);
+        $result = $this->db->get('cardholder');
+        return $result->row(0)->firstName;
+    }
+
     public function add_item()
     {
         //login data array

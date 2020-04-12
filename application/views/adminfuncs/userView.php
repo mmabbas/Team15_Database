@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="list-group">
-                        <a href='<?php echo base_url('users/newDash'); ?>' class="list-group-item"> <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard</a>
+                        <a href='<?php echo base_url('users/adminDashboard'); ?>' class="list-group-item"> <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard</a>
                         <a href='<?php echo base_url('adminPortal/viewUsers'); ?>' class="list-group-item active main-color-bg">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Users <span class="badge"><?php echo $userCount; ?></span>
                         </a>
@@ -54,11 +54,11 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input class="form-control" type="text" placeholder="Filter Users...">
+                                    <input type="search" class="form-control form-control-sm" placeholder="Search for User" aria-controls="userTable">
                                 </div>
                             </div>
                             <br>
-                            <table class="table table-striped table-hover">
+                            <table id="userTable" class="table table-striped table-hover">
                                 <tr>
                                     <th>User ID</th>
                                     <th>Name</th>
@@ -94,7 +94,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url(); ?>/assets/js/bootstrap.min.js"></script>
 </body>
 
 </html>

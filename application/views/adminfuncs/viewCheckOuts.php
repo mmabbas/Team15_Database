@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="list-group">
-                        <a href='<?php echo base_url('users/newDash'); ?>' class="list-group-item"> <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard</a>
+                        <a href='<?php echo base_url('users/adminDashboard'); ?>' class="list-group-item"> <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard</a>
                         <a href='<?php echo base_url('adminPortal/viewUsers'); ?>' class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Users <span class="badge"><?php echo $userCount; ?></span></a>
                         <a href='<?php echo base_url('adminportal/viewTitles'); ?>' class="list-group-item"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Titles <span class="badge"><?php echo $totalTitles; ?></span></a>
                         <a href='<?php echo base_url('adminportal/viewCheckouts'); ?>' class="list-group-item active main-color-bg">

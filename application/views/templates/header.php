@@ -17,7 +17,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo base_url(); ?>">Team 15 Library App</a>
+                <?php if (!$this->session->userdata('logged_in')) : ?>
+                    <a class="navbar-brand" href="<?php echo base_url(); ?>">Team 15 Library App</a>
+                <?php endif; ?>
+                <?php if ($this->session->userdata('logged_in')) : ?>
+                    <?php if ($this->session->userdata('userType') == "Admin") : ?>
+                        <a class="navbar-brand" href="<?php echo base_url(); ?>users/adminDashboard">Team 15 Library App</a>
+                    <?php endif; ?>
+                    <?php if ($this->session->userdata('userType') == "User") : ?>
+                        <a class="navbar-brand" href="<?php echo base_url(); ?>users/newDash">Team 15 Library App</a>
+                    <?php endif; ?>
+                <?php endif; ?>
+
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -29,7 +40,7 @@
                         <?php endif; ?>
                         <?php if ($this->session->userdata('userType') == "User") : ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url(); ?>users/dashboard">Dashboard <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="<?php echo base_url(); ?>users/newDash">Dashboard <span class="sr-only">(current)</span></a>
                             </li>
                         <?php endif; ?>
                     <?php endif; ?>
