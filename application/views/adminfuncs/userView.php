@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-10">
-                    <h1><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> View Reservations</h1>
+                    <h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span> View Registered Users</h1>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
     <section id="breadcrumb">
         <div class="container">
             <ol class="breadcrumb">
-                <li class="active"> Active Reservations</li>
+                <li class="active">User View</li>
             </ol>
         </div>
     </section>
@@ -35,12 +35,12 @@
                 <div class="col-md-3">
                     <div class="list-group">
                         <a href='<?php echo base_url('users/newDash'); ?>' class="list-group-item"> <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard</a>
-                        <a href='<?php echo base_url('adminPortal/viewUsers'); ?>' class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Users <span class="badge"><?php echo $userCount; ?></span></a>
+                        <a href='<?php echo base_url('adminPortal/viewUsers'); ?>' class="list-group-item active main-color-bg">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Users <span class="badge"><?php echo $userCount; ?></span>
+                        </a>
                         <a href='<?php echo base_url('adminportal/viewTitles'); ?>' class="list-group-item"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Titles <span class="badge"><?php echo $totalTitles; ?></span></a>
                         <a href='<?php echo base_url('adminportal/viewCheckouts'); ?>' class="list-group-item"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkouts <span class="badge"><?php echo $checkOuts; ?></span></a>
-                        <a href='<?php echo base_url('adminportal/adminReservations'); ?>' class="list-group-item active main-color-bg">
-                            <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Reservations <span class="badge"><?php echo $reservations; ?></span>
-                        </a>
+                        <a href='<?php echo base_url('adminportal/adminReservations'); ?>' class="list-group-item"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Reservations <span class="badge"><?php echo $reservations; ?></span></a>
                     </div>
 
 
@@ -49,32 +49,31 @@
                     <!-- Website Overview -->
                     <div class="panel panel-default">
                         <div class="panel-heading main-color-bg">
-                            <h3 class="panel-title">Titles</h3>
+                            <h3 class="panel-title">Users</h3>
                         </div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <!-- <input class="form-control" type="text" placeholder="Filter Users..."> -->
-                                    <!-- <a class="btn btn-primary" href='<?php echo base_url('adminPortal/addItem'); ?>' role="button">Add Item</a> -->
-
+                                    <input class="form-control" type="text" placeholder="Filter Users...">
                                 </div>
                             </div>
                             <br>
                             <table class="table table-striped table-hover">
                                 <tr>
-                                    <th>Item ID</th>
-                                    <th>Requested By</th>
-                                    <th>Reservation Created On</th>
-                                    <th>Reservation Expires On</th>
-
-                                    <?php foreach ($allReservations as $reservation) : ?>
+                                    <th>User ID</th>
+                                    <th>Name</th>
+                                    <th>Login ID</th>
+                                    <th>Email</th>
+                                    <?php foreach ($userInfo as $user) : ?>
                                 <tr>
-                                    <td><?php echo $reservation['itemName']; ?></td>
-                                    <td>UserID # <?php echo $reservation['userID']; ?></td>
-                                    <td><?php echo $reservation['reservationDate']; ?></td>
-                                    <td>Reservation expires on: <?php echo $reservation['expirationDate']; ?></td>
+                                    <td><?php echo $user->userID; ?></td>
+                                    <td><?php echo $user->firstName; ?> <?php echo $user->lastName; ?> </td>
+                                    <td><?php echo $user->loginID; ?></td>
+                                    <td><?php echo $user->email; ?></td>
                                 </tr>
                             <?php endforeach; ?>
+
+                            </tr>
 
                             </table>
                         </div>

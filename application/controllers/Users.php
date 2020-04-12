@@ -60,7 +60,8 @@ class Users extends CI_Controller
                 $user_data = array(
                     'user_id' => $user_id,
                     'username' => $username,
-                    'logged_in' => true
+                    'logged_in' => true,
+                    'userType' => "User",
                 );
 
                 $this->session->set_userdata($user_data);
@@ -102,7 +103,8 @@ class Users extends CI_Controller
                 $user_data = array(
                     'user_id' => $user_id,
                     'username' => $username,
-                    'logged_in' => true
+                    'logged_in' => true,
+                    'userType' => "Admin",
                 );
 
                 $this->session->set_userdata($user_data);
@@ -143,7 +145,7 @@ class Users extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function adminDashboard()
+    public function oldAdminDashboard()
     {
         if(!$this->session->userdata['logged_in'])
         {
@@ -226,5 +228,26 @@ class Users extends CI_Controller
 		$this->load->view('templates/header');
 		$this->load->view('users\checkout_cart_view', $data);
 		$this->load->view('templates/footer');
-	}
+    }
+    
+    public function adminDashboard()
+    {
+        /*if(!$this->session->userdata['logged_in'])
+        {
+            $this->session->set_flashdata('not_signed_in', 'You are not signed in. Please sign in');
+            redirect('users/login');
+        }
+        $data['title'] = 'Dashboard';
+        */
+
+        $data['reservations'] = $this->reservation_model->getActiveCount();
+        $data['checkOuts'] = $this->checkedOut_model->getActiveCount();
+        $data['totalTitles'] = $this->fetch_item->getCount();
+        $data['userCount'] = $this->user_model->getCount();
+        $data['latestReservations'] = $this->reservation_model->getLatest();
+
+        $this->load->view('templates/header');
+        $this->load->view('adminfuncs/newDash', $data);
+        $this->load->view('templates/footer');
+    }
 }

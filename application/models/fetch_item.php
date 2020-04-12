@@ -6,6 +6,12 @@ class Fetch_item extends CI_Model {
     return $query;
   }
 
+  public function getCount()
+    {
+        $query = $this->db->query('SELECT * FROM item');
+        return $query->num_rows();
+    }
+
   function checkAmount($query){ //get total items available
     $this->db->select('*');
     $this->db->from("inventory");
@@ -31,5 +37,13 @@ class Fetch_item extends CI_Model {
     //$this->db->order_by('itemID', 'DESC');
     return $this->db->get()->result();
   }
+
+  public function getAll()
+    {
+        $this->db->select('itemID, userID, title, isbn, genre, author, status');
+        $this->db->from('item');
+        $this->db->order_by('itemID', 'ASC');
+        return $this->db->get()->result();
+    }
 }
 ?>
