@@ -19,5 +19,18 @@ class CheckedOut_model extends CI_Model
         $query = $this->db->get_where('item', array('userID' =>$userID));
         return $query->result_array();
     }
+
+    public function getActiveCount()
+    {
+        $query = $this->db->get_where('item', array('status' => "Checked Out"));
+        return $query->num_rows();
+    }
+
+    public function getAll()
+    {
+        $this->db->order_by('item.itemID', 'ASC');
+        $query = $this->db->get_where('item', array('status' => "Checked Out"));
+        return $query->result_array();
+    }
 }
 ?>
