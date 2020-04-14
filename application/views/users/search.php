@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-  </div>gi
+  </div>
   </div>
   <div class="items-container">
     <div id="items"></div>
