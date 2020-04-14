@@ -20,7 +20,8 @@ class Adminportal extends CI_Controller
         } else {
 
             $this->user_model->add_item();
-
+            $this->user_model->update_item_invID();
+            
             //set message
             $this->session->set_flashdata('item_added', 'Item has been added to the Library');
             redirect('users/adminDashboard');

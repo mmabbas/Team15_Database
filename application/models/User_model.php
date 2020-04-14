@@ -107,4 +107,22 @@ class User_model extends CI_Model
         //insert user
         return $this->db->insert('item', $itemData);
     }
+
+    public function update_item_invID()
+    {
+        $itemisbn = $this->input->post('isbn');
+        $this->db->select('inventoryID');
+        $this->db->from('inventory');
+        $this->db->where('isbn', $itemisbn);
+        // $invID = $this->db->get();
+        //$query = $this->db->get_where('inventory', array('isbn' => $itemisbn));
+        $query = $this->db->get()->row('inventoryID');
+        // var_dump($invID);
+        // $invID = $this->db->query('SELECT inventoryID FROM inventory WHERE inventory.isbn = $itemisbn');
+        $updateitem = array(
+            'inventoryID' => $query
+            );
+        $this->db->where('isbn', $itemisbn);
+        return $this->db->update('item', $updateitem);
+    }
 }
