@@ -82,33 +82,31 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script>
-            $(document).ready(function() {
-                $("button").click(function() {
-                    var search = $('#searchtxt').val();
-                    if (window.location.href != "<?php echo base_url(); ?>pages/search") {
-                        window.location.href = "<?php echo base_url(); ?>pages/search";
-                        if (search != '') {
-                            load_data(search);
-                        }
-                    }
-                    if (search != '') {
-                        load_data(search);
-                    }
+        $(document).ready(function() {
+            $("button").click(function() {
+                var search = $('#searchtxt').val();
+                var type = $("#searchType :selected").val();
+                var title = $("#searchTitle :selected").val();
+                if (window.location.href != "<?php echo base_url(); ?>users/search") {
+                    window.location.href = "<?php echo base_url(); ?>users/search";
+                } else {
+                if (search != '') {
+                    load_data(search, type, title);
+                }
+              }
 
-                    function load_data(query) {
-                        $.ajax({
-                            url: "<?php echo base_url(); ?>getitem/getData",
-                            method: "POST",
-                            data: {
-                                query: query
-                            },
-                            success: function(data) {
-                                $('#items').html(data);
-                            }
-                        })
-                    }
-                })
-            });
+                function load_data(search, type, title) {
+                    $.ajax({
+                        url: "<?php echo base_url(); ?>getitem/getData",
+                        method: "POST",
+                        data: {search: search, type, title},
+                        success: function(data) {
+                            $('#items').html(data);
+                        }
+                    })
+                }
+            })
+        });
         </script>
     </head>
 

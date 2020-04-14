@@ -30,7 +30,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="nav-item">
-          <a href="<?php echo base_url(); ?>users/searchBar" class="btn btn-warning btn-lg" type="button">Search</a>
+          <a href="<?php echo base_url(); ?>users/search" class="btn btn-warning btn-lg" type="button">Search</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?php echo base_url(); ?>users/adminLogin">Admin Portal</a>

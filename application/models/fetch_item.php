@@ -24,17 +24,35 @@ class Fetch_item extends CI_Model {
     $db = get_instance()->db->conn_id;
     return $db;
   }
+  function assignImage($itemType){
+    if($itemType == 1){
+    return '<img class="item-img" src="http://localhost/team15dbms/assets/images/book.png">';
+  }elseif($itemType == 2){
+    return '<img class="item-img" src="http://localhost/team15dbms/assets/images/audio-book.png">';
+  }elseif($itemType == 3){
+    return '<img class="item-img"src="http://localhost/team15dbms/assets/images/film.png">';
+  }else{
+    return '<img class="item-img"src="http://localhost/team15dbms/assets/images/error.png">';
+  }
 
-  function get_data($query){
+  }
+  function get_data($query, $searchBy, $searchType){
     $this->db->select("*");
     $this->db->from("item");
+    if($searchType != 0){
+    $this->db->where('type', $searchType);
+    }
     //Look up user input as $query from item.title, item.author and item.distributor
     if($query != ''){
+      if($searchBy == "title"){
       $this->db->like('title', $query);
-      $this->db->or_like('author', $query);
-      $this->db->or_like('distributor', $query);
+    } elseif ($searchBy == "author") {
+      $this->db->like('author', $query);
+    } elseif ($searchBy == "distributor") {
+      $this->db->like('distributor', $query);
     }
-    //$this->db->order_by('itemID', 'DESC');
+  }
+    $this->db->order_by('itemID', 'DESC');
     return $this->db->get()->result();
   }
 

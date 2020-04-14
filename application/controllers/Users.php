@@ -139,7 +139,7 @@ class Users extends CI_Controller
             redirect('users/login');
         }
         $data['title'] = 'Dashboard';
-        
+
 
         $data['reservations'] = $this->reservation_model->getActiveCount();
         $data['checkOuts'] = $this->checkedOut_model->getActiveCount();
@@ -233,11 +233,11 @@ class Users extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function searchBar()
+    public function search()
     {
         $data['title'] = 'Search Bar';
         $this->load->view('templates/header');
-        $this->load->view('users/searchBar');
+        $this->load->view('users/search');
         $this->load->view('templates/footer');
     }
 
@@ -256,7 +256,7 @@ class Users extends CI_Controller
         $this->load->view('users/reserveStatus', $data);
         $this->load->view('templates/footer');
     }
-	
+
 	public function checkout_cart_view()
 	{
 		$this->load->model('checkout_cart_model');

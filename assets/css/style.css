@@ -19,12 +19,46 @@
   padding: 30px;
 }
 .items-box{
-  padding-bottom: 30px;
-  border-style: solid;
-  border-color: red;
+  background: #222229;
+  padding-bottom: 20px;
+  border-style: double;
+  border-color: #222222;
+  border-bottom-style: groove;
+  border-bottom-color: #dfe6e9;
   width: 100%
 }
-
+.item-title{
+  padding-left:200px;
+}
+.item-author{
+  padding-left:200px;
+}
+.item-genre{
+  padding-left:200px;
+}
+.year{
+  padding-left:200px;
+}
+.item-id{
+  padding-left:200px;
+}
+.item-status{
+  padding-left:200px;
+}
+.total-available{
+  padding-left:200px;
+}
+#item-btn{
+  margin-left: 200px;
+}
+.item-img{
+  margin-top:-100px;
+  position: relative;
+  top:130px;
+  left: 30px;
+  width: 100px;
+  height: 100px;
+}
 .btn-search {
   background: #c0c0c0;
   border-radius: 0;
@@ -32,4 +66,12 @@
   border-width: 1px;
   border-style: solid;
   border-color: #1c1c1c;
+}
+select{
+    background: #222222 !important;
+    text-shadow:0 1px 0 rgba(0,0,0,0.4);
+}
+option:not(:checked) {
+    background-color: white;
+    color:#000;
 }
