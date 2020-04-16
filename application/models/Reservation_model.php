@@ -30,20 +30,20 @@ class Reservation_model extends CI_Model
     public function getUserReservations($userID)
     {
             $this->db->order_by('reservations.userID', 'ASC');
-            $query = $this->db->get_where('reservations', array('userID' => $userID, 'status' => "Processing"));
+            $query = $this->db->get_where('reservations', array('userID' => $userID, 'status' => "Reserved"));
             return $query->result_array();
     }
 
     public function getActiveUserCount($userID)
     {
         $this->db->order_by('reservations.reservationID', 'DESC');
-        $query = $this->db->get_where('reservations', array('userID' => $userID, 'status' => "Processing"));
+        $query = $this->db->get_where('reservations', array('userID' => $userID, 'status' => "Reserved"));
         return $query->num_rows();
     }
 
     public function getActiveCount()
     {
-        $query = $this->db->get_where('reservations', array('status' => "Processing"));
+        $query = $this->db->get_where('reservations', array('status' => "Reserved"));
         //$query = $this->db->query('SELECT * FROM reservations');
         return $query->num_rows();
     }
@@ -57,7 +57,7 @@ class Reservation_model extends CI_Model
         //$query = $this->db->get();
 
         $this->db->order_by('reservations.userID', 'ASC');
-        $query = $this->db->get_where('reservations', array('status' => "Processing"));
+        $query = $this->db->get_where('reservations', array('status' => "Reserved"));
         return $query->result_array();
     }
 }

@@ -226,7 +226,7 @@ class Users extends CI_Controller
             'itemName' => $item->title,
             'reservationDate' => date("Y-m-d"),
             'expirationDate' => date('Y-m-d', strtotime('+1 week')),
-            'status' => 'Processing'
+            'status' => 'Reserved'
         );
         $this->reservation_model->createReservation($reservationInfo);
 
