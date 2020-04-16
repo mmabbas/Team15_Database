@@ -29,14 +29,14 @@ class Users extends CI_Controller
 
             //set message
             $this->session->set_flashdata('user_registered', 'You are now registered and can log in');
-            redirect('users/login');
+            redirect('home');
         }
     }
 
     //login user
     public function login()
     {
-        $data['title'] = 'User Sign In';
+        $data['title'] = 'Sign In';
 
         $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
@@ -94,8 +94,7 @@ class Users extends CI_Controller
         $data['activeCheckOuts'] = $this->checkedOut_model->activeCheckout($this->session->userdata['user_id']);
         $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']);
         $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']);
-        $data['totalReserve'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']);
-        $data['latestReservations'] = $this->reservation_model->getUserActiveReservations($this->session->userdata['user_id']);
+        $data['latestReservations'] = $this->reservation_model->getUserReservations($this->session->userdata['user_id']);
         $this->load->view('templates/header');
         $this->load->view('users/newDash', $data);
         $this->load->view('templates/footer');
@@ -195,11 +194,6 @@ class Users extends CI_Controller
 
     public function confirmReservation($itemID)
     {
-        if (!$this->session->userdata['logged_in']) {
-            $this->session->set_flashdata('not_signed_in', 'You are not signed in. Please sign in');
-            redirect('users/login');
-        }
-
         $data['title'] = 'Confirm Reservation';
         $data['item'] = $this->fetch_item->getItem($itemID);
         //print_r($data['item']);
@@ -210,11 +204,6 @@ class Users extends CI_Controller
 
     public function confirmCancelation($itemID)
     {
-        if (!$this->session->userdata['logged_in']) {
-            $this->session->set_flashdata('not_signed_in', 'You are not signed in. Please sign in');
-            redirect('users/login');
-        }
-
         $data['title'] = 'Confirm Cancelation';
         $data['item'] = $this->fetch_item->getItem($itemID);
         //print_r($data['item']);
@@ -230,7 +219,6 @@ class Users extends CI_Controller
         //update total available
         $item = $this->fetch_item->getItem($itemID);
         $this->inventory_model->decrementTotalAvailable($item->isbn);
-        $this->inventory_model->incrementTotalReserved($item->isbn);
         //add to reservation table
         $reservationInfo = array(
             'userID' => $this->session->userdata['user_id'],
@@ -254,7 +242,6 @@ class Users extends CI_Controller
         //update total available
         $item = $this->fetch_item->getItem($itemID);
         $this->inventory_model->incrementTotalAvailable($item->isbn);
-        $this->inventory_model->decrementTotalReserved($item->isbn);
         //add to reservation table
         $this->reservation_model->deleteReservation($itemID);
 
@@ -265,12 +252,6 @@ class Users extends CI_Controller
     {
           $data['title'] = 'Confirm Checkout';
           $data['item'] = $this->fetch_item->getItem($itemID);
-          $inventoryInfo = $this->inventory_model->getTotalAvailable($data['item']);
-          if($inventoryInfo->totalAvailable == 0 && $inventoryInfo->totalReserved == 0)
-          {
-            $this->session->set_flashdata('not_signed_in', 'This title is not available to be checked out yet. Please try again later');
-            redirect('users/newDash');
-          }
           //print_r($data['item']);
           $this->load->view('templates/header');
           $this->load->view('users/checkout_cart_view', $data);
@@ -278,23 +259,13 @@ class Users extends CI_Controller
     }
     public function createCheckout($itemID)
     {
-        //Check if the item was reserved
-        $item = $this->fetch_item->getItem($itemID);
-        $isbn = $item->isbn;
-        if($item->status = "Reserved")
-        {
-            $this->inventory_model->decrementTotalReserved($item->isbn);
-            $this->reservation_model->checkOutReservation($itemID);
-        }
-        else
-        {
-            $this->inventory_model->decrementTotalAvailable($isbn);
-        }
         //update item status
         $this->checkout_cart_model->checkOutItem($itemID);
         //update total available
+        $item = $this->fetch_item->getItem($itemID);
+        $isbn = $item->isbn;
+        $this->inventory_model->decrementTotalAvailable($isbn);
         $this->inventory_model->incrementTotalCheckedout($isbn);
-        
         //add to item table
         redirect('users/newDash');
     }

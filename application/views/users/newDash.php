@@ -109,7 +109,7 @@
                                     <td><?php echo $reservation['reservationDate']; ?></td>
                                     <td><?php echo $reservation['expirationDate']; ?></td>
                                     <td><a href="<?php echo base_url(); ?>users/confirmCancelation/<?php echo $reservation['itemID']; ?>" class="btn btn-success">Cancel</a></td>
-                                    <?php if ($reservation['status'] == "Processing") : ?>
+                                    <?php if ($reservation['status'] == "Reserved") : ?>
 										<td><a href="<?php echo base_url(); ?>users/confirmCheckout/<?php echo $reservation['itemID']; ?>" class="btn btn-success">Check Out</a></td>
 									<?php endif; ?>
 									<?php if ($reservation['status'] == "Canceled") : ?>

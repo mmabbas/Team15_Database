@@ -65,6 +65,7 @@
 									<th>Reservation Expires On</th>
 									<th>Status</th>
 									<th>Cancel Reservation</th>
+									<th>Check Out</th>
 
 									<?php foreach ($reservations as $reservation) : ?>
 								<tr>
@@ -72,11 +73,13 @@
 									<td><?php echo $reservation['reservationDate']; ?></td>
 									<td><?php echo $reservation['expirationDate']; ?></td>
 									<td><?php echo $reservation['status']; ?></td>
-									<?php if ($reservation['status'] == "Processing") : ?>
+									<?php if ($reservation['status'] == "Reserved") : ?>
 										<td><a href="<?php echo base_url(); ?>users/confirmCancelation/<?php echo $reservation['itemID']; ?>" class="btn btn-success">Cancel</a></td>
+										<td><a href="<?php echo base_url(); ?>users/confirmCheckout/<?php echo $reservation['itemID']; ?>" class="btn btn-success">Check Out</a></td>
 									<?php endif; ?>
 									<?php if ($reservation['status'] == "Canceled") : ?>
-										<td>  N/A</td>
+										<td> </td>
+										<td> </td>
 									<?php endif; ?>
 								</tr>
 							<?php endforeach; ?>
