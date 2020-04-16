@@ -133,8 +133,7 @@ class Users extends CI_Controller
 
     public function adminDashboard()
     {
-        if(!$this->session->userdata['logged_in'])
-        {
+        if (!$this->session->userdata['logged_in']) {
             $this->session->set_flashdata('not_signed_in', 'You are not signed in. Please sign in');
             redirect('users/login');
         }
@@ -162,14 +161,11 @@ class Users extends CI_Controller
         $this->load->view('templates/header');
         $this->load->view('users/newDash', $data);
         $this->load->view('templates/footer');
-
-
     }
 
     public function dashboard()
     {
-        if(!$this->session->userdata['logged_in'])
-        {
+        if (!$this->session->userdata['logged_in']) {
             $this->session->set_flashdata('not_signed_in', 'You are not signed in. Please sign in');
             redirect('users/login');
         }
@@ -182,8 +178,7 @@ class Users extends CI_Controller
 
     public function oldAdminDashboard()
     {
-        if(!$this->session->userdata['logged_in'])
-        {
+        if (!$this->session->userdata['logged_in']) {
             $this->session->set_flashdata('not_signed_in', 'You are not signed in. Please sign in');
             redirect('users/adminLogin');
         }
@@ -223,8 +218,7 @@ class Users extends CI_Controller
         $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']);
         $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']);
         $data['items'] = $this->checkedOut_model->get_items($this->session->userdata['user_id']);
-        if(empty($data['items']))
-        {
+        if (empty($data['items'])) {
             $this->session->set_flashdata('none_checkedOut', 'You don\'t have any items checked out');
             redirect('users/dashboard');
         }
@@ -247,8 +241,7 @@ class Users extends CI_Controller
         $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']);
         $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']);
         $data['reservations'] = $this->reservation_model->getUserReservations($this->session->userdata['user_id']);
-        if(empty($data['reservations']))
-        {
+        if (empty($data['reservations'])) {
             $this->session->set_flashdata('no_reservations', 'You don\'t have any reservations');
             redirect('users/newDash');
         }
@@ -257,8 +250,40 @@ class Users extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-	public function checkout_cart()
-	{
-		$this->load->model('checkout_cart_model');
-  }
+    public function checkout_cart()
+    {
+        $this->load->model('checkout_cart_model');
+    }
+
+    public function confirmReservation($itemID)
+    {
+        $data['title'] = 'Confirm Reservation';
+        $data['item'] = $this->fetch_item->getItem($itemID);
+        //print_r($data['item']);
+        $this->load->view('templates/header');
+        $this->load->view('users/confirmReservation', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function createReservation($itemID)
+    {
+        //update item status to reserved
+        $this->fetch_item->reserveItem($itemID);
+        //update total available
+        $item = $this->fetch_item->getItem($itemID);
+        $this->inventory_model->decrementTotalAvailable($item->isbn);
+        //add to reservation table
+        $reservationInfo = array(
+            'userID' => $this->session->userdata['user_id'],
+            'itemID' => $item->itemID,
+            'itemName' => $item->title,
+            'reservationDate' => date("Y-m-d"),
+            'expirationDate' => date('Y-m-d', strtotime('+1 week')),
+        );
+        $this->reservation_model->createReservation($reservationInfo);
+
+        $this->session->set_flashdata('user_registered', 'Reservation has been created successfully');
+        redirect('users/newDash');
+
+    }
 }

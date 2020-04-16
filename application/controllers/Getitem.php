@@ -26,6 +26,12 @@ class Getitem extends CI_Controller{
     } else {
       $status = 'Unavailable';
     }
+
+    $cButton = 'Check Out';
+    $rButton = 'Reserve';
+    $cOnClick = "window.location.href='checkout_cart_view'";
+    $rOnClick = "window.location.href='reserveStatus'";
+
       $itemImg = $this->fetch_item->assignImage($row->type);
       $output .=
       "<div class='items-box'>
@@ -37,7 +43,7 @@ class Getitem extends CI_Controller{
               <p class='total-available'>Total Available: ".$amount->totalAvailable."</p>
       <div class='input-group-append' id='item-btn'>
               <button id='checkout-btn' class='btn btn-Danger' type='button' onClick=window.location.href='checkout_cart'>Check Out</button>
-              <button id='reserve-btn' class='btn btn-Danger' type='button' onClick=window.location.href='reserveStatus'>Reserve</button>
+              <button id='reserve-btn' class='btn btn-Danger' type='button' onClick=window.location.href='confirmReservation/$row->itemID'>Reserve</button>
       </div>
       </div>";
     }
@@ -47,4 +53,3 @@ class Getitem extends CI_Controller{
   echo $output;
   }
 }
-?>

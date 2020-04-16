@@ -63,5 +63,17 @@ class Fetch_item extends CI_Model {
         $this->db->order_by('itemID', 'ASC');
         return $this->db->get()->result();
     }
+
+  public function getItem($itemID)
+  {
+    $query = $this->db->get_where('item', array('itemID' => $itemID));
+    return $query->row();
+  }
+
+  public function reserveItem($itemID)
+  {
+    $this->db->where('itemID', $itemID);
+    $this->db->update('item', array('status' => "Reserved"));
+    return true;
+  }
 }
-?>

@@ -6,6 +6,12 @@ class Reservation_model extends CI_Model
         $this->load->database();
     }
 
+    public function createReservation($reservationInfo)
+    {
+        $this->db->insert('reservations', $reservationInfo);
+        return true;
+    }
+
     public function get_reservations()
     {
             $this->db->order_by('reservations.userID', 'ASC');

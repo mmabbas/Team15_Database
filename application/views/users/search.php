@@ -1,6 +1,7 @@
 <b<body>
-  <link rel="stylesheet" href="<?php echo base_url('./assets/css/style.css') ?>">
   <div class="container">
+  <!--<link rel="stylesheet" href="<?php echo base_url('./assets/css/style.css') ?>"> -->
+  <?php echo "<body style='background-color:#222222'>"; ?>
     <div class="jumbotron">
       <div class="row">
         <input type="text" class="form-control" id="searchtxt" placeholder="Search Books..." name="searchTest">

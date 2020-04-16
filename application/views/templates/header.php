@@ -4,11 +4,12 @@
     <title>Team 15 DBMS</title>
     <link rel="stylesheet" href="https://bootswatch.com/3/darkly/bootstrap.min.css">
     <script src="http://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <link href="<?php echo base_url(); ?>/assets/css/style.css" rel="stylesheet" />
 </head>
 
 <body>
 
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse" style="background-color: #464545;">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -109,11 +110,6 @@
         });
         </script>
     </head>
-
-
-
-
-
 
     <div class="container">
         <!-- Flash messages -->

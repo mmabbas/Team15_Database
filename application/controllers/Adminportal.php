@@ -52,7 +52,7 @@ class Adminportal extends CI_Controller
         //print_r(($data['reservations']));
         if (empty($data['reservations'])) {
             $this->session->set_flashdata('no_reservations', 'There are no reservations at the moment');
-            redirect('users/dashboard');
+            redirect('users/adminDashboard');
         }
         $this->load->view('templates/header');
         $this->load->view('adminfuncs/adminReservations', $data);
@@ -93,5 +93,17 @@ class Adminportal extends CI_Controller
         $this->load->view('templates/header');
         $this->load->view('adminfuncs/viewCheckOuts', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function reportTest()
+    {
+        $this->load->view('templates/header');
+        $this->load->view('adminfuncs/reportTest');
+        $this->load->view('templates/footer');
+    }
+
+    public function fetchReportData()
+    {
+        $this->load->view('adminfuncs/fetch');
     }
 }

@@ -1,7 +1,6 @@
 <html>
 <head>
     <title>Checkout Cart</title>
-    <link rel="stylesheet" href="<?php echo base_url('./assets/css/style.css')?>">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <body>
