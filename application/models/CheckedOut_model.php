@@ -22,14 +22,14 @@ class CheckedOut_model extends CI_Model
 
     public function getActiveCount()
     {
-        $query = $this->db->get_where('item', array('status' => "Checked Out"));
+        $query = $this->db->get_where('item', array('status' => "Unavailable"));
         return $query->num_rows();
     }
 
     public function getAll()
     {
         $this->db->order_by('item.itemID', 'ASC');
-        $query = $this->db->get_where('item', array('status' => "Checked Out"));
+        $query = $this->db->get_where('item', array('status' => "Unavailable"));
         return $query->result_array();
     }
 

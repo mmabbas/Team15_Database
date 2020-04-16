@@ -19,12 +19,28 @@ class Reservation_model extends CI_Model
         return true;
     }
 
+    public function checkOutReservation($itemID)
+    {
+        $array = array('status' => "Processing", 'itemID' => $itemID);
+        $this->db->where($array);
+        $this->db->update('reservations', array('status' => "Picked Up"));
+        return true;
+    }
+
+
     public function get_reservations()
     {
-            $this->db->order_by('reservations.userID', 'ASC');
-            //$this->db->join('item', 'item.itemID = reservations.itemID');
-            $query = $this->db->get('reservations');
-            return $query->result_array();
+        $this->db->order_by('reservations.userID', 'ASC');
+        //$this->db->join('item', 'item.itemID = reservations.itemID');
+        $query = $this->db->get('reservations');
+        return $query->result_array();
+    }
+
+    public function getUserActiveReservations($userID)
+    {
+        $this->db->order_by('reservations.userID', 'ASC');
+        $query = $this->db->get_where('reservations', array('userID' => $userID, 'status' => "Processing"));
+        return $query->result_array();
     }
 
     public function getUserReservations($userID)
@@ -40,11 +56,23 @@ class Reservation_model extends CI_Model
         $query = $this->db->get_where('reservations', array('userID' => $userID, 'status' => "Reserved"));
         return $query->num_rows();
     }
+    public function getUserCount($userID)
+    {
+        $this->db->order_by('reservations.reservationID', 'DESC');
+        $query = $this->db->get_where('reservations', array('userID' => $userID));
+        return $query->num_rows();
+    }
 
     public function getActiveCount()
     {
         $query = $this->db->get_where('reservations', array('status' => "Reserved"));
         //$query = $this->db->query('SELECT * FROM reservations');
+        return $query->num_rows();
+    }
+
+    public function getTotalCount()
+    {
+        $query = $this->db->get('reservations');
         return $query->num_rows();
     }
 

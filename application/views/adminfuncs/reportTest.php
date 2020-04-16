@@ -13,12 +13,14 @@
     margin:0;
     padding:0;
     background-color:#222222;
+    color:black;
    }
    .box
    {
     width:1270px;
     padding:20px;
-    background-color:#fff;
+    background-color:dimgray;
+    color: #fff;
     border:1px solid #ccc;
     border-radius:5px;
     margin-top:25px;

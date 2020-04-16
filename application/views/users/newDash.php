@@ -37,8 +37,8 @@
                         <a href='<?php echo base_url('users/newDash'); ?>' class="list-group-item active main-color-bg">
                             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard
                         </a>
-                        <a href='<?php echo base_url('users/checkedOut'); ?>' class="list-group-item"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkouts <span class="badge"><?php echo $numOfCheckOuts; ?></span></a>
-                        <a href='<?php echo base_url('users/reserveStatus'); ?>' class="list-group-item"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Reservations <span class="badge"><?php echo $reserveNum; ?></span></a>
+                        <a href='<?php echo base_url('users/checkedOut'); ?>' class="list-group-item"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkouts <span class="badge"><?php echo $numOfCheckOuts; ?> Active</span></a>
+                        <a href='<?php echo base_url('users/reserveStatus'); ?>' class="list-group-item"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Reservations <span class="badge"><?php echo $reserveNum; ?> Active</span></a>
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -100,12 +100,21 @@
                                     <th>Name</th>
                                     <th>Reservation Date</th>
                                     <th>Experiation Date</th>
+                                    <th>Cancel Reservation</th>
+                                    <th>Check Out Book</th>
 
                                     <?php foreach ($latestReservations as $reservation) : ?>
                                 <tr>
                                     <td><?php echo $reservation['itemName']; ?></td>
                                     <td><?php echo $reservation['reservationDate']; ?></td>
                                     <td><?php echo $reservation['expirationDate']; ?></td>
+                                    <td><a href="<?php echo base_url(); ?>users/confirmCancelation/<?php echo $reservation['itemID']; ?>" class="btn btn-success">Cancel</a></td>
+                                    <?php if ($reservation['status'] == "Processing") : ?>
+										<td><a href="<?php echo base_url(); ?>users/confirmCheckout/<?php echo $reservation['itemID']; ?>" class="btn btn-success">Check Out</a></td>
+									<?php endif; ?>
+									<?php if ($reservation['status'] == "Canceled") : ?>
+										<td>  N/A</td>
+									<?php endif; ?>
                                 </tr>
                             <?php endforeach; ?>
 

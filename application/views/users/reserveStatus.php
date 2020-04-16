@@ -35,7 +35,7 @@
 				<div class="col-md-3">
 					<div class="list-group">
 						<a href='<?php echo base_url('users/newDash'); ?>' class="list-group-item"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard</a>
-						<a href='<?php echo base_url('users/checkedOut'); ?>' class="list-group-item"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkouts <span class="badge"><?php echo $numOfCheckOuts; ?></span></a>
+						<a href='<?php echo base_url('users/checkedOut'); ?>' class="list-group-item"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkouts <span class="badge"><?php echo $numOfCheckOuts; ?> Active</span></a>
 						<a href='<?php echo base_url('users/reserveStatus'); ?>' class="list-group-item active main-color-bg">
 							<span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Reservations <span class="badge"><?php echo $reserveNum; ?></span>
 						<a href='<?php echo base_url('users/checkedOut'); ?>' class="list-group-item"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkouts <span class="badge"><?php echo $numOfCheckOuts; ?></span></a>
@@ -60,19 +60,25 @@
 							<br>
 							<table class="table table-striped table-hover">
 								<tr>
-									<th>Item ID</th>
-									<th>Requested By</th>
+									<th>Title</th>
 									<th>Reservation Created On</th>
 									<th>Reservation Expires On</th>
+									<th>Status</th>
 									<th>Cancel Reservation</th>
 
 									<?php foreach ($reservations as $reservation) : ?>
 								<tr>
 									<td><?php echo $reservation['itemName']; ?></td>
-									<td>UserID # <?php echo $reservation['userID']; ?></td>
 									<td><?php echo $reservation['reservationDate']; ?></td>
 									<td><?php echo $reservation['expirationDate']; ?></td>
-									<td><a href="<?php echo base_url(); ?>users/confirmCancelation/<?php echo $reservation['itemID']; ?>"class="btn btn-success">Cancel</a></td>								</tr>
+									<td><?php echo $reservation['status']; ?></td>
+									<?php if ($reservation['status'] == "Processing") : ?>
+										<td><a href="<?php echo base_url(); ?>users/confirmCancelation/<?php echo $reservation['itemID']; ?>" class="btn btn-success">Cancel</a></td>
+									<?php endif; ?>
+									<?php if ($reservation['status'] == "Canceled") : ?>
+										<td>  N/A</td>
+									<?php endif; ?>
+								</tr>
 							<?php endforeach; ?>
 
 							</table>

@@ -12,7 +12,7 @@
     <div align="center">
         <h2>Are you sure you want to cancel this reservation?</h2>
         <a href="<?php echo base_url(); ?>users/cancelReservation/<?php echo $item->itemID; ?>"class="btn btn-success">Yes</a>
-        <a href="<?php echo base_url(); ?>users/search" class="btn btn-danger">No</a>
+        <a href="<?php echo base_url(); ?>users/newDash" class="btn btn-danger">No</a>
     </div>
 
 </div>

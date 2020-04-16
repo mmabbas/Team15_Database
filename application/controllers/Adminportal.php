@@ -108,7 +108,7 @@ class Adminportal extends CI_Controller
     {
         $data['title'] = 'View All Reservations';
         $data['allReservations'] = $this->reservation_model->get_reservations();
-        $data['reservations'] = $this->reservation_model->getActiveCount();
+        $data['reservations'] = $this->reservation_model->getTotalCount();
         $data['checkOuts'] = $this->checkedOut_model->getActiveCount();
         $data['totalTitles'] = $this->fetch_item->getCount();
         $data['userCount'] = $this->user_model->getCount();
