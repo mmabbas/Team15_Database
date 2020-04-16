@@ -87,7 +87,7 @@ class Adminportal extends CI_Controller
             
             //set message
             $this->session->set_flashdata('item_added', 'Item has been added to the Library');
-            redirect('users/adminDashboard');
+            redirect('adminportal/viewtitles');
             //redirect('adminDashboard');
         }
         // $data['title'] = 'Add Item';

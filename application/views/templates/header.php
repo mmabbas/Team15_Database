@@ -22,12 +22,7 @@
                     <a class="navbar-brand" href="<?php echo base_url(); ?>">Team 15 Library App</a>
                 <?php endif; ?>
                 <?php if ($this->session->userdata('logged_in')) : ?>
-                    <?php if ($this->session->userdata('userType') == "Admin") : ?>
-                        <a class="navbar-brand" href="<?php echo base_url(); ?>adminportal/adminDashboard">Team 15 Library App</a>
-                    <?php endif; ?>
-                    <?php if ($this->session->userdata('userType') == "User") : ?>
-                        <a class="navbar-brand" href="<?php echo base_url(); ?>users/newDash">Team 15 Library App</a>
-                    <?php endif; ?>
+                    <a class="navbar-brand">Team 15 Library App</a> 
                 <?php endif; ?>
 
             </div>
@@ -36,19 +31,19 @@
                     <?php if ($this->session->userdata('logged_in')) : ?>
                         <?php if ($this->session->userdata('userType') == "Admin") : ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url(); ?>adminportal/adminDashboard">Dashboard <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="<?php echo base_url(); ?>adminportal/adminDashboard">Admin Dashboard <span class="sr-only">(current)</span></a>
                             </li>
                         <?php endif; ?>
                         <?php if ($this->session->userdata('userType') == "User") : ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url(); ?>users/newDash">Dashboard <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="<?php echo base_url(); ?>users/newDash">User Dashboard <span class="sr-only">(current)</span></a>
                             </li>
                         <?php endif; ?>
                     <?php endif; ?>
 
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url(); ?>about">About</a>
-                    </li>
+                    </li> -->
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <?php if (!$this->session->userdata('logged_in')) : ?>
