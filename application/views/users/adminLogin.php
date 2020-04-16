@@ -1,4 +1,4 @@
-<?php echo form_open('users/adminLogin'); ?>
+<?php echo form_open('adminportal/adminLogin'); ?>
 <div class="row">
 
     <div class="col-md-12">

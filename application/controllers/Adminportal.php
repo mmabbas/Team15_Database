@@ -1,6 +1,69 @@
 <?php
 class Adminportal extends CI_Controller
 {
+    public function adminLogin()
+    {
+        $data['title'] = 'Sign In';
+
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('templates/header');
+            $this->load->view('users/adminLogin', $data);
+            $this->load->view('templates/footer');
+        } else {
+            //get username
+            $username = $this->input->post('username');
+            //get and encrypt password
+            $password = $this->input->post('password');
+            //$password = md5($this->input->post('password'));
+
+            //Login user
+            $user_id = $this->admin_model->admin_login($username, $password);
+
+            if ($user_id) {
+                //Create Session
+                $user_data = array(
+                    'user_id' => $user_id,
+                    'username' => $username,
+                    'logged_in' => true,
+                    'userType' => "Admin",
+                );
+
+                $this->session->set_userdata($user_data);
+
+                //set message
+                $this->session->set_flashdata('user_loggedin', 'You are now logged in');
+                redirect('adminportal/adminDashboard');
+            } else {
+                //set message
+                $this->session->set_flashdata('login_failed', 'Login is invalid');
+                redirect('adminportal/adminLogin');
+            }
+        }
+    }
+
+    public function adminDashboard()
+    {
+        if (!$this->session->userdata['logged_in']) {
+            $this->session->set_flashdata('not_signed_in', 'You are not signed in. Please sign in');
+            redirect('adminportal/adminlogin');
+        }
+        $data['title'] = 'Dashboard';
+
+
+        $data['reservations'] = $this->reservation_model->getActiveCount();
+        $data['checkOuts'] = $this->checkedOut_model->getActiveCount();
+        $data['totalTitles'] = $this->fetch_item->getCount();
+        $data['userCount'] = $this->user_model->getCount();
+        $data['latestReservations'] = $this->reservation_model->getLatest();
+
+        $this->load->view('templates/header');
+        $this->load->view('adminfuncs/adminDash', $data);
+        $this->load->view('templates/footer');
+    }
+
     public function addItem()
     {
         $data['title'] = 'Add Item';
@@ -19,8 +82,8 @@ class Adminportal extends CI_Controller
             $this->load->view('templates/footer');
         } else {
 
-            $this->user_model->add_item();
-            $this->user_model->update_item_invID();
+            $this->admin_model->add_item();
+            $this->admin_model->update_item_invID();
             
             //set message
             $this->session->set_flashdata('item_added', 'Item has been added to the Library');

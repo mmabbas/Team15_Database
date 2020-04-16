@@ -33,7 +33,7 @@
           <a href="<?php echo base_url(); ?>users/search" class="btn btn-warning btn-lg" type="button">Search</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo base_url(); ?>users/adminLogin">Admin Portal</a>
+          <a class="nav-link" href="<?php echo base_url(); ?>adminportal/adminLogin">Admin Portal</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<?php echo base_url(); ?>users/login">Login</a>
@@ -56,7 +56,7 @@
       <br>
       <a href="<?php echo base_url(); ?>users/login" class="btn btn-default btn-lg">Login</a>
       <a href="<?php echo base_url(); ?>users/register" class="btn btn-default btn-lg">Register</a>
-      <a href="<?php echo base_url(); ?>users/adminLogin" class="btn btn-default btn-lg">Admin Portal</a>
+      <a href="<?php echo base_url(); ?>adminportal/adminLogin" class="btn btn-default btn-lg">Admin Portal</a>
     </div>
   </div>
 </body>

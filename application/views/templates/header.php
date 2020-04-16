@@ -23,7 +23,7 @@
                 <?php endif; ?>
                 <?php if ($this->session->userdata('logged_in')) : ?>
                     <?php if ($this->session->userdata('userType') == "Admin") : ?>
-                        <a class="navbar-brand" href="<?php echo base_url(); ?>users/adminDashboard">Team 15 Library App</a>
+                        <a class="navbar-brand" href="<?php echo base_url(); ?>adminportal/adminDashboard">Team 15 Library App</a>
                     <?php endif; ?>
                     <?php if ($this->session->userdata('userType') == "User") : ?>
                         <a class="navbar-brand" href="<?php echo base_url(); ?>users/newDash">Team 15 Library App</a>
@@ -36,7 +36,7 @@
                     <?php if ($this->session->userdata('logged_in')) : ?>
                         <?php if ($this->session->userdata('userType') == "Admin") : ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo base_url(); ?>users/adminDashboard">Dashboard <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="<?php echo base_url(); ?>adminportal/adminDashboard">Dashboard <span class="sr-only">(current)</span></a>
                             </li>
                         <?php endif; ?>
                         <?php if ($this->session->userdata('userType') == "User") : ?>
@@ -53,7 +53,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <?php if (!$this->session->userdata('logged_in')) : ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo base_url(); ?>users/adminLogin">Admin Portal</a>
+                            <a class="nav-link" href="<?php echo base_url(); ?>adminportal/adminLogin">Admin Portal</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo base_url(); ?>users/login">Login</a>
