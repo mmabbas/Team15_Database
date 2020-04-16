@@ -309,6 +309,26 @@ class Users extends CI_Controller
 
         $this->session->set_flashdata('user_registered', 'Reservation has been canceled successfully');
         redirect('users/newDash');
-
+    }
+    public function confirmCheckout($itemID)
+    {
+          $data['title'] = 'Confirm Reservation';
+          $data['item'] = $this->fetch_item->getItem($itemID);
+          //print_r($data['item']);
+          $this->load->view('templates/header');
+          $this->load->view('users/checkout_cart_view', $data);
+          $this->load->view('templates/footer');
+    }
+    public function createCheckout($itemID)
+    {
+        //update item status
+        $this->checkout_cart_model->checkOutItem($itemID);
+        //update total available
+        $item = $this->fetch_item->getItem($itemID);
+        $isbn = $item->isbn;
+        $this->inventory_model->decrementTotalAvailable($isbn);
+        $this->inventory_model->incrementTotalCheckedout($isbn);
+        //add to item table
+        redirect('users/newDash');
     }
 }

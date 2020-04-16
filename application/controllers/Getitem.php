@@ -42,7 +42,7 @@ class Getitem extends CI_Controller{
               <p class='item-status'>".$status."</p>
               <p class='total-available'>Total Available: ".$amount->totalAvailable."</p>
       <div class='input-group-append' id='item-btn'>
-              <button id='checkout-btn' class='btn btn-Danger' type='button' onClick=window.location.href='checkout_cart'>Check Out</button>
+              <button id='checkout-btn' class='btn btn-Danger' type='button' onClick=window.location.href='confirmCheckout/$row->itemID'>Check Out</button>
               <button id='reserve-btn' class='btn btn-Danger' type='button' onClick=window.location.href='confirmReservation/$row->itemID'>Reserve</button>
       </div>
       </div>";
