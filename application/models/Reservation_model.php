@@ -21,7 +21,7 @@ class Reservation_model extends CI_Model
 
     public function checkOutReservation($itemID)
     {
-        $array = array('status' => "Processing", 'itemID' => $itemID);
+        $array = array('status' => "Reserved", 'itemID' => $itemID);
         $this->db->where($array);
         $this->db->update('reservations', array('status' => "Picked Up"));
         return true;

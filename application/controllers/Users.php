@@ -255,12 +255,21 @@ class Users extends CI_Controller
     }
     public function createCheckout($itemID)
     {
+        $item = $this->fetch_item->getItem($itemID);
+        $isbn = $item->isbn;
+
+        if($item->status == "Reserved")
+        {
+            $this->inventory_model->decrementTotalReserved($isbn);
+            $this->reservation_model->deleteReservation($item->itemID);
+        }
+        else
+        {
+            $this->inventory_model->decrementTotalAvailable($isbn);
+        }
         //update item status
         $this->checkout_cart_model->checkOutItem($itemID);
         //update total available
-        $item = $this->fetch_item->getItem($itemID);
-        $isbn = $item->isbn;
-        $this->inventory_model->decrementTotalAvailable($isbn);
         $this->inventory_model->incrementTotalCheckedout($isbn);
         //add to item table
         redirect('users/newDash');
