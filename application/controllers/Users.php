@@ -178,10 +178,6 @@ class Users extends CI_Controller
         $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']);
         $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']);
         $data['reservations'] = $this->reservation_model->getUserReservations($this->session->userdata['user_id']);
-        if (empty($data['reservations'])) {
-            $this->session->set_flashdata('no_reservations', 'You don\'t have any reservations');
-            redirect('users/newDash');
-        }
         $this->load->view('templates/header');
         $this->load->view('users/reserveStatus', $data);
         $this->load->view('templates/footer');
