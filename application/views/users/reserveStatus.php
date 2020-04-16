@@ -70,8 +70,7 @@
 									<td>UserID # <?php echo $reservation['userID']; ?></td>
 									<td><?php echo $reservation['reservationDate']; ?></td>
 									<td><?php echo $reservation['expirationDate']; ?></td>
-									<td><a button type="button" class="btn btn-cancel" href = '<?php base_url('users/cancelReservation'); ?>'>Cancel</button></td>
-								</tr>
+									<td><a href="<?php echo base_url(); ?>users/confirmCancelation/<?php echo $reservation['itemID']; ?>"class="btn btn-success">Cancel</a></td>								</tr>
 							<?php endforeach; ?>
 
 							</table>

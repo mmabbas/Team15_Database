@@ -12,6 +12,13 @@ class Reservation_model extends CI_Model
         return true;
     }
 
+    public function deleteReservation($itemID)
+    {
+        $this->db->where('itemID', $itemID);
+        $this->db->update('reservations', array('status' => "Canceled"));
+        return true;
+    }
+
     public function get_reservations()
     {
             $this->db->order_by('reservations.userID', 'ASC');
@@ -23,14 +30,14 @@ class Reservation_model extends CI_Model
     public function getUserReservations($userID)
     {
             $this->db->order_by('reservations.userID', 'ASC');
-            $query = $this->db->get_where('reservations', array('userID' => $userID));
+            $query = $this->db->get_where('reservations', array('userID' => $userID, 'status' => "Processing"));
             return $query->result_array();
     }
 
     public function getActiveUserCount($userID)
     {
         $this->db->order_by('reservations.reservationID', 'DESC');
-        $query = $this->db->get_where('reservations', array('userID' => $userID));
+        $query = $this->db->get_where('reservations', array('userID' => $userID, 'status' => "Processing"));
         return $query->num_rows();
     }
 
@@ -43,11 +50,14 @@ class Reservation_model extends CI_Model
 
     public function getLatest()
     {
-        $this->db->select('*');
-        $this->db->order_by('reservations.reservationID', 'DESC');
-        $this->db->from('reservations');
-        $this->db->limit('5');
-        $query = $this->db->get();
+        //$this->db->select('*');
+        //$this->db->order_by('reservations.reservationID', 'DESC');
+        //$this->db->from('reservations');
+        //$this->db->limit('5');
+        //$query = $this->db->get();
+
+        $this->db->order_by('reservations.userID', 'ASC');
+        $query = $this->db->get_where('reservations', array('status' => "Processing"));
         return $query->result_array();
     }
 }

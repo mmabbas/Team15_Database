@@ -265,6 +265,16 @@ class Users extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function confirmCancelation($itemID)
+    {
+        $data['title'] = 'Confirm Cancelation';
+        $data['item'] = $this->fetch_item->getItem($itemID);
+        //print_r($data['item']);
+        $this->load->view('templates/header');
+        $this->load->view('users/confirmCancelation', $data);
+        $this->load->view('templates/footer');
+    }
+
     public function createReservation($itemID)
     {
         //update item status to reserved
@@ -283,6 +293,21 @@ class Users extends CI_Controller
         $this->reservation_model->createReservation($reservationInfo);
 
         $this->session->set_flashdata('user_registered', 'Reservation has been created successfully');
+        redirect('users/newDash');
+
+    }
+
+    public function cancelReservation($itemID)
+    {
+        //update item status to Available
+        $this->fetch_item->unReserveItem($itemID);
+        //update total available
+        $item = $this->fetch_item->getItem($itemID);
+        $this->inventory_model->incrementTotalAvailable($item->isbn);
+        //add to reservation table
+        $this->reservation_model->deleteReservation($itemID);
+
+        $this->session->set_flashdata('user_registered', 'Reservation has been canceled successfully');
         redirect('users/newDash');
 
     }

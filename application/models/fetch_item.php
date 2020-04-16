@@ -76,4 +76,11 @@ class Fetch_item extends CI_Model {
     $this->db->update('item', array('status' => "Reserved"));
     return true;
   }
+
+  public function unReserveItem($itemID)
+  {
+    $this->db->where('itemID', $itemID);
+    $this->db->update('item', array('status' => "Available"));
+    return true;
+  }
 }
