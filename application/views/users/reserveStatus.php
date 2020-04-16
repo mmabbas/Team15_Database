@@ -38,6 +38,7 @@
 						<a href='<?php echo base_url('users/checkedOut'); ?>' class="list-group-item"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkouts <span class="badge"><?php echo $numOfCheckOuts; ?></span></a>
 						<a href='<?php echo base_url('users/reserveStatus'); ?>' class="list-group-item active main-color-bg">
 							<span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Reservations <span class="badge"><?php echo $reserveNum; ?></span>
+
 						</a>
 					</div>
 				</div>
@@ -69,6 +70,7 @@
 									<td>UserID # <?php echo $reservation['userID']; ?></td>
 									<td><?php echo $reservation['reservationDate']; ?></td>
 									<td><?php echo $reservation['expirationDate']; ?></td>
+									<td><a button type="button" class="btn btn-cancel" href = '<?php base_url('users/cancelReservation'); ?>'>Cancel</button></td>
 								</tr>
 							<?php endforeach; ?>
 
