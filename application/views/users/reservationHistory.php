@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang = "en">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Admin Area | Dashboard</title>
+	<title>Dashboard</title>
 
 </head>
 
@@ -15,19 +14,19 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-10">
-					<h1><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> View Reservations</h1>
+					<h1><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> View Reservation History</h1>
 				</div>
 			</div>
 		</div>
 	</header>
 
-	<section id="breadcrumb">
+	<!-- <section id="breadcrumb">
 		<div class="container">
 			<ol class="breadcrumb">
 				<li class="active"> Active Reservations</li>
 			</ol>
 		</div>
-	</section>
+	</section> -->
 
 	<section id="main">
 		<div class="container">
@@ -38,8 +37,7 @@
 						<a href='<?php echo base_url('users/checkedOut'); ?>' class="list-group-item"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkouts <span class="badge"><?php echo $numOfCheckOuts; ?></span></a>
 						<a href='<?php echo base_url('users/reserveStatus'); ?>' class="list-group-item active main-color-bg">
 							<span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Reservations <span class="badge"><?php echo $reserveNum; ?></span>
-						<a href='<?php echo base_url('users/checkedOut'); ?>' class="list-group-item"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkouts <span class="badge"><?php echo $numOfCheckOuts; ?></span></a>
-						<!-- <a href='<?php echo base_url('users/reservationHistory'); ?>' class="list-group-item"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Reservation History</a> -->
+
 						</a>
 					</div>
 				</div>
@@ -61,23 +59,28 @@
 							<table class="table table-striped table-hover">
 								<tr>
 									<th>Item ID</th>
-									<th>Requested By</th>
 									<th>Reservation Created On</th>
 									<th>Reservation Expires On</th>
+                                    <th>Status</th>
 									<th>Cancel Reservation</th>
 
 									<?php foreach ($reservations as $reservation) : ?>
 								<tr>
 									<td><?php echo $reservation['itemName']; ?></td>
-									<td>UserID # <?php echo $reservation['userID']; ?></td>
 									<td><?php echo $reservation['reservationDate']; ?></td>
 									<td><?php echo $reservation['expirationDate']; ?></td>
-									<td><a href="<?php echo base_url(); ?>users/confirmCancelation/<?php echo $reservation['itemID']; ?>"class="btn btn-success">Cancel</a></td>								</tr>
+                                    <td><?php echo $reservation['status']; ?></td>
+                                    <?php if($reservation['status'] == "Reserved") : ?>
+                                        <td><a href="<?php echo base_url(); ?>users/confirmCancelation/<?php echo $reservation['itemID']; ?>" class="btn btn-success">Cancel</a></td>
+                                    <?php endif; ?>
+                                    <?php if ($reservation['status'] == "Canceled") : ?>
+                                        <td> </td>
+                                    <?php endif;?>
+									<!-- <td><a href="<?php echo base_url(); ?>users/confirmCancelation/<?php echo $reservation['itemID']; ?>"class="btn btn-success">Cancel</a></td>								</tr> -->
 							<?php endforeach; ?>
 
-							</table>
+							</table> 
 						</div>
-						<a href="<?php echo base_url(); ?>users/getHistory" class="btn btn-sucess"> Reservation History</a>
 					</div>
 				</div>
 			</div>

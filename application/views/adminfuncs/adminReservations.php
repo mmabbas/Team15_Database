@@ -66,6 +66,7 @@
                                     <th>Requested By</th>
                                     <th>Reservation Created On</th>
                                     <th>Reservation Expires On</th>
+                                    <th>Status</th>
 
                                     <?php foreach ($allReservations as $reservation) : ?>
                                 <tr>
@@ -73,6 +74,7 @@
                                     <td>UserID # <?php echo $reservation['userID']; ?></td>
                                     <td><?php echo $reservation['reservationDate']; ?></td>
                                     <td><?php echo $reservation['expirationDate']; ?></td>
+                                    <td><?php echo $reservation['status']; ?></td>
                                 </tr>
                             <?php endforeach; ?>
 

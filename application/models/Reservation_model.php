@@ -60,4 +60,11 @@ class Reservation_model extends CI_Model
         $query = $this->db->get_where('reservations', array('status' => "Reserved"));
         return $query->result_array();
     }
+
+    public function getHistory($userID)
+    {
+        $this->db->order_by('reservations.reservationID', 'DESC');
+        $query = $this->db->get_where('reservations', array('userID'=> $userID));
+        return $query->result_array();
+    }
 }

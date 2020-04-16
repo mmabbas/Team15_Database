@@ -226,7 +226,7 @@ class Users extends CI_Controller
             'itemName' => $item->title,
             'reservationDate' => date("Y-m-d"),
             'expirationDate' => date('Y-m-d', strtotime('+1 week')),
-            'status' => 'Reserved'
+            #'status' => 'Processing',
         );
         $this->reservation_model->createReservation($reservationInfo);
 
@@ -268,5 +268,21 @@ class Users extends CI_Controller
         $this->inventory_model->incrementTotalCheckedout($isbn);
         //add to item table
         redirect('users/newDash');
+    }
+
+    public function getHistory()
+    {
+        $data['title'] = 'Reservation History';
+        $data['reservations'] = $this->reservation_model->getHistory($this->session->userdata['user_id']);
+        $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']);
+        $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']);
+        if (empty($data['reservations']))
+        {
+            $this->session->set_flashdata('no_reservations', 'You don\'t have any reservations');
+            redirect('users/newDash');
+        } 
+        $this->load->view('templates/header');
+        $this->load->view('users/reservationHistory', $data);
+        $this->load->view('templates/footer');
     }
 }
