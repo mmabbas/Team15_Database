@@ -312,7 +312,7 @@ class Users extends CI_Controller
     }
     public function confirmCheckout($itemID)
     {
-          $data['title'] = 'Confirm Reservation';
+          $data['title'] = 'Confirm Checkout';
           $data['item'] = $this->fetch_item->getItem($itemID);
           //print_r($data['item']);
           $this->load->view('templates/header');

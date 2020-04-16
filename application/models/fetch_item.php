@@ -42,6 +42,7 @@ class Fetch_item extends CI_Model {
     if($searchType != 0){
     $this->db->where('type', $searchType);
     }
+    $this->db->where('userID is NULL', NULL, FALSE);
     //Look up user input as $query from item.title, item.author and item.distributor
     if($query != ''){
       if($searchBy == "title"){
@@ -52,7 +53,7 @@ class Fetch_item extends CI_Model {
       $this->db->like('distributor', $query);
     }
   }
-    $this->db->order_by('itemID', 'DESC');
+    $this->db->order_by('title', 'ASC');
     return $this->db->get()->result();
   }
 

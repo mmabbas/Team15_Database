@@ -11,6 +11,7 @@ class Getitem extends CI_Controller{
     $query = '';
     $searchBy = '';
     $searchType = '';
+    $temp2 = '';
     $this->load->model('fetch_item');
     if($this->input->post('search')){
       $query = $this->input->post('search');
@@ -20,20 +21,22 @@ class Getitem extends CI_Controller{
     $data = $this->fetch_item->get_data($query, $searchBy, $searchType);
     if(!empty($data)){
     foreach($data as $row){
-    $amount = $this->fetch_item->checkAmount($row->inventoryID);
-    if(intval($amount->totalAvailable) > 0){
-      $status = 'Available';
-    } else {
-      $status = 'Unavailable';
-    }
+    $temp1 = $row->isbn;
+    if($temp1 != $temp2){
+      $amount = $this->fetch_item->checkAmount($row->inventoryID);
+      if(intval($amount->totalAvailable) > 0){
+        $status = 'Available';
+      } else {
+        $status = 'Unavailable';
+      }
 
-    $cButton = 'Check Out';
-    $rButton = 'Reserve';
-    $cOnClick = "window.location.href='checkout_cart_view'";
-    $rOnClick = "window.location.href='reserveStatus'";
+      $cButton = 'Check Out';
+      $rButton = 'Reserve';
+      $cOnClick = "window.location.href='checkout_cart_view'";
+      $rOnClick = "window.location.href='reserveStatus'";
 
-      $itemImg = $this->fetch_item->assignImage($row->type);
-      $output .=
+        $itemImg = $this->fetch_item->assignImage($row->type);
+        $output .=
       "<div class='items-box'>
               $itemImg
               <h3 class='item-title'>".$row->title."</h3>
@@ -46,6 +49,8 @@ class Getitem extends CI_Controller{
               <button id='reserve-btn' class='btn btn-Danger' type='button' onClick=window.location.href='confirmReservation/$row->itemID'>Reserve</button>
       </div>
       </div>";
+    }
+      $temp2 = $row->isbn;
     }
   }else {
     $output .= "No results";

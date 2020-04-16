@@ -10,7 +10,7 @@
         </div>
     </div>
     <div align="center">
-        <h2>Are you sure you want to reserve this tile?</h2>
+        <h2>Are you sure you want to checkout this tile?</h2>
         <a href="<?php echo base_url(); ?>users/createCheckout/<?php echo $item->itemID; ?>"class="btn btn-success">Yes</a>
         <a href="<?php echo base_url(); ?>users/search" class="btn btn-danger">No</a>
     </div>
