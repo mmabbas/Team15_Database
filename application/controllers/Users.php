@@ -257,12 +257,8 @@ class Users extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-	public function checkout_cart_view()
+	public function checkout_cart()
 	{
 		$this->load->model('checkout_cart_model');
-		$data['item'] = $this->checkout_cart_model->fetch_item();
-		$this->load->view('templates/header');
-		$this->load->view('users\checkout_cart_view', $data);
-		$this->load->view('templates/footer');
-    }
+  }
 }

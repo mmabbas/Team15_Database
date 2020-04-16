@@ -6,12 +6,11 @@ class Getitem extends CI_Controller{
 
   function getData(){
     $status = '';
-    $button = '';
+    $tempID = '';
     $output = '';
     $query = '';
     $searchBy = '';
     $searchType = '';
-    $onClick = "";
     $this->load->model('fetch_item');
     if($this->input->post('search')){
       $query = $this->input->post('search');
@@ -23,13 +22,9 @@ class Getitem extends CI_Controller{
     foreach($data as $row){
     $amount = $this->fetch_item->checkAmount($row->inventoryID);
     if(intval($amount->totalAvailable) > 0){
-      $button = 'Check Out';
       $status = 'Available';
-      $onClick = "window.location.href='checkout_cart_view'";
     } else {
-      $button = 'Reserve';
       $status = 'Unavailable';
-      $onClick = "window.location.href='reserveStatus'";
     }
       $itemImg = $this->fetch_item->assignImage($row->type);
       $output .=
@@ -40,8 +35,9 @@ class Getitem extends CI_Controller{
               <p class='year'>".$row->year."</p>
               <p class='item-status'>".$status."</p>
               <p class='total-available'>Total Available: ".$amount->totalAvailable."</p>
-      <div class='input-group-append'>
-              <button id='item-btn' class='btn btn-Danger' type='button' onClick=$onClick>".$button."</button>
+      <div class='input-group-append' id='item-btn'>
+              <button id='checkout-btn' class='btn btn-Danger' type='button' onClick=window.location.href='checkout_cart'>Check Out</button>
+              <button id='reserve-btn' class='btn btn-Danger' type='button' onClick=window.location.href='reserveStatus'>Reserve</button>
       </div>
       </div>";
     }
