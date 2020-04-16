@@ -3,6 +3,17 @@ class User_model extends CI_Model
 {
     public function register($enc_password)
     {
+        $usertype = $this->input->post('usertype');
+        if($usertype == 1)
+        {
+            $daylimit = 3;
+            $booklimit = 3;
+        }
+        else
+        {
+            $daylimit = 5;
+            $booklimit = 5;
+        }
         //login data array
         $loginData = array(
             'firstName' => $this->input->post('firstName'),
@@ -12,6 +23,8 @@ class User_model extends CI_Model
             'password' => $enc_password,
             'age' => $this->input->post('age'),
             'userType' => $this->input->post('usertype'),
+            'dayLimit' => $daylimit,
+            'bookLimit' => $booklimit
         );
 
         //insert user
