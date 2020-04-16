@@ -63,6 +63,7 @@
 									<th>Requested By</th>
 									<th>Reservation Created On</th>
 									<th>Reservation Expires On</th>
+									<th>Cancel Reservation</th>
 
 									<?php foreach ($reservations as $reservation) : ?>
 								<tr>
