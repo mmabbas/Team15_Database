@@ -20,7 +20,7 @@
 
         <div class="form-group">
             <Label>ISBN</Label>
-            <input type="number" class="form-control" name="isbn" placeholder="ISBN">
+            <input type="text" class="form-control" name="isbn" placeholder="ISBN">
         </div>
 
         <div class="form-group">

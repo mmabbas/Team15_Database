@@ -63,21 +63,21 @@
                             <table class="table table-striped table-hover">
                                 <tr>
                                     <th>Item ID</th>
-                                    <th>User ID</th>
                                     <th>Title</th>
                                     <th>ISBN</th>
                                     <th>Genre</th>
                                     <th>Author</th>
                                     <th>Status</th>
+                                    <th>Edit</th>
                                     <?php foreach ($allTitles as $title) : ?>
                                 <tr>
                                     <td><?php echo $title->itemID; ?></td>
-                                    <td><?php echo $title->userID; ?></td>
                                     <td><?php echo $title->title; ?></td>
                                     <td><?php echo $title->isbn; ?></td>
                                     <td><?php echo $title->genre; ?></td>
                                     <td><?php echo $title->author; ?></td>
                                     <td><?php echo $title->status; ?></td>
+                                    <td><a href="<?php echo base_url(); ?>adminPortal/editItem/<?php echo $title->itemID; ?>" class="btn btn-success">Edit</a></td>
                                 </tr>
                             <?php endforeach; ?>
 

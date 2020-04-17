@@ -157,7 +157,7 @@ class Users extends CI_Controller
         $data['items'] = $this->checkedOut_model->get_items($this->session->userdata['user_id']);
         if (empty($data['items'])) {
             $this->session->set_flashdata('none_checkedOut', 'You don\'t have any items checked out');
-            redirect('users/dashboard');
+            redirect('users/newDash');
         }
         $this->load->view('templates/header');
         $this->load->view('users/checkedOut', $data);
@@ -261,7 +261,7 @@ class Users extends CI_Controller
         if($item->status == "Reserved")
         {
             $this->inventory_model->decrementTotalReserved($isbn);
-            $this->reservation_model->deleteReservation($item->itemID);
+            $this->reservation_model->checkOutReservation($item->itemID);
         }
         else
         {

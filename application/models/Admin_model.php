@@ -19,6 +19,38 @@
             return $this->db->insert('item', $itemData);
         }
 
+        public function updateItem()
+        {
+            $itemData = array(
+                'title' => $this->input->post('title'),
+                'type' => $this->input->post('type'),
+                'status' => 'Available',
+                'genre' => $this->input->post('genre'),
+                'year' => $this->input->post('year'),
+                'author' => $this->input->post('author'),
+                'distributor' => $this->input->post('distributor'),
+            );
+
+            //update item
+            $this->db->where('itemID', $this->input->post('id'));
+            return $this->db->update('item', $itemData);
+        }
+
+        public function update_post()
+        {
+            $slug = url_title($this->input->post('title'));
+
+            $data = array(
+                'title' => $this->input->post('title'),
+                'slug' => $slug,
+                'body' => $this->input->post('body'),
+                'category_id' => $this->input->post('category_id')
+            );
+
+            $this->db->where('id', $this->input->post('id'));
+            return $this->db->update('posts', $data);
+        }
+
         public function admin_login($username, $password)
         {
             //validate

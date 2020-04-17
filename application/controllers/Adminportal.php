@@ -96,6 +96,26 @@ class Adminportal extends CI_Controller
         // $this->load->view('templates/footer');
     }
 
+    public function editItem($itemID)
+    {
+        $data['title'] = 'Edit Title';
+        $data['item'] = $this->fetch_item->getItem($itemID);
+
+            $this->load->view('templates/header');
+            $this->load->view('adminfuncs/editItem', $data);
+            $this->load->view('templates/footer');
+            
+    }
+
+    public function update()
+        {
+            $this->admin_model->updateItem();
+            $this->admin_model->update_item_invID();
+            //set message
+            $this->session->set_flashdata('post_updated', 'Item has been updated');
+            redirect('adminportal/viewTitles');
+        }
+
     public function issueItem()
     {
         $data['title'] = 'Issue Item';
