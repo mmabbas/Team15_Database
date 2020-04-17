@@ -38,8 +38,8 @@
                             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard
                         </a>
                         <a href='<?php echo base_url('users/userprofile'); ?>' class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> User Profile <span class="badge"></span></a>
-                        <a href='<?php echo base_url('users/checkedOut'); ?>' class="list-group-item"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkouts <span class="badge"><?php echo $numOfCheckOuts; ?> Active</span></a>
-                        <a href='<?php echo base_url('users/reserveStatus'); ?>' class="list-group-item"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Reservations <span class="badge"><?php echo $reserveNum; ?> Active</span></a>
+                        <a href='<?php echo base_url('users/checkedOut'); ?>' class="list-group-item"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkouts <span class="badge"><?php echo $numOfCheckOuts; ?></span></a>
+                        <a href='<?php echo base_url('users/reserveStatus'); ?>' class="list-group-item"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Reservations <span class="badge"><?php echo $reserveNum; ?></span></a>
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -59,6 +59,20 @@
                                 <div class="well dash-box">
                                     <h2><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> <?php echo $reserveNum; ?></h2>
                                     <h4>Pending Reservations</h4>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="well dash-box">
+                                    <h2><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <?php echo $dayLimit; ?></h2>
+                                    <h4>Day Loan Period</h4>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="well dash-box">
+                                    <h2><span class="glyphicon glyphicon-share" aria-hidden="true"></span> <?php echo $bookLimit; ?></h2>
+                                    <h4>Total Loans Permitted</h4>
                                 </div>
                             </div>
                         </div>

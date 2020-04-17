@@ -127,6 +127,7 @@ class User_model extends CI_Model
         return $result->row(0)->quantityCheckedOut;
     }
 
+
     public function increaseQuantityCheckedOut($userID)
     {
         $this->db->set('quantityCheckedOut', 'quantityCheckedOut+1', FALSE);

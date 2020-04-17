@@ -28,8 +28,8 @@ class Users extends CI_Controller
             //$this->user_model->register('password');
 
             //set message
-            $this->session->set_flashdata('user_registered', 'You are now registered and can log in');
-            redirect('home');
+            $this->session->set_flashdata('user_updated', 'You are now registered and can log in');
+            redirect('users/login');
         }
     }
 
@@ -152,6 +152,8 @@ class Users extends CI_Controller
         $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']);
         $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']);
         $data['latestReservations'] = $this->reservation_model->getUserReservations($this->session->userdata['user_id']);
+        $data['dayLimit'] = $this->user_model->getDayLimit($this->session->userdata['user_id']);
+        $data['bookLimit'] = $this->user_model->getBookLimit($this->session->userdata['user_id']);
         $this->load->view('templates/header');
         $this->load->view('users/newDash', $data);
         $this->load->view('templates/footer');
