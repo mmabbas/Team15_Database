@@ -24,7 +24,6 @@
             $itemData = array(
                 'title' => $this->input->post('title'),
                 'type' => $this->input->post('type'),
-                'status' => 'Available',
                 'genre' => $this->input->post('genre'),
                 'year' => $this->input->post('year'),
                 'author' => $this->input->post('author'),
