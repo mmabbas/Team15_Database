@@ -31,6 +31,23 @@ class User_model extends CI_Model
         return $this->db->insert('cardholder', $loginData);
     }
 
+    public function update_user($enc_password)
+    {
+        
+        //user data array
+        $userData = array(
+            'firstName' => $this->input->post('firstName'),
+            'lastName' => $this->input->post('lastName'),
+            'age' => $this->input->post('age'),
+            'email' => $this->input->post('email'),
+            'loginID' => $this->input->post('username'),
+            'password' => $enc_password,
+            
+        );
+        $this->db->where('userID', $this->session->userdata['user_id']);
+        return $this->db->update('cardholder', $userData);
+    }
+
     //user log in
     public function login($username, $password)
     {

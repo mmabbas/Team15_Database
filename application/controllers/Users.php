@@ -33,6 +33,53 @@ class Users extends CI_Controller
         }
     }
 
+    public function updateUser()
+    {
+        $this->form_validation->set_rules('firstName', 'First Name', 'required');
+        $this->form_validation->set_rules('lastName', 'Last Name', 'required');
+        $this->form_validation->set_rules('username', 'Username', 'required|callback_check_username_exists');
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|callback_check_email_exists');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('password2', 'Confirm Password', 'matches[password]');
+
+        if ($this->form_validation->run() === FALSE) {
+            $this->load->view('templates/header');
+            $this->load->view('users/editProfile');
+            $this->load->view('templates/footer');
+        } 
+        else 
+        {
+            //Encrypt Password
+            $enc_password = md5($this->input->post('password'));
+            $this->user_model->update_user($enc_password);
+            
+            $user_id = $this->session->userdata['user_id'];
+            $username = $this->session->userdata['username'];
+            $user_type = $this->session->userdata['user_type']; 
+            $this->db->where('userID', $user_id);
+            $result = $this->db->get('cardholder');
+            $user_data = array
+            (
+                'user_id' => $user_id,
+                'username' => $username,
+                'logged_in' => true,
+                'userType' => "User",
+                'first_name' => $result->row()->firstName,
+                'last_name' => $result->row()->lastName,
+                'age' => $result->row()->age,
+                'email' => $result->row()->email,
+                'user_type' => $user_type,
+            );
+            $this->session->set_userdata($user_data);
+
+            $this->session->set_flashdata('user_updated', 'Your User Profile has been updated');
+            redirect('users/userprofile');
+        }
+    
+    
+    }
+
     //login user
     public function login()
     {
@@ -54,7 +101,12 @@ class Users extends CI_Controller
 
             //Login user
             $user_id = $this->user_model->login($username, $password);
-
+            $this->db->where('userID', $user_id);
+            $result = $this->db->get('cardholder');
+            if($result->row()->userType == 1)
+                {$user_type = "Student";}
+            else
+                {$user_type = "Faculty";}
             if ($user_id) {
                 //Create Session
                 $user_data = array(
@@ -62,6 +114,11 @@ class Users extends CI_Controller
                     'username' => $username,
                     'logged_in' => true,
                     'userType' => "User",
+                    'first_name' => $result->row()->firstName,
+                    'last_name' => $result->row()->lastName,
+                    'age' => $result->row()->age,
+                    'email' => $result->row()->email,
+                    'user_type' => $user_type,
                 );
 
                 $this->session->set_userdata($user_data);
@@ -306,5 +363,27 @@ public function returnBook($itemID)
         $this->load->view('templates/header');
         $this->load->view('users/reservationHistory', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function userprofile()
+    {
+        $data['title'] = 'User Profile';
+        $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']);
+        $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']);
+        $data['reservations'] = $this->reservation_model->getUserReservations($this->session->userdata['user_id']);
+        $this->load->view('templates/header');
+        $this->load->view('users/userprofile', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function editProfile()
+    {
+        $data['title'] = 'Edit Profile';
+        $this->load->view('templates/header');
+        $this->load->view('users/editProfile');
+        $this->load->view('templates/footer');
+
+            
+            
     }
 }
