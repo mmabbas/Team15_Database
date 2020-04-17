@@ -59,8 +59,7 @@ class Users extends CI_Controller
             $user_type = $this->session->userdata['user_type'];
             $this->db->where('userID', $user_id);
             $result = $this->db->get('cardholder');
-            $user_data = array
-            (
+            $user_data = array(
                 'user_id' => $user_id,
                 'username' => $username,
                 'logged_in' => true,
@@ -103,10 +102,11 @@ class Users extends CI_Controller
             $user_id = $this->user_model->login($username, $password);
             $this->db->where('userID', $user_id);
             $result = $this->db->get('cardholder');
-            if($result->row()->userType == 1)
-                {$user_type = "Student";}
-            else
-                {$user_type = "Faculty";}
+            if ($result->row()->userType == 1) {
+                $user_type = "Student";
+            } else {
+                $user_type = "Faculty";
+            }
             if ($user_id) {
                 //Create Session
                 $user_data = array(
@@ -282,7 +282,6 @@ class Users extends CI_Controller
 
         $this->session->set_flashdata('user_registered', 'Reservation has been created successfully');
         redirect('users/newDash');
-
     }
 
     public function cancelReservation($itemID)
@@ -300,26 +299,29 @@ class Users extends CI_Controller
     }
     public function confirmCheckout($itemID)
     {
-          $data['title'] = 'Confirm Checkout';
-          $data['item'] = $this->fetch_item->getItem($itemID);
-          //print_r($data['item']);
-          $this->load->view('templates/header');
-          $this->load->view('users/checkout_cart_view', $data);
-          $this->load->view('templates/footer');
+        $data['title'] = 'Confirm Checkout';
+        $data['item'] = $this->fetch_item->getItem($itemID);
+        //print_r($data['item']);
+        $this->load->view('templates/header');
+        $this->load->view('users/checkout_cart_view', $data);
+        $this->load->view('templates/footer');
     }
     public function createCheckout($itemID)
     {
         $this->load->model('CheckedOut_model');
+        $bookLimit = $this->user_model->getBookLimit($this->session->userdata['user_id']);
+        $amountLoaned = $this->user_model->getQuantityCheckedOut($this->session->userdata['user_id']);
+        if ($amountLoaned >= $bookLimit) {
+            $this->session->set_flashdata('no_reservations', 'You cannot exceed your book limit. Try returning some books and try again');
+            redirect('users/newDash');
+        }
         $item = $this->fetch_item->getItem($itemID);
         $isbn = $item->isbn;
 
-        if($item->status == "Reserved")
-        {
+        if ($item->status == "Reserved") {
             $this->inventory_model->decrementTotalReserved($isbn);
             $this->reservation_model->checkOutReservation($item->itemID);
-        }
-        else
-        {
+        } else {
             $this->inventory_model->decrementTotalAvailable($isbn);
         }
         //update item status
@@ -336,39 +338,41 @@ class Users extends CI_Controller
             'status' => 'Checked Out',
         );
         $this->checkedOut_model->createLoan($loanInfo);
+        //augment qunatityCheckedOut
+        $this->user_model->increaseQuantityCheckedOut($this->session->userdata['user_id']);
+        //add to item table
         redirect('users/newDash');
     }
     public function confirmReturn($itemID)
-{
-      $data['title'] = 'Confirm Return';
-      $data['item'] = $this->fetch_item->getItem($itemID);
-      //print_r($data['item']);
-      $this->load->view('templates/header');
-      $this->load->view('users/confirmReturnBook', $data);
-      $this->load->view('templates/footer');
-}
-public function returnBook($itemID)
-{
-    //remove user from item
-    $this->checkout_cart_model->removeUser($itemID);
-    //update total available
-    $item = $this->fetch_item->getItem($itemID);
-    $this->inventory_model->incrementTotalAvailable($item->isbn);
-    $this->inventory_model->decrementTotalCheckedout($item->isbn);
-    //update loans
-    $this->checkedOut_model->updateLoanStatus($itemID);
-    //return to dash
-    redirect('users/newDash');
-
-}
+    {
+        $data['title'] = 'Confirm Return';
+        $data['item'] = $this->fetch_item->getItem($itemID);
+        //print_r($data['item']);
+        $this->load->view('templates/header');
+        $this->load->view('users/confirmReturnBook', $data);
+        $this->load->view('templates/footer');
+    }
+    public function returnBook($itemID)
+    {
+        //remove user from item
+        $this->checkout_cart_model->removeUser($itemID);
+        //update total available
+        $item = $this->fetch_item->getItem($itemID);
+        $this->inventory_model->incrementTotalAvailable($item->isbn);
+        $this->inventory_model->decrementTotalCheckedout($item->isbn);
+        $this->user_model->decreaseQuantityCheckedOut($this->session->userdata['user_id']);
+        $this->checkedOut_model->updateLoanStatus($itemID);
+        //return to dash
+        redirect('users/newDash');
+    }
+    
     public function getHistory()
     {
         $data['title'] = 'Reservation History';
         $data['reservations'] = $this->reservation_model->getHistory($this->session->userdata['user_id']);
         $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']);
         $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']);
-        if (empty($data['reservations']))
-        {
+        if (empty($data['reservations'])) {
             $this->session->set_flashdata('no_reservations', 'You don\'t have any reservations');
             redirect('users/newDash');
         }
@@ -384,7 +388,7 @@ public function returnBook($itemID)
         $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']);
         if (empty($data['loans']))
         {
-            $this->session->set_flashdata('no_checkout', 'You don\'t have any checkout history');
+            $this->session->set_flashdata('no_reservations', 'You don\'t have any checkout history');
             redirect('users/newDash');
         }
         $this->load->view('templates/header');

@@ -113,6 +113,34 @@ class User_model extends CI_Model
         return $result->row(0)->dayLimit;
     }
 
+    public function getBookLimit($userID)
+    {
+        $this->db->where('userID', $userID);
+        $result = $this->db->get('cardholder');
+        return $result->row(0)->bookLimit;
+    }
+
+    public function getQuantityCheckedOut($userID)
+    {
+        $this->db->where('userID', $userID);
+        $result = $this->db->get('cardholder');
+        return $result->row(0)->quantityCheckedOut;
+    }
+
+    public function increaseQuantityCheckedOut($userID)
+    {
+        $this->db->set('quantityCheckedOut', 'quantityCheckedOut+1', FALSE);
+        $this->db->where('userID', $userID);
+        $this->db->update('cardholder');
+    }
+
+    public function decreaseQuantityCheckedOut($userID)
+    {
+        $this->db->set('quantityCheckedOut', 'quantityCheckedOut-1', FALSE);
+        $this->db->where('userID', $userID);
+        $this->db->update('cardholder');
+    }
+
     public function add_item()
     {
         //login data array
