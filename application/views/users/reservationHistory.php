@@ -73,8 +73,8 @@
                                     <?php if($reservation['status'] == "Reserved") : ?>
                                         <td><a href="<?php echo base_url(); ?>users/confirmCancelation/<?php echo $reservation['itemID']; ?>" class="btn btn-success">Cancel</a></td>
                                     <?php endif; ?>
-                                    <?php if ($reservation['status'] == "Canceled") : ?>
-                                        <td> </td>
+                                    <?php if ($reservation['status'] != "Reserved") : ?>
+                                        <td>Not Applicable</td>
                                     <?php endif;?>
 									<!-- <td><a href="<?php echo base_url(); ?>users/confirmCancelation/<?php echo $reservation['itemID']; ?>"class="btn btn-success">Cancel</a></td>								</tr> -->
 							<?php endforeach; ?>

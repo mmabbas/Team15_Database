@@ -74,12 +74,14 @@
                                     <th>Title</th>
                                     <th>Checkout Date</th>
                                     <th>Due Date</th>
+                                    <th>Return Item</th>
 
                                     <?php foreach ($activeCheckOuts as $item) : ?>
                                 <tr>
                                     <td><?php echo $item['title']; ?></td>
                                     <td><?php echo $item['checkoutDate']; ?></td>
                                     <td><?php echo $item['dueDate']; ?></td>
+                                    <td><a href="<?php echo base_url(); ?>users/confirmReturn/<?php echo $item['itemID']; ?>" class="btn btn-success">Return</a></td>
                                 </tr>
                             <?php endforeach; ?>
 
