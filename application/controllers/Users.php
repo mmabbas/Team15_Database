@@ -47,16 +47,16 @@ class Users extends CI_Controller
             $this->load->view('templates/header');
             $this->load->view('users/editProfile');
             $this->load->view('templates/footer');
-        } 
-        else 
+        }
+        else
         {
             //Encrypt Password
             $enc_password = md5($this->input->post('password'));
             $this->user_model->update_user($enc_password);
-            
+
             $user_id = $this->session->userdata['user_id'];
             $username = $this->session->userdata['username'];
-            $user_type = $this->session->userdata['user_type']; 
+            $user_type = $this->session->userdata['user_type'];
             $this->db->where('userID', $user_id);
             $result = $this->db->get('cardholder');
             $user_data = array
@@ -76,8 +76,8 @@ class Users extends CI_Controller
             $this->session->set_flashdata('user_updated', 'Your User Profile has been updated');
             redirect('users/userprofile');
         }
-    
-    
+
+
     }
 
     //login user
@@ -309,6 +309,7 @@ class Users extends CI_Controller
     }
     public function createCheckout($itemID)
     {
+        $this->load->model('CheckedOut_model');
         $item = $this->fetch_item->getItem($itemID);
         $isbn = $item->isbn;
 
@@ -325,7 +326,16 @@ class Users extends CI_Controller
         $this->checkout_cart_model->checkOutItem($itemID);
         //update total available
         $this->inventory_model->incrementTotalCheckedout($isbn);
-        //add to item table
+        //add to loan table
+        $loanInfo = array(
+            'userID' => $this->session->userdata['user_id'],
+            'itemID' => $item->itemID,
+            'itemName' => $item->title,
+            'checkOutDate' => date("Y-m-d"),
+            'dueDate' => date('Y-m-d', strtotime('+1 week')),
+            'status' => 'Checked Out',
+        );
+        $this->checkedOut_model->createLoan($loanInfo);
         redirect('users/newDash');
     }
     public function confirmReturn($itemID)
@@ -345,6 +355,8 @@ public function returnBook($itemID)
     $item = $this->fetch_item->getItem($itemID);
     $this->inventory_model->incrementTotalAvailable($item->isbn);
     $this->inventory_model->decrementTotalCheckedout($item->isbn);
+    //update loans
+    $this->checkedOut_model->updateLoanStatus($itemID);
     //return to dash
     redirect('users/newDash');
 
@@ -362,6 +374,21 @@ public function returnBook($itemID)
         }
         $this->load->view('templates/header');
         $this->load->view('users/reservationHistory', $data);
+        $this->load->view('templates/footer');
+    }
+    public function checkoutHistory()
+    {
+        $data['title'] = 'Checkout History';
+        $data['loans'] = $this->checkedOut_model->checkoutHistory($this->session->userdata['user_id']);
+        $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']);
+        $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']);
+        if (empty($data['loans']))
+        {
+            $this->session->set_flashdata('no_checkout', 'You don\'t have any checkout history');
+            redirect('users/newDash');
+        }
+        $this->load->view('templates/header');
+        $this->load->view('users/checkoutHistory', $data);
         $this->load->view('templates/footer');
     }
 
@@ -382,8 +409,5 @@ public function returnBook($itemID)
         $this->load->view('templates/header');
         $this->load->view('users/editProfile');
         $this->load->view('templates/footer');
-
-            
-            
     }
 }

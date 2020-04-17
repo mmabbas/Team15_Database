@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang = "en">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Admin Area | Dashboard</title>
+	<title>Dashboard</title>
 
 </head>
 
@@ -15,7 +14,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-10">
-					<h1><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> View Checkouts</h1>
+					<h1><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> View Checkout History</h1>
 				</div>
 			</div>
 		</div>
@@ -24,7 +23,7 @@
 	<section id="breadcrumb">
 		<div class="container">
 			<ol class="breadcrumb">
-				<li class="active">Active Checkouts</li>
+				<li class="active"> Checkout History</li>
 			</ol>
 		</div>
 	</section>
@@ -35,9 +34,13 @@
 				<div class="col-md-3">
 					<div class="list-group">
 						<a href='<?php echo base_url('users/newDash'); ?>' class="list-group-item"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard</a>
-						<a href='<?php echo base_url('users/userprofile'); ?>' class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> User Profile <span class="badge"></span></a>
-						<a href='<?php echo base_url('users/checkedOut'); ?>' class="list-group-item active main-color-bg"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkouts <span class="badge"><?php echo $numOfCheckOuts; ?> Active</span></a>
-						<a href='<?php echo base_url('users/reserveStatus'); ?>' class="list-group-item"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Reservations <span class="badge"><?php echo $reserveNum; ?> Active</span></a>
+            <a href='<?php echo base_url('users/userprofile'); ?>' class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> User Profile <span class="badge"></span></a>
+						<a href='<?php echo base_url('users/checkedOut'); ?>' class="list-group-item active main-color-bg">
+							<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkout <span class="badge"><?php echo $reserveNum; ?></span>
+            <a href='<?php echo base_url('users/reserveStatus'); ?>' class="list-group-item"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Reservations <span class="badge"><?php echo $reserveNum; ?> Active</span></a>
+
+
+						</a>
 					</div>
 				</div>
 				<div class="col-md-9">
@@ -57,28 +60,28 @@
 							<br>
 							<table class="table table-striped table-hover">
 								<tr>
-									<th>Item ID</th>
-									<th>User ID</th>
-									<th>Title</th>
-									<th>Checkout Date</th>
-									<th>Due Date</th>
-									<th>Return</th>
-									<?php foreach ($items as $entry) : ?>
-								<tr>
-									<td><?php echo $entry['itemID']; ?></td>
-									<td><?php echo $entry['userID']; ?></td>
-									<td><?php echo $entry['title']; ?></td>
-									<td><?php echo $entry['checkoutDate']; ?></td>
-									<td><?php echo $entry['dueDate']; ?></td>
-									<td><a href="<?php echo base_url(); ?>users/confirmReturn/<?php echo $entry['itemID']; ?>" class="btn btn-success">Return</a></td>
-								</tr>
-							<?php endforeach; ?>
+									<th>Item Name</th>
+									<th>Loan Created On</th>
+									<th>Loan Expires On</th>
+                                    <th>Status</th>
+									<th>Return Book</th>
 
-							</tr>
+									<?php foreach ($loans as $loan) : ?>
+								<tr>
+									<td><?php echo $loan['itemName']; ?></td>
+									<td><?php echo $loan['checkOutDate']; ?></td>
+									<td><?php echo $loan['dueDate']; ?></td>
+                                    <td><?php echo $loan['status']; ?></td>
+                                    <?php if($loan['status'] == "Checked Out") : ?>
+                                        <td><a href="<?php echo base_url(); ?>users/confirmReturn/<?php echo $loan['itemID']; ?>" class="btn btn-success">Return</a></td>
+                                    <?php endif; ?>
+                                    <?php if ($loan['status'] != "Checked Out") : ?>
+                                        <td>Not Applicable</td>
+                                    <?php endif;?>
+							<?php endforeach; ?>
 
 							</table>
 						</div>
-						<a href="<?php echo base_url(); ?>users/checkoutHistory" class="btn btn-sucess"> Checkout History</a>
 					</div>
 				</div>
 			</div>
