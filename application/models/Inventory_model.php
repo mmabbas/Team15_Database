@@ -41,4 +41,10 @@ class Inventory_model extends CI_Model
         $query = $this->db->get_where('inventory', array('isbn' => $itemInfo->isbn));
         return $query->row();
     }
+    public function decrementTotalCheckedout($isbn)
+    {
+      $this->db->set('totalCheckedout', 'totalCheckedout-1', FALSE);
+      $this->db->where('isbn', $isbn);
+      $this->db->update('inventory');
+    }
 }

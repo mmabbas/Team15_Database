@@ -155,10 +155,6 @@ class Users extends CI_Controller
         $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']);
         $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']);
         $data['items'] = $this->checkedOut_model->get_items($this->session->userdata['user_id']);
-        if (empty($data['items'])) {
-            $this->session->set_flashdata('none_checkedOut', 'You don\'t have any items checked out');
-            redirect('users/newDash');
-        }
         $this->load->view('templates/header');
         $this->load->view('users/checkedOut', $data);
         $this->load->view('templates/footer');
@@ -274,7 +270,27 @@ class Users extends CI_Controller
         //add to item table
         redirect('users/newDash');
     }
+    public function confirmReturn($itemID)
+{
+      $data['title'] = 'Confirm Return';
+      $data['item'] = $this->fetch_item->getItem($itemID);
+      //print_r($data['item']);
+      $this->load->view('templates/header');
+      $this->load->view('users/confirmReturnBook', $data);
+      $this->load->view('templates/footer');
+}
+public function returnBook($itemID)
+{
+    //remove user from item
+    $this->checkout_cart_model->removeUser($itemID);
+    //update total available
+    $item = $this->fetch_item->getItem($itemID);
+    $this->inventory_model->incrementTotalAvailable($item->isbn);
+    $this->inventory_model->decrementTotalCheckedout($item->isbn);
+    //return to dash
+    redirect('users/newDash');
 
+}
     public function getHistory()
     {
         $data['title'] = 'Reservation History';
@@ -285,7 +301,7 @@ class Users extends CI_Controller
         {
             $this->session->set_flashdata('no_reservations', 'You don\'t have any reservations');
             redirect('users/newDash');
-        } 
+        }
         $this->load->view('templates/header');
         $this->load->view('users/reservationHistory', $data);
         $this->load->view('templates/footer');

@@ -29,5 +29,16 @@ class checkout_cart_model extends CI_Model
        );
    $this->db->update('item', $updateitem);
  }
+ function removeUser($itemID){
+   $this->db->where('itemID', $itemID);
+   $updateitem = array(
+       'userID' => NULL,
+       'checkedOutBy' => NULL,
+       'status' => 'Available',
+       'checkoutDate' => NULL,
+       'dueDate' => NULL,
+       );
+   $this->db->update('item', $updateitem);
+ }
 
 }

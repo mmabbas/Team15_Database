@@ -29,12 +29,6 @@ class Getitem extends CI_Controller{
       } else {
         $status = 'Unavailable';
       }
-
-      $cButton = 'Check Out';
-      $rButton = 'Reserve';
-      $cOnClick = "window.location.href='checkout_cart_view'";
-      $rOnClick = "window.location.href='reserveStatus'";
-
         $itemImg = $this->fetch_item->assignImage($row->type);
         $output .=
       "<div class='items-box'>

@@ -63,14 +63,15 @@
 									<th>Title</th>
 									<th>Checkout Date</th>
 									<th>Due Date</th>
+									<th>Return</th>
 									<?php foreach ($items as $entry) : ?>
 								<tr>
-
 									<td><?php echo $entry['itemID']; ?></td>
 									<td><?php echo $entry['userID']; ?></td>
 									<td><?php echo $entry['title']; ?></td>
 									<td><?php echo $entry['checkoutDate']; ?></td>
 									<td><?php echo $entry['dueDate']; ?></td>
+									<td><a href="<?php echo base_url(); ?>users/confirmReturn/<?php echo $entry['itemID']; ?>" class="btn btn-success">Return</a></td>
 								</tr>
 							<?php endforeach; ?>
 
