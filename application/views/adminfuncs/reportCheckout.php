@@ -26,7 +26,7 @@
     margin-top:25px;
    }
   </style>
-  
+
 
  </head>
  <body>
@@ -42,7 +42,7 @@
       </div>
       <div class="col-md-4">
        <input type="text" name="end_date" id="end_date" class="form-control" placeholder="Ending Date" />
-      </div>      
+      </div>
      </div>
      <div class="col-md-4">
       <input type="button" name="search" id="search" value="Search" class="btn btn-info" />
@@ -63,7 +63,7 @@
       </tr>
      </thead>
     </table>
-    
+
    </div>
   </div>
  </body>
@@ -73,15 +73,15 @@
 
 <script type="text/javascript" language="javascript" >
 $(document).ready(function(){
- 
+
  $('.input-daterange').datepicker({
   todayBtn:'linked',
   format: "yyyy-mm-dd",
   autoclose: true
  });
- 
+
  fetch_data('no');
- 
+
  function fetch_data(is_date_search, start_date='', end_date='')
  {
   var dataTable = $('#order_data').DataTable({
@@ -97,7 +97,25 @@ $(document).ready(function(){
    }
   });
  }
- 
+ $('#checkbox-checkedout').click(function(){
+   if (document.getElementById('checkbox-checkedout').checked) {
+             var checkoutBox = $('#checkbox-checkedout').val();
+         } else{
+             var checkoutBox = '';
+         }
+  var start_date = $('#start_date').val();
+  var end_date = $('#end_date').val();
+  if(start_date != '' && end_date !='')
+  {
+   $('#order_data').DataTable().destroy();
+   fetch_data('yes', start_date, end_date, checkoutBox);
+  }
+  else
+  {
+    $('#order_data').DataTable().destroy();
+   fetch_data('no');
+  }
+  });
  $('#search').click(function(){
   var start_date = $('#start_date').val();
   var end_date = $('#end_date').val();
@@ -110,7 +128,7 @@ $(document).ready(function(){
   {
    alert("Both dates are required");
   }
- }); 
- 
+ });
+
 });
 </script>

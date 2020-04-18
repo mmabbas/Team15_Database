@@ -10,23 +10,29 @@ if($_POST["is_date_search"] == "yes")
  $query .= 'checkOutDate BETWEEN "'.$_POST["start_date"].'" AND "'.$_POST["end_date"].'" AND ';
 }
 
-if(isset($_POST["search"]["value"]))
+if($_POST["checkoutBox"] == "Checked Out")
+{
+  $query .= '
+   (status LIKE "%'.$_POST["checkoutBox"].'%")
+  ';
+}
+elseif(isset($_POST["search"]["value"]))
 {
  $query .= '
   (loanID LIKE "%'.$_POST["search"]["value"].'%"
   OR userID LIKE "%'.$_POST["search"]["value"].'%"
-  OR itemID LIKE "%'.$_POST["search"]["value"].'%"   
-  OR itemName LIKE "%'.$_POST["search"]["value"].'%" 
-  OR checkOutDate LIKE "%'.$_POST["search"]["value"].'%" 
+  OR itemID LIKE "%'.$_POST["search"]["value"].'%"
+  OR itemName LIKE "%'.$_POST["search"]["value"].'%"
+  OR checkOutDate LIKE "%'.$_POST["search"]["value"].'%"
   OR dueDate LIKE "%'.$_POST["search"]["value"].'%"
-  OR overDue LIKE "%'.$_POST["search"]["value"].'%" 
+  OR overDue LIKE "%'.$_POST["search"]["value"].'%"
   OR status LIKE "%'.$_POST["search"]["value"].'%")
  ';
 }
 
 if(isset($_POST["order"]))
 {
- $query .= 'ORDER BY '.$columns[$_POST['order']['0']['column']].' '.$_POST['order']['0']['dir'].' 
+ $query .= 'ORDER BY '.$columns[$_POST['order']['0']['column']].' '.$_POST['order']['0']['dir'].'
  ';
 }
 else
