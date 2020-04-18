@@ -184,9 +184,21 @@ class Adminportal extends CI_Controller
         $this->load->view('adminfuncs/reportTest');
         $this->load->view('templates/footer');
     }
+	
+	public function reportCheckout()
+	{
+		$this->load->view('templates/header');
+        $this->load->view('adminfuncs/reportCheckout');
+        $this->load->view('templates/footer');
+    }
 
     public function fetchReportData()
     {
         $this->load->view('adminfuncs/fetch');
     }
+	
+	public function fetchReportCheckoutData()
+	{
+		$this->load->view('adminfuncs/fetchCheckout');
+	}
 }

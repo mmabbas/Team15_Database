@@ -116,7 +116,7 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Reservation Date</th>
-                                    <th>Experiation Date</th>
+                                    <th>Expiration Date</th>
                                     <th>Cancel Reservation</th>
                                     <th>Check Out Book</th>
 
