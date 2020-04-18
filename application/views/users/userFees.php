@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Dashboard</title>
+	<title>Admin Area | Dashboard</title>
 
 </head>
 
@@ -14,19 +15,19 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-10">
-					<h1><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> View Reservation History</h1>
+					<h1><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> View Reservations</h1>
 				</div>
 			</div>
 		</div>
 	</header>
 
-	<!-- <section id="breadcrumb">
+	<section id="breadcrumb">
 		<div class="container">
 			<ol class="breadcrumb">
 				<li class="active"> Active Reservations</li>
 			</ol>
 		</div>
-	</section> -->
+	</section>
 
 	<section id="main">
 		<div class="container">
@@ -36,10 +37,10 @@
 						<a href='<?php echo base_url('users/newDash'); ?>' class="list-group-item"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard</a>
 						<a href='<?php echo base_url('users/userprofile'); ?>' class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> User Profile <span class="badge"></span></a>
 						<a href='<?php echo base_url('users/checkedOut'); ?>' class="list-group-item"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkouts <span class="badge"><?php echo $numOfCheckOuts; ?></span></a>
-						<a href='<?php echo base_url('users/reserveStatus'); ?>' class="list-group-item active main-color-bg">
+						<a href='<?php echo base_url('users/reserveStatus'); ?>' class="list-group-item">
 							<span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Reservations <span class="badge"><?php echo $reserveNum; ?></span>
 						</a>
-						<a href='<?php echo base_url('users/userFees'); ?>' class="list-group-item"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Fees</a>
+						<a href='<?php echo base_url('users/userFees'); ?>' class="list-group-item active main-color-bg"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Fees</a>
 					</div>
 				</div>
 				<div class="col-md-9">
@@ -51,36 +52,36 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-md-12">
-									<!-- <input class="form-control" type="text" placeholder="Filter Users..."> -->
-									<!-- <a class="btn btn-primary" href='<?php echo base_url('adminPortal/addItem'); ?>' role="button">Add Item</a> -->
-
 								</div>
 							</div>
 							<br>
 							<table class="table table-striped table-hover">
 								<tr>
-									<th>Item ID</th>
-									<th>Reservation Created On</th>
-									<th>Reservation Expires On</th>
-                                    <th>Status</th>
-									<th>Cancel Reservation</th>
+									<th>Title</th>
+									<th>Date Fee Applied</th>
+									<th>Date Paid</th>
+									<th>Status</th>
+									<th>Amount</th>
+									<th>Pay</th>
 
-									<?php foreach ($reservations as $reservation) : ?>
+									<?php foreach ($feesNums as $feeNum) : ?>
 								<tr>
-									<td><?php echo $reservation['itemName']; ?></td>
-									<td><?php echo $reservation['reservationDate']; ?></td>
-									<td><?php echo $reservation['expirationDate']; ?></td>
-                                    <td><?php echo $reservation['status']; ?></td>
-                                    <?php if($reservation['status'] == "Reserved") : ?>
-                                        <td><a href="<?php echo base_url(); ?>users/confirmCancelation/<?php echo $reservation['itemID']; ?>" class="btn btn-success">Cancel</a></td>
-                                    <?php endif; ?>
-                                    <?php if ($reservation['status'] != "Reserved") : ?>
-                                        <td>Not Applicable</td>
-                                    <?php endif;?>
-									<!-- <td><a href="<?php echo base_url(); ?>users/confirmCancelation/<?php echo $reservation['itemID']; ?>"class="btn btn-success">Cancel</a></td>								</tr> -->
+									<td><?php echo $feeNum['title']; ?></td>
+									<td><?php echo $feeNum['dateCreated']; ?></td>
+									<td><?php echo $feeNum['dateSettled']; ?></td>
+                                    <td><?php echo $feeNum['feeStatus']; ?></td>
+                                    <td><?php echo $feeNum['feeAmount']; ?></td>
+									<?php if ($feeNum['feeStatus'] == "Unpaid") : ?>
+										<td><a href="<?php echo base_url(); ?>users/confirmPayment/<?php echo $feeNum['feeID']; ?>" class="btn btn-success">Pay</a></td>
+									<?php endif; ?>
+									<?php if ($feeNum['feeStatus'] == "Paid") : ?>
+										<td> </td>
+										<td> </td>
+									<?php endif; ?>
+								</tr>
 							<?php endforeach; ?>
 
-							</table> 
+							</table>
 						</div>
 					</div>
 				</div>

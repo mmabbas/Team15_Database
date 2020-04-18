@@ -41,6 +41,7 @@
 
 
 						</a>
+						<a href='<?php echo base_url('users/userFees'); ?>' class="list-group-item"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Fees</a>
 					</div>
 				</div>
 				<div class="col-md-9">
