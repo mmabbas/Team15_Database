@@ -47,6 +47,12 @@
      <div class="col-md-4">
       <input type="button" name="search" id="search" value="Search" class="btn btn-info" />
      </div>
+     <div class="col-md-4">
+     <label for="checkbox-checkedout">
+     <input type="checkbox" id="checkbox-checkedout" name="checkbox-checkedout" value="Checked Out">
+     Checked Out Items
+     </label><br>
+   </div>
     </div>
     <br />
     <table id="order_data" class="table table-bordered table-striped">
@@ -84,6 +90,11 @@ $(document).ready(function(){
 
  function fetch_data(is_date_search, start_date='', end_date='')
  {
+   if (document.getElementById('checkbox-checkedout').checked) {
+             var checkoutBox = $('#checkbox-checkedout').val();
+         } else{
+             var checkoutBox = '';
+         }
   var dataTable = $('#order_data').DataTable({
    "processing" : true,
    "serverSide" : true,
@@ -92,7 +103,7 @@ $(document).ready(function(){
     url:"<?php echo base_url(); ?>adminportal/fetchReportCheckoutData",
     type:"POST",
     data:{
-     is_date_search:is_date_search, start_date:start_date, end_date:end_date
+     is_date_search:is_date_search, start_date:start_date, end_date:end_date, checkoutBox:checkoutBox
     }
    }
   });
@@ -115,7 +126,8 @@ $(document).ready(function(){
     $('#order_data').DataTable().destroy();
    fetch_data('no');
   }
-  });
+});
+
  $('#search').click(function(){
   var start_date = $('#start_date').val();
   var end_date = $('#end_date').val();
@@ -129,6 +141,5 @@ $(document).ready(function(){
    alert("Both dates are required");
   }
  });
-
 });
 </script>
