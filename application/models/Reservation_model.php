@@ -36,10 +36,17 @@ class Reservation_model extends CI_Model
         return $query->result_array();
     }
 
+    public function getActiveReservations()
+    {
+        $this->db->order_by('reservations.userID', 'ASC');
+        $query = $this->db->get_where('reservations', array('status' => "Reserved"));
+        return $query->result_array();
+    }
+
     public function getUserActiveReservations($userID)
     {
         $this->db->order_by('reservations.userID', 'ASC');
-        $query = $this->db->get_where('reservations', array('userID' => $userID, 'status' => "Processing"));
+        $query = $this->db->get_where('reservations', array('userID' => $userID, 'status' => "Reserved"));
         return $query->result_array();
     }
 

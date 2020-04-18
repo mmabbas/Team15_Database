@@ -52,12 +52,14 @@
     <table id="order_data" class="table table-bordered table-striped">
      <thead>
       <tr>
+      <th>Loan ID</th>
+      <th>User ID </th>
        <th>Item ID</th>
-       <th>Title</th>
-       <th>Author</th>
-       <th>Genre</th>
-       <th>Distributor</th>
-       <th>Date Added</th>
+       <th>itemName</th>
+       <th>checkoutDate</th>
+       <th>dueDate</th>
+       <th>OverDue</th>
+       <th>Status</th>
       </tr>
      </thead>
     </table>

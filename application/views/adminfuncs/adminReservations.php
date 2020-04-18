@@ -37,9 +37,9 @@
                         <a href='<?php echo base_url('adminportal/adminDashboard'); ?>' class="list-group-item"> <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard</a>
                         <a href='<?php echo base_url('adminPortal/viewUsers'); ?>' class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Users <span class="badge"><?php echo $userCount; ?></span></a>
                         <a href='<?php echo base_url('adminportal/viewTitles'); ?>' class="list-group-item"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Titles <span class="badge"><?php echo $totalTitles; ?></span></a>
-                        <a href='<?php echo base_url('adminportal/viewCheckouts'); ?>' class="list-group-item"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkouts <span class="badge"><?php echo $checkOuts;?> Active</span></a>
+                        <a href='<?php echo base_url('adminportal/viewCheckouts'); ?>' class="list-group-item"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkouts <span class="badge"><?php echo $checkOuts;?></span></a>
                         <a href='<?php echo base_url('adminportal/adminReservations'); ?>' class="list-group-item active main-color-bg">
-                            <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Reservations <span class="badge"><?php echo $reservations; ?> Total</span>
+                            <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Reservations <span class="badge"><?php echo $reservations; ?></span>
                         </a>
                     </div>
 

@@ -1,24 +1,26 @@
 <?php
 //fetch.php
 $connect = mysqli_connect("localhost", "root", "secret", "team15dbms");
-$columns = array('itemID', 'title', 'author', 'genre', 'distributor', 'dateAdded');
+$columns = array('loanID', 'userID', 'itemID', 'itemName', 'checkOutDate', 'dueDate', 'overDue', 'status');
 
-$query = "SELECT * FROM item WHERE ";
+$query = "SELECT * FROM loans WHERE ";
 
 if($_POST["is_date_search"] == "yes")
 {
- $query .= 'dateAdded BETWEEN "'.$_POST["start_date"].'" AND "'.$_POST["end_date"].'" AND ';
+ $query .= 'checkOutDate BETWEEN "'.$_POST["start_date"].'" AND "'.$_POST["end_date"].'" AND ';
 }
 
 if(isset($_POST["search"]["value"]))
 {
  $query .= '
-  (itemID LIKE "%'.$_POST["search"]["value"].'%" 
-  OR title LIKE "%'.$_POST["search"]["value"].'%" 
-  OR author LIKE "%'.$_POST["search"]["value"].'%" 
-  OR genre LIKE "%'.$_POST["search"]["value"].'%"
-  OR distributor LIKE "%'.$_POST["search"]["value"].'%" 
-  OR dateAdded LIKE "%'.$_POST["search"]["value"].'%")
+  (loanID LIKE "%'.$_POST["search"]["value"].'%"
+  OR userID LIKE "%'.$_POST["search"]["value"].'%"
+  OR itemID LIKE "%'.$_POST["search"]["value"].'%"   
+  OR itemName LIKE "%'.$_POST["search"]["value"].'%" 
+  OR checkOutDate LIKE "%'.$_POST["search"]["value"].'%" 
+  OR dueDate LIKE "%'.$_POST["search"]["value"].'%"
+  OR overDue LIKE "%'.$_POST["search"]["value"].'%" 
+  OR status LIKE "%'.$_POST["search"]["value"].'%")
  ';
 }
 
@@ -48,18 +50,20 @@ $data = array();
 while($row = mysqli_fetch_array($result))
 {
  $sub_array = array();
+ $sub_array[] = $row["loanID"];
+ $sub_array[] = $row["userID"];
  $sub_array[] = $row["itemID"];
- $sub_array[] = $row["title"];
- $sub_array[] = $row["author"];
- $sub_array[] = $row["genre"];
- $sub_array[] = $row["distributor"];
- $sub_array[] = $row["dateAdded"];
+ $sub_array[] = $row["itemName"];
+ $sub_array[] = $row["checkOutDate"];
+ $sub_array[] = $row["dueDate"];
+ $sub_array[] = $row["overDue"];
+ $sub_array[] = $row["status"];
  $data[] = $sub_array;
 }
 
 function get_all_data($connect)
 {
- $query = "SELECT * FROM item";
+ $query = "SELECT * FROM loans";
  $result = mysqli_query($connect, $query);
  return mysqli_num_rows($result);
 }
