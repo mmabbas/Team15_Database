@@ -41,6 +41,7 @@
 							<span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Reservations <span class="badge"><?php echo $reserveNum; ?></span>
 						<!-- <a href='<?php echo base_url('users/reservationHistory'); ?>' class="list-group-item"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Reservation History</a> -->
 						</a>
+						<a href='<?php echo base_url('users/userFees'); ?>' class="list-group-item"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Fees</a>
 					</div>
 				</div>
 				<div class="col-md-9">

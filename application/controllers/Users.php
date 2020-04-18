@@ -227,16 +227,16 @@ class Users extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function reserveStatus()
-    {
-        $data['title'] = 'Reservation Status';
-        $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']);
-        $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']);
-        $data['reservations'] = $this->reservation_model->getUserReservations($this->session->userdata['user_id']);
-        $this->load->view('templates/header');
-        $this->load->view('users/reserveStatus', $data);
-        $this->load->view('templates/footer');
-    }
+    public function reserveStatus() 
+    { 
+        $data['title'] = 'Reservation Status'; 
+        $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']); 
+        $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']); 
+        $data['reservations'] = $this->reservation_model->getUserReservations($this->session->userdata['user_id']); 
+        $this->load->view('templates/header'); 
+        $this->load->view('users/reserveStatus', $data); 
+        $this->load->view('templates/footer'); 
+    } 
 
     public function checkout_cart()
     {
@@ -414,6 +414,42 @@ class Users extends CI_Controller
         $data['title'] = 'Edit Profile';
         $this->load->view('templates/header');
         $this->load->view('users/editProfile');
+        $this->load->view('templates/footer');
+    }
+
+    public function userFees()
+    {
+        $data['title'] = 'User Fees';
+        $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']); 
+        $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']); 
+        $data['reservations'] = $this->reservation_model->getUserReservations($this->session->userdata['user_id']); 
+        // $data['titleNames'] = $this->fetch_item->getItem($itemID)
+        $data['feesNums'] = $this->fees_model->getFees($this->session->userdata['user_id']);
+        $this->load->view('templates/header'); 
+        $this->load->view('users/userFees', $data); 
+        $this->load->view('templates/footer'); 
+    }
+
+    public function updateFee($feeID)
+    {
+        //update fee status to paid
+        $this->fees_model->updateFeeStatus($feeID);
+        //update date user paid
+        //$this->fees_model->updateFeeDate($feeID);
+        //$amount = $this->fees_model->feeNum($this->session->userdata['user_id']);
+        $this->fees_model->updateFeeDate($feeID);
+
+        $this->session->set_flashdata('user_registered', 'Fee has been paid successfully');
+        redirect('users/newDash');
+    } 
+
+    public function confirmPayment($feeID)
+    {
+        $data['title'] = 'Confirm Payment';
+        $data['feesArray'] = $this->fees_model->getOneFee($feeID);
+        //print_r($data['item']);
+        $this->load->view('templates/header');
+        $this->load->view('users/confirmPayment', $data);
         $this->load->view('templates/footer');
     }
 }

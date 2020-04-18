@@ -42,7 +42,7 @@ class Fetch_item extends CI_Model {
     if($searchType != 0){
     $this->db->where('type', $searchType);
     }
-    $this->db->where('userID is NULL', NULL, FALSE);
+    //$this->db->where('userID is NULL', NULL, FALSE);
     //Look up user input as $query from item.title, item.author and item.distributor
     if($query != ''){
       if($searchBy == "title"){
