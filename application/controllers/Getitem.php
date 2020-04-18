@@ -45,7 +45,6 @@ class Getitem extends CI_Controller{
               $itemImg
               <h3 class='item-title'>".$row->title."</h3>
               <p class='item-author'>".$row->author."</p>
-              <p class='item-id'>".$row->itemID."</p>
               <p class='year'>".$row->year."</p>
               <p class='item-status'>".$status."</p>
               <p class='total-available'>Total Available: ".$amount->totalAvailable."</p>
