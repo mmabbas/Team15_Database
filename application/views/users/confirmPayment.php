@@ -4,7 +4,7 @@
         <br><br>
         <h1 class="text-center"><?php echo $title; ?></h1>
         <div class='items-box'>
-            <h3 class='item-title'><?php echo $feesArray->itemID; ?></h3>
+            <h3 class='item-title'><?php echo $feesArray->title; ?></h3>
             <!-- <p class='item-author'><?php echo $feesArray->author; ?></p> -->
             <!-- <p class='year'><?php echo $item->year; ?></p> -->
         </div>

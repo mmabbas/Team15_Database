@@ -436,8 +436,8 @@ class Users extends CI_Controller
         $this->fees_model->updateFeeStatus($feeID);
         //update date user paid
         //$this->fees_model->updateFeeDate($feeID);
-        $amount = $this->fees_model->feeNum($this->session->userdata['user_id']);
-        $this->fees_model->updateFeeDate($amount);
+        //$amount = $this->fees_model->feeNum($this->session->userdata['user_id']);
+        $this->fees_model->updateFeeDate($feeID);
 
         $this->session->set_flashdata('user_registered', 'Fee has been paid successfully');
         redirect('users/newDash');
