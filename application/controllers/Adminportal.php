@@ -133,10 +133,10 @@ class Adminportal extends CI_Controller
         $data['totalTitles'] = $this->fetch_item->getCount();
         $data['userCount'] = $this->user_model->getCount();
         //print_r(($data['reservations']));
-        if (empty($data['reservations'])) {
+        /*if (empty($data['reservations'])) {
             $this->session->set_flashdata('no_reservations', 'There are no active reservations at the moment');
             redirect('users/adminDashboard');
-        }
+        }*/
         $this->load->view('templates/header');
         $this->load->view('adminfuncs/adminReservations', $data);
         $this->load->view('templates/footer');
