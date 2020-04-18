@@ -1,25 +1,24 @@
 <?php
 //fetch.php
 $connect = mysqli_connect("localhost", "root", "secret", "team15dbms");
-$columns = array('loanID', 'userID', 'itemID', 'itemName', 'checkOutDate', 'dueDate', 'overDue', 'status');
+$columns = array('reservationID', 'userID', 'itemID', 'itemName', 'reservationDate', 'expirationDate', 'status');
 
-$query = "SELECT * FROM loans WHERE ";
+$query = "SELECT * FROM reservations WHERE ";
 
 if($_POST["is_date_search"] == "yes")
 {
- $query .= 'checkOutDate BETWEEN "'.$_POST["start_date"].'" AND "'.$_POST["end_date"].'" AND ';
+ $query .= 'reservationDate BETWEEN "'.$_POST["start_date"].'" AND "'.$_POST["end_date"].'" AND ';
 }
 
 if(isset($_POST["search"]["value"]))
 {
  $query .= '
-  (loanID LIKE "%'.$_POST["search"]["value"].'%"
+  (reservationID LIKE "%'.$_POST["search"]["value"].'%"
   OR userID LIKE "%'.$_POST["search"]["value"].'%"
   OR itemID LIKE "%'.$_POST["search"]["value"].'%"   
   OR itemName LIKE "%'.$_POST["search"]["value"].'%" 
-  OR checkOutDate LIKE "%'.$_POST["search"]["value"].'%" 
-  OR dueDate LIKE "%'.$_POST["search"]["value"].'%"
-  OR overDue LIKE "%'.$_POST["search"]["value"].'%" 
+  OR reservationDate LIKE "%'.$_POST["search"]["value"].'%" 
+  OR expirationDate LIKE "%'.$_POST["search"]["value"].'%" 
   OR status LIKE "%'.$_POST["search"]["value"].'%")
  ';
 }
@@ -31,7 +30,7 @@ if(isset($_POST["order"]))
 }
 else
 {
- $query .= 'ORDER BY loanID ASC ';
+ $query .= 'ORDER BY reservationID ASC ';
 }
 
 $query1 = '';
@@ -50,20 +49,19 @@ $data = array();
 while($row = mysqli_fetch_array($result))
 {
  $sub_array = array();
- $sub_array[] = $row["loanID"];
+ $sub_array[] = $row["reservationID"];
  $sub_array[] = $row["userID"];
  $sub_array[] = $row["itemID"];
  $sub_array[] = $row["itemName"];
- $sub_array[] = $row["checkOutDate"];
- $sub_array[] = $row["dueDate"];
- $sub_array[] = $row["overDue"];
+ $sub_array[] = $row["reservationDate"];
+ $sub_array[] = $row["expirationDate"];
  $sub_array[] = $row["status"];
  $data[] = $sub_array;
 }
 
 function get_all_data($connect)
 {
- $query = "SELECT * FROM loans";
+ $query = "SELECT * FROM reservations";
  $result = mysqli_query($connect, $query);
  return mysqli_num_rows($result);
 }

@@ -90,7 +90,7 @@
                   <th>Name</th>
                   <th>Requested By</th>
                   <th>Reservation Date</th>
-                  <th>Experiation Date</th>
+                  <th>Expiration Date</th>
                   
                   <?php foreach ($latestReservations as $reservation) : ?>
                     <tr>

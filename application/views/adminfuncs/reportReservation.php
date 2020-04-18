@@ -31,7 +31,7 @@
  </head>
  <body>
   <div class="container box">
-   <h1 align="center">Checkout Report</h1>
+   <h1 align="center">Reservation Report</h1>
    <br />
    <div class="table-responsive">
     <br />
@@ -52,13 +52,12 @@
     <table id="order_data" class="table table-bordered table-striped">
      <thead>
       <tr>
-	   <th>Loan ID</th>
+	   <th>Reservation ID</th>
        <th>User ID</th>
 	   <th>Item ID</th>
        <th>Title</th>
-       <th>Date Checked Out</th>
-	   <th>Due Date</th>
-	   <th>Over Due</th>
+       <th>Reservation Initiation</th>
+	   <th>Reservation Expiration</th>
 	   <th>Status</th>
       </tr>
      </thead>
@@ -89,7 +88,7 @@ $(document).ready(function(){
    "serverSide" : true,
    "order" : [],
    "ajax" : {
-    url:"<?php echo base_url(); ?>adminportal/fetchReportCheckoutData",
+    url:"<?php echo base_url(); ?>adminportal/fetchReportReservationData",
     type:"POST",
     data:{
      is_date_search:is_date_search, start_date:start_date, end_date:end_date
