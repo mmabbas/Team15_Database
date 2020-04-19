@@ -119,7 +119,7 @@
                                     <th>Reservation Date</th>
                                     <th>Expiration Date</th>
                                     <th>Cancel Reservation</th>
-                                    <th>Check Out Book</th>
+                                    <th>Check Out Item</th>
 
                                     <?php foreach ($latestReservations as $reservation) : ?>
                                 <tr>

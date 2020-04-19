@@ -37,7 +37,7 @@ if(isset($_POST["order"]))
 }
 else
 {
- $query .= 'ORDER BY loanID ASC ';
+ $query .= 'ORDER BY loanID DESC ';
 }
 
 $query1 = '';
