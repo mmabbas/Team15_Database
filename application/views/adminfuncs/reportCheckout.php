@@ -163,7 +163,7 @@ $(document).ready(function(){
             data: {
                 labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
                 datasets: [{
-                    label: 'Population',
+                    label: 'Amount of Checkouts',
                     data: [
                         1,
                         1,
