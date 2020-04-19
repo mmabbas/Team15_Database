@@ -7,6 +7,7 @@
   <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
   <style>
    body
    {
@@ -72,6 +73,10 @@
 
    </div>
   </div>
+
+  <div class="container box">
+        <canvas id="myChart"></canvas>
+    </div>
  </body>
 </html>
 
@@ -143,3 +148,72 @@ $(document).ready(function(){
  });
 });
 </script>
+
+
+<script>
+        let myChart = document.getElementById('myChart').getContext('2d');
+
+        //global options
+        Chart.defaults.global.defaultFontFamily = 'Segoe UI';
+        Chart.defaults.global.defaultFontSize = 17;
+        Chart.defaults.global.defaultFontColor = 'white';
+
+        let massPopChart = new Chart(myChart, {
+            type: 'bar', //bar, horizontalBar, pie, line, doughnut, radar, polarArea
+            data: {
+                labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                datasets: [{
+                    label: 'Population',
+                    data: [
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    //backgroundColor:'grey'
+                    backgroundColor: [
+                        '#8F0B0B',
+                        '#9C5700',
+                        '#948B01',
+                        '#006218',
+                        '#001E9E',
+                        '#390049',
+                        '#614e6e'
+                    ],
+                    borderWidth: 1,
+                    borderColor: 'grey',
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: '#000'
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Amount of Checkouts by Day',
+                    fontSize: 25,
+                },
+                legend: {
+                    display: false,
+                    position: 'right',
+                    labels: {
+                        fontColor: 'black'
+                    }
+                },
+                layout: {
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        top: 0,
+                    }
+                },
+                tooltips: {
+                    enabled: true
+                }
+            }
+
+        });
+    </script>
