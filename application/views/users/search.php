@@ -4,7 +4,7 @@
   <?php echo "<body style='background-color:#222222'>"; ?>
     <div class="jumbotron">
       <div class="row">
-        <input type="text" class="form-control" id="searchtxt" placeholder="Search Books..." name="searchTest">
+        <input type="text" class="form-control" id="searchtxt" placeholder="Search Items..." name="searchTest">
         <select class="type-filter" id=searchType>
           <option selected="selected" value="0">Everything</option>
           <option value="1">Book</option>

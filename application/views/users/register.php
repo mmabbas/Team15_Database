@@ -6,12 +6,12 @@
         <br>
         <h2 class="text-center"><?= $title; ?></h2>
         <div class="form-group">
-            <Label>Name</Label>
+            <Label>First Name</Label>
             <input type="text" class="form-control" name="firstName" placeholder="First Name">
         </div>
 
         <div class="form-group">
-            <Label>Name</Label>
+            <Label>Last Name</Label>
             <input type="text" class="form-control" name="lastName" placeholder="Last Name">
         </div>
 
