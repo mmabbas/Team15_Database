@@ -36,13 +36,22 @@ class Fees_model extends CI_Model
     {
         $this->db->where('userID', $userID);
         $result = $this->db->get('cardholder');
-        return $result->row(0)->feeID;
+        //$endResult = $this->db->update('cardholder', array('fines' => $result->fines));
+        return $result->row(0)->fines;
     } 
 
     public function getOneFee($feeID)
     {
         $query = $this->db->get_where('fees', array('feeID' => $feeID));
         return $query->row();
+    }
+
+    public function updateCardholderFee($amount, $userID)
+    {
+        $this->db->set('fines', $amount);
+        $this->db->where('userID', $userID);
+        $this->db->update('cardholder');
+        return true;
     }
    
 }
