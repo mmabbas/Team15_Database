@@ -64,7 +64,7 @@ class CheckedOut_model extends CI_Model
     public function updateLoanStatus($itemID)
     {
         $this->db->where('itemID', $itemID);
-        $this->db->update('loans', array('status' => "Retruned"));
+        $this->db->update('loans', array('status' => "Returned"));
         return true;
     }
 }
