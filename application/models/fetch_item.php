@@ -26,13 +26,13 @@ class Fetch_item extends CI_Model {
   }
   function assignImage($itemType){
     if($itemType == 1){
-    return '<img class="item-img" src="http://localhost/team15dbms/assets/images/book.png">';
+    return '<img class="item-img" src="'.base_url().'assets/images/book.png" />'; //<img src="'.base_url().'upload/'."file_name".'" />
   }elseif($itemType == 2){
-    return '<img class="item-img" src="http://localhost/team15dbms/assets/images/audio-book.png">';
+    return '<img class="item-img" src="'.base_url().'assets/images/audio-book.png" />';
   }elseif($itemType == 3){
-    return '<img class="item-img"src="http://localhost/team15dbms/assets/images/film.png">';
+    return '<img class="item-img" src="'.base_url().'assets/images/film.png" />';
   }else{
-    return '<img class="item-img"src="http://localhost/team15dbms/assets/images/error.png">';
+    return '<img class="item-img" src="'.base_url().'assets/images/error.png" />';
   }
 
   }

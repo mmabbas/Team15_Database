@@ -28,7 +28,7 @@ class Getitem extends CI_Controller{
     } else {
       $status = 'Unavailable';
     }
-    //assign a image base on the item type **THIS WILL NEED TO BE CHANGE BEFORE WE SUBMIT** (check fetch_item model to see why)
+    //assign a image base on the item type
     $itemImg = $this->fetch_item->assignImage($row->type);
     //display only one of the same item at a time
     if($temp1 != $temp2){
