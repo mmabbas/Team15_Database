@@ -47,9 +47,7 @@ class Users extends CI_Controller
             $this->load->view('templates/header');
             $this->load->view('users/editProfile');
             $this->load->view('templates/footer');
-        }
-        else
-        {
+        } else {
             //Encrypt Password
             $enc_password = md5($this->input->post('password'));
             $this->user_model->update_user($enc_password);
@@ -76,8 +74,6 @@ class Users extends CI_Controller
             $this->session->set_flashdata('user_updated', 'Your User Profile has been updated');
             redirect('users/userprofile');
         }
-
-
     }
 
     //login user
@@ -229,16 +225,16 @@ class Users extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function reserveStatus() 
-    { 
-        $data['title'] = 'Reservation Status'; 
-        $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']); 
-        $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']); 
-        $data['reservations'] = $this->reservation_model->getUserReservations($this->session->userdata['user_id']); 
-        $this->load->view('templates/header'); 
-        $this->load->view('users/reserveStatus', $data); 
-        $this->load->view('templates/footer'); 
-    } 
+    public function reserveStatus()
+    {
+        $data['title'] = 'Reservation Status';
+        $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']);
+        $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']);
+        $data['reservations'] = $this->reservation_model->getUserReservations($this->session->userdata['user_id']);
+        $this->load->view('templates/header');
+        $this->load->view('users/reserveStatus', $data);
+        $this->load->view('templates/footer');
+    }
 
     public function checkout_cart()
     {
@@ -371,7 +367,7 @@ class Users extends CI_Controller
         //return to dash
         redirect('users/newDash');
     }
-    
+
     public function getHistory()
     {
         $data['title'] = 'Reservation History';
@@ -392,8 +388,7 @@ class Users extends CI_Controller
         $data['loans'] = $this->checkedOut_model->checkoutHistory($this->session->userdata['user_id']);
         $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']);
         $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']);
-        if (empty($data['loans']))
-        {
+        if (empty($data['loans'])) {
             $this->session->set_flashdata('no_reservations', 'You don\'t have any checkout history');
             redirect('users/newDash');
         }
@@ -424,14 +419,14 @@ class Users extends CI_Controller
     public function userFees()
     {
         $data['title'] = 'User Fees';
-        $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']); 
-        $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']); 
-        $data['reservations'] = $this->reservation_model->getUserReservations($this->session->userdata['user_id']); 
+        $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']);
+        $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']);
+        $data['reservations'] = $this->reservation_model->getUserReservations($this->session->userdata['user_id']);
         // $data['titleNames'] = $this->fetch_item->getItem($itemID)
         $data['feesNums'] = $this->fees_model->getFees($this->session->userdata['user_id']);
-        $this->load->view('templates/header'); 
-        $this->load->view('users/userFees', $data); 
-        $this->load->view('templates/footer'); 
+        $this->load->view('templates/header');
+        $this->load->view('users/userFees', $data);
+        $this->load->view('templates/footer');
     }
 
     public function updateFee($feeID)
@@ -448,7 +443,7 @@ class Users extends CI_Controller
 
         $this->session->set_flashdata('user_registered', 'Fee has been paid successfully');
         redirect('users/newDash');
-    } 
+    }
 
     public function confirmPayment($feeID)
     {

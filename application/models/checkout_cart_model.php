@@ -29,6 +29,13 @@ class checkout_cart_model extends CI_Model
        );
    $this->db->update('item', $updateitem);
  }
+
+ public function getDueDate($itemID)
+ {
+  $query = $this->db->get_where('item', array('itemID' => $itemID));
+  return $query->row()->dueDate;
+ }
+
  function removeUser($itemID){
    $this->db->where('itemID', $itemID);
    $updateitem = array(

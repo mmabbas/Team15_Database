@@ -1,3 +1,4 @@
+
 <html>
  <head>
   <title>Checkout Report</title>
@@ -161,17 +162,17 @@ $(document).ready(function(){
         let massPopChart = new Chart(myChart, {
             type: 'bar', //bar, horizontalBar, pie, line, doughnut, radar, polarArea
             data: {
-                labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
                 datasets: [{
                     label: 'Amount of Checkouts',
                     data: [
-                        1,
-                        1,
-                        1,
-                        1,
-                        1,
-                        1,
-                        1
+                      <?php echo $checkOutInfo['1']; ?>,
+                      <?php echo $checkOutInfo['2']; ?>,
+                      <?php echo $checkOutInfo['3']; ?>,
+                      <?php echo $checkOutInfo['4']; ?>,
+                      <?php echo $checkOutInfo['5']; ?>,
+                      <?php echo $checkOutInfo['6']; ?>,
+                      <?php echo $checkOutInfo['7']; ?>
                     ],
                     //backgroundColor:'grey'
                     backgroundColor: [
@@ -181,7 +182,7 @@ $(document).ready(function(){
                         '#006218',
                         '#001E9E',
                         '#390049',
-                        '#614e6e'
+                        '#3BA18D'
                     ],
                     borderWidth: 1,
                     borderColor: 'grey',

@@ -192,9 +192,16 @@ class Adminportal extends CI_Controller
 	
 	public function reportCheckout()
 	{
+        $data['checkOutInfo'] = $this->checkedOut_model->getCheckOutFrequencyByDay();
+        //print_r($checkOutCount);
+        //print_r("<br>");
+        //print_r($checkOutCount[0]['count']);
+
+        
 		$this->load->view('templates/header');
-        $this->load->view('adminfuncs/reportCheckout');
+        $this->load->view('adminfuncs/reportCheckout', $data);
         $this->load->view('templates/footer');
+        
     }
 	
 	public function fetchReportCheckoutData()

@@ -67,5 +67,30 @@ class CheckedOut_model extends CI_Model
         $this->db->update('loans', array('status' => "Returned"));
         return true;
     }
+
+    public function getCheckOutFrequencyByDay()
+    {
+        $week = array(
+            '1' => 0,
+            '2' => 0,
+            '3' => 0,
+            '4' => 0,
+            '5' => 0,
+            '6' => 0,
+            '7' => 0,
+        );
+        $query = $this->db->query('SELECT DAYOFWEEK(`checkOutDate`) as dayOfWeek, COUNT(*) as count FROM loans GROUP BY `checkOutDate` ORDER BY dayofWeek ASC');
+        $result = $query->result_array();
+        print_r($result);
+        print_r("<br><br><br>");
+        for($i = 0; $i < count($result); $i++)
+        {
+            $count = $result[$i]['count'];
+            //print_r("<br><br><br>");
+            //print_r($result[$i]['count']);
+            $week[$result[$i]['dayOfWeek']] = $count;
+        }
+        return $week;
+    }
 }
 ?>
