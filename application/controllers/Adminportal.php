@@ -193,7 +193,9 @@ class Adminportal extends CI_Controller
 	public function reportCheckout()
 	{
         $data['checkOutInfo'] = $this->checkedOut_model->getCheckOutFrequencyByDay();
-        //print_r($checkOutCount);
+        $data['mostCheckedOut'] = $this->checkedOut_model->mostCheckedOutItem();
+        $data['mostActive'] = $this->checkedOut_model->mostActiveUsers();
+        //print_r($data['mostActive']);
         //print_r("<br>");
         //print_r($checkOutCount[0]['count']);
 
@@ -211,8 +213,11 @@ class Adminportal extends CI_Controller
 	
 	public function reportReservation()
     {
+        $data['reservationInfo'] = $this->reservation_model->getReservationFrequencyByDay();
+        $data['mostReserved'] = $this->reservation_model->mostReservedItem();
+        //$data['mostActive'] = $this->reservation_model->mostActiveUsers();
         $this->load->view('templates/header');
-        $this->load->view('adminfuncs/reportReservation');
+        $this->load->view('adminfuncs/reportReservation', $data);
         $this->load->view('templates/footer');
     }
 	

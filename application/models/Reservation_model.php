@@ -102,4 +102,42 @@ class Reservation_model extends CI_Model
         $query = $this->db->get_where('reservations', array('userID'=> $userID));
         return $query->result_array();
     }
+
+    public function getReservationFrequencyByDay()
+    {
+        $week = array(
+            '1' => 0,
+            '2' => 0,
+            '3' => 0,
+            '4' => 0,
+            '5' => 0,
+            '6' => 0,
+            '7' => 0,
+        );
+        $query = $this->db->query('SELECT DAYOFWEEK(`reservationDate`) as dayOfWeek, COUNT(*) as count FROM reservations GROUP BY `reservationDate` ORDER BY dayofWeek ASC');
+        $result = $query->result_array();
+        //print_r($result);
+        //print_r("<br><br><br>");
+        for($i = 0; $i < count($result); $i++)
+        {
+            $count = $result[$i]['count'];
+            //print_r("<br><br><br>");
+            //print_r($result[$i]['count']);
+            $week[$result[$i]['dayOfWeek']] = $count;
+        }
+        return $week;
+    }
+
+    public function mostReservedItem()
+    {
+        $query = $this->db->query('SELECT `itemName`, COUNT(`itemName`) AS `value_occurrence` FROM `reservations` GROUP BY `itemName` ORDER BY `value_occurrence` DESC LIMIT 1');
+        return $query->row();
+    }
+
+    public function mostActiveUsers()
+    {
+        $query = $this->db->query('SELECT `userID`, COUNT(*) as count FROM reservations GROUP BY `userID` ORDER BY userID ASC');
+        $result = $query->result_array();
+        return $result;
+    }
 }

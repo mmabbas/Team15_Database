@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,7 +39,7 @@
                         <a href='<?php echo base_url('adminPortal/viewUsers'); ?>' class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Users <span class="badge"><?php echo $userCount; ?></span></a>
                         <a href='<?php echo base_url('adminportal/viewTitles'); ?>' class="list-group-item"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Titles <span class="badge"><?php echo $totalTitles; ?></span></a>
                         <a href='<?php echo base_url('adminportal/adminReports'); ?>' class="list-group-item active main-color-bg">
-                            <span class="glyphicon glyphicon-book" aria-hidden="true"></span> Reports <span class="badge"></span>
+                            <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> Reports <span class="badge"></span>
                         </a>
                     </div>
 
@@ -53,10 +54,12 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <!-- <input class="form-control" type="text" placeholder="Filter Users..."> -->
-                                    <!-- <a class="btn btn-primary" href='<?php echo base_url('adminPortal/addItem'); ?>' role="button">Add Item</a> -->
-									<a class="btn btn-primary" href='<?php echo base_url('adminportal/reportReservation'); ?>' role="button">Reservation Report</a> <br><br>
-                                    <a class="btn btn-primary" href='<?php echo base_url('adminPortal/reportCheckout'); ?>' role="button">Checkout Report</a>
+                                    <center>
+                                        <!-- <input class="form-control" type="text" placeholder="Filter Users..."> -->
+                                        <!-- <a class="btn btn-primary" href='<?php echo base_url('adminPortal/addItem'); ?>' role="button">Add Item</a> -->
+                                        <a class="btn btn-primary" href='<?php echo base_url('adminportal/reportReservation'); ?>' role="button">Reservation Report</a> <br><br>
+                                        <a class="btn btn-primary" href='<?php echo base_url('adminPortal/reportCheckout'); ?>' role="button">Checkout Report</a>
+                                    </center>
                                 </div>
                             </div>
                             <br>

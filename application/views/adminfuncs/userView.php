@@ -39,7 +39,7 @@
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Users <span class="badge"><?php echo $userCount; ?></span>
                         </a>
                         <a href='<?php echo base_url('adminportal/viewTitles'); ?>' class="list-group-item"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Titles <span class="badge"><?php echo $totalTitles; ?></span></a>
-                        <a href='<?php echo base_url('adminportal/adminReports'); ?>' class="list-group-item"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Reports <span class="badge"></span></a>
+                        <a href='<?php echo base_url('adminportal/adminReports'); ?>' class="list-group-item"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> Reports <span class="badge"></span></a>
 
                     </div>
 

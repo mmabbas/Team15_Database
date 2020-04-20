@@ -92,5 +92,18 @@ class CheckedOut_model extends CI_Model
         }
         return $week;
     }
+
+    public function mostCheckedOutItem()
+    {
+        $query = $this->db->query('SELECT `itemName`, COUNT(`itemName`) AS `value_occurrence` FROM `loans` GROUP BY `itemName` ORDER BY `value_occurrence` DESC LIMIT 1');
+        return $query->row();
+    }
+
+    public function mostActiveUsers()
+    {
+        $query = $this->db->query('SELECT `userID`, COUNT(*) as count FROM loans GROUP BY `userID` ORDER BY userID ASC');
+        $result = $query->result_array();
+        return $result;
+    }
 }
 ?>

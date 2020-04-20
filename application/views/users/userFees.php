@@ -52,7 +52,7 @@
 						<div class="panel-body">
 							<div class="col-md-3">
                                 <div class="well dash-box">
-                                    <h2><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> <?php echo $feeTotal; ?></h2>
+                                    <h2>$<?php echo $feeTotal; ?></h2>
                                     <h4>Fee Total</h4>
                                 </div>
                             </div>
