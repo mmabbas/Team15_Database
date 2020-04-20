@@ -293,6 +293,7 @@ class Users extends CI_Controller
         //update total available
         $item = $this->fetch_item->getItem($itemID);
         $this->inventory_model->incrementTotalAvailable($item->isbn);
+        $this->inventory_model->decrementTotalReserved($item->isbn);
         //add to reservation table
         $this->reservation_model->deleteReservation($itemID);
 
