@@ -68,6 +68,7 @@ class Users extends CI_Controller
                 'last_name' => $result->row()->lastName,
                 'age' => $result->row()->age,
                 'email' => $result->row()->email,
+                'dayLimit' => $result->row()->dayLimit,
                 'user_type' => $user_type,
             );
             $this->session->set_userdata($user_data);
@@ -117,6 +118,7 @@ class Users extends CI_Controller
                     'first_name' => $result->row()->firstName,
                     'last_name' => $result->row()->lastName,
                     'age' => $result->row()->age,
+                    'dayLimit' => $result->row()->dayLimit,
                     'email' => $result->row()->email,
                     'user_type' => $user_type,
                 );
@@ -332,12 +334,13 @@ class Users extends CI_Controller
         //update total available
         $this->inventory_model->incrementTotalCheckedout($isbn);
         //add to loan table
+        $dayLimit = $this->session->userdata['dayLimit'];
         $loanInfo = array(
             'userID' => $this->session->userdata['user_id'],
             'itemID' => $item->itemID,
             'itemName' => $item->title,
             'checkOutDate' => date("Y-m-d"),
-            'dueDate' => date('Y-m-d', strtotime('+1 week')),
+            'dueDate' => date('Y-m-d', strtotime('+'.$dayLimit.' days')),
             'status' => 'Checked Out',
         );
         $this->checkedOut_model->createLoan($loanInfo);
