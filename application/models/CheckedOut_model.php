@@ -81,8 +81,8 @@ class CheckedOut_model extends CI_Model
         );
         $query = $this->db->query('SELECT DAYOFWEEK(`checkOutDate`) as dayOfWeek, COUNT(*) as count FROM loans GROUP BY `checkOutDate` ORDER BY dayofWeek ASC');
         $result = $query->result_array();
-        print_r($result);
-        print_r("<br><br><br>");
+        //print_r($result);
+        //print_r("<br><br><br>");
         for($i = 0; $i < count($result); $i++)
         {
             $count = $result[$i]['count'];
