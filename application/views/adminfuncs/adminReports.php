@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-10">
-                    <h1><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> View Reservations</h1>
+                    <h1><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> View Reports</h1>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
     <section id="breadcrumb">
         <div class="container">
             <ol class="breadcrumb">
-                <li class="active"> Reservation History</li>
+                <li class="active"> Library Reports</li>
             </ol>
         </div>
     </section>
@@ -37,7 +37,6 @@
                         <a href='<?php echo base_url('adminportal/adminDashboard'); ?>' class="list-group-item"> <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard</a>
                         <a href='<?php echo base_url('adminPortal/viewUsers'); ?>' class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Users <span class="badge"><?php echo $userCount; ?></span></a>
                         <a href='<?php echo base_url('adminportal/viewTitles'); ?>' class="list-group-item"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Titles <span class="badge"><?php echo $totalTitles; ?></span></a>
-                        <!-- <a href='<?php echo base_url('adminportal/viewCheckouts'); ?>' class="list-group-item"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkouts <span class="badge"><?php echo $checkOuts;?></span></a> -->
                         <a href='<?php echo base_url('adminportal/adminReports'); ?>' class="list-group-item active main-color-bg">
                             <span class="glyphicon glyphicon-book" aria-hidden="true"></span> Reports <span class="badge"></span>
                         </a>
