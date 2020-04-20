@@ -39,7 +39,6 @@
             <Label>Confirm Password</Label>
             <input type="password" class="form-control" name="password2" placeholder="Confirm Password">
         </div>
-        <div><Label>User Type</Label></div>
     </div>
 </div>
 
