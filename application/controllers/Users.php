@@ -283,7 +283,7 @@ class Users extends CI_Controller
         $this->reservation_model->createReservation($reservationInfo);
 
         $this->session->set_flashdata('user_registered', 'Reservation has been created successfully');
-        redirect('users/newDash');
+        redirect('users/search');
     }
 
     public function cancelReservation($itemID)
@@ -345,7 +345,14 @@ class Users extends CI_Controller
         //augment qunatityCheckedOut
         $this->user_model->increaseQuantityCheckedOut($this->session->userdata['user_id']);
         //add to item table
-        redirect('users/newDash');
+        if ($item->status == "Reserved")
+        {
+            redirect('users/newDash');
+        }
+        else
+        {
+            redirect('users/search');
+        }
     }
     public function confirmReturn($itemID)
     {
