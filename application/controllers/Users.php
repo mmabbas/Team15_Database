@@ -344,6 +344,7 @@ class Users extends CI_Controller
         //augment qunatityCheckedOut
         $this->user_model->increaseQuantityCheckedOut($this->session->userdata['user_id']);
         //add to item table
+        $this->session->set_flashdata('user_registered', 'Checkout was successful');
         if ($item->status == "Reserved") {
             redirect('users/newDash');
         } else {
