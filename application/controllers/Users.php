@@ -186,24 +186,24 @@ class Users extends CI_Controller
     //Check if username exists
     public function check_username_exists($username)
     {
-        $this->form_validation->set_message('check_username_exists', 'That username is taken. Please choose a different one');
-        $this->session->set_flashdata('not_signed_in', 'That username is taken. Please choose a different one');
         if ($this->user_model->check_username_exists($username)) {
-            redirect("users/register");
             return true;
         } else {
+            $this->form_validation->set_message('check_username_exists', 'That username is taken. Please choose a different one');
+            $this->session->set_flashdata('not_signed_in', 'That username is taken. Please choose a different one');
+            redirect("users/register");
             return false;
         }
     }
 
     public function check_email_exists($email)
     {
-        $this->form_validation->set_message('check_email_exists', 'That email is taken. Please choose a different one');
         //$this->session->set_flashdata('not_signed_in', 'That email is taken. Please choose a different one');
         if ($this->user_model->check_email_exists($email)) {
-            redirect("users/register");
             return true;
         } else {
+            $this->form_validation->set_message('check_email_exists', 'That email is taken. Please choose a different one');
+            redirect("users/register");
             return false;
         }
     }
@@ -338,19 +338,16 @@ class Users extends CI_Controller
             'itemID' => $item->itemID,
             'itemName' => $item->title,
             'checkOutDate' => date("Y-m-d"),
-            'dueDate' => date('Y-m-d', strtotime('+'.$dayLimit.' days')),
+            'dueDate' => date('Y-m-d', strtotime('+' . $dayLimit . ' days')),
             'status' => 'Checked Out',
         );
         $this->checkedOut_model->createLoan($loanInfo);
         //augment qunatityCheckedOut
         $this->user_model->increaseQuantityCheckedOut($this->session->userdata['user_id']);
         //add to item table
-        if ($item->status == "Reserved")
-        {
+        if ($item->status == "Reserved") {
             redirect('users/newDash');
-        }
-        else
-        {
+        } else {
             redirect('users/search');
         }
     }
