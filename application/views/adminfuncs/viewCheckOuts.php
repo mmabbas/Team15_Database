@@ -40,7 +40,7 @@
                         <a href='<?php echo base_url('adminportal/viewCheckouts'); ?>' class="list-group-item active main-color-bg">
                             <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Checkouts <span class="badge"><?php echo $checkOuts; ?></span>
                         </a>
-                        <a href='<?php echo base_url('adminportal/adminReservations'); ?>' class="list-group-item"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Reservations <span class="badge"><?php echo $reservations; ?></span></a>
+                        <a href='<?php echo base_url('adminportal/adminReports'); ?>' class="list-group-item"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> Reservations <span class="badge"><?php echo $reservations; ?></span></a>
                     </div>
 
 

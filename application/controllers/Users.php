@@ -315,7 +315,7 @@ class Users extends CI_Controller
         $bookLimit = $this->user_model->getBookLimit($this->session->userdata['user_id']);
         $amountLoaned = $this->user_model->getQuantityCheckedOut($this->session->userdata['user_id']);
         if ($amountLoaned >= $bookLimit) {
-            $this->session->set_flashdata('no_reservations', 'You cannot exceed your book limit. Try returning some books and try again');
+            $this->session->set_flashdata('no_reservations', 'You cannot exceed your book limit. Return some books and try again');
             redirect('users/newDash');
         }
         $item = $this->fetch_item->getItem($itemID);

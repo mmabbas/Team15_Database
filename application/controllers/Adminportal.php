@@ -124,9 +124,9 @@ class Adminportal extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function adminReservations()
+    public function adminReports()
     {
-        $data['title'] = 'View All Reservations';
+        $data['title'] = 'View All Reports';
         $data['allReservations'] = $this->reservation_model->getActiveReservations();
         $data['reservations'] = $this->reservation_model->getActiveCount();
         $data['checkOuts'] = $this->checkedOut_model->getActiveCount();
@@ -138,7 +138,7 @@ class Adminportal extends CI_Controller
             redirect('users/adminDashboard');
         }*/
         $this->load->view('templates/header');
-        $this->load->view('adminfuncs/adminReservations', $data);
+        $this->load->view('adminfuncs/adminReports', $data);
         $this->load->view('templates/footer');
     }
 
