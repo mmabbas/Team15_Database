@@ -53,9 +53,9 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-md-12">
+                                <!-- <div class="col-md-12">
                                     <input type="search" class="form-control form-control-sm" placeholder="Search for User" aria-controls="userTable">
-                                </div>
+                                </div> -->
                             </div>
                             <br>
                             <table id="userTable" class="table table-striped table-hover">
