@@ -15,7 +15,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-10">
-					<h1><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> View Reservations</h1>
+					<h1><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> View Fees</h1>
 				</div>
 			</div>
 		</div>
@@ -24,7 +24,7 @@
 	<section id="breadcrumb">
 		<div class="container">
 			<ol class="breadcrumb">
-				<li class="active"> Active Reservations</li>
+				<li class="active"> User Fees</li>
 			</ol>
 		</div>
 	</section>
@@ -50,10 +50,18 @@
 							<h3 class="panel-title">Titles</h3>
 						</div>
 						<div class="panel-body">
-							<div class="row">
-								<div class="col-md-12">
-								</div>
-							</div>
+							<div class="col-md-3">
+                                <div class="well dash-box">
+                                    <h2><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> <?php echo $feeTotal; ?></h2>
+                                    <h4>Fee Total</h4>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="well dash-box">
+                                    <h2><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> <?php echo $feeCount; ?></h2>
+                                    <h4>Unpaid Fees</h4>
+                                </div>
+                            </div>
 							<br>
 							<table class="table table-striped table-hover">
 								<tr>
@@ -70,7 +78,7 @@
 									<td><?php echo $feeNum['dateCreated']; ?></td>
 									<td><?php echo $feeNum['dateSettled']; ?></td>
                                     <td><?php echo $feeNum['feeStatus']; ?></td>
-                                    <td><?php echo $feeNum['feeAmount']; ?></td>
+                                    <td>$<?php echo $feeNum['feeAmount']; ?></td>
 									<?php if ($feeNum['feeStatus'] == "Unpaid") : ?>
 										<td><a href="<?php echo base_url(); ?>users/confirmPayment/<?php echo $feeNum['feeID']; ?>" class="btn btn-success">Pay</a></td>
 									<?php endif; ?>

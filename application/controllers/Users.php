@@ -424,6 +424,8 @@ class Users extends CI_Controller
         $data['numOfCheckOuts'] = $this->checkedOut_model->activeCheckoutNum($this->session->userdata['user_id']);
         $data['reserveNum'] = $this->reservation_model->getActiveUserCount($this->session->userdata['user_id']);
         $data['reservations'] = $this->reservation_model->getUserReservations($this->session->userdata['user_id']);
+        $data['feeTotal'] = $this->fees_model->getTotalFees($this->session->userdata['user_id']);
+        $data['feeCount'] = $this->fees_model->getFeeCount($this->session->userdata['user_id']);
         // $data['titleNames'] = $this->fetch_item->getItem($itemID)
         $data['feesNums'] = $this->fees_model->getFees($this->session->userdata['user_id']);
         $this->load->view('templates/header');

@@ -53,5 +53,17 @@ class Fees_model extends CI_Model
         $this->db->update('cardholder');
         return true;
     }
+
+    public function getTotalFees($userID)
+    {
+        $query = $this->db->get_where('cardholder', array('userID' => $userID));
+        return $query->row()->fines;
+    }
+
+    public function getFeeCount($userID)
+    {
+        $query = $this->db->get_where('fees', array('userID' => $userID, 'feeStatus' => 'Unpaid'));
+        return $query->num_rows();
+    }
    
 }

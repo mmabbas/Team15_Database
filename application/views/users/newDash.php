@@ -53,20 +53,20 @@
                             <div class="col-md-3">
                                 <div class="well dash-box">
                                     <h2><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> <?php echo $numOfCheckOuts; ?></h2>
-                                    <h4>Active Checkouts</h4>
+                                    <h4>Active Checkout(s)</h4>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="well dash-box">
                                     <h2><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span> <?php echo $reserveNum; ?></h2>
-                                    <h4>Pending Reservations</h4>
+                                    <h4>Requested Reservation(s)</h4>
                                 </div>
                             </div>
 
                             <div class="col-md-3">
                                 <div class="well dash-box">
-                                    <h2><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <?php echo $dayLimit; ?></h2>
-                                    <h4>Day Loan Period</h4>
+                                    <h2><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> <?php echo $dayLimit; ?> days </h2>
+                                    <h4>Loan Period</h4>
                                 </div>
                             </div>
 
