@@ -53,13 +53,12 @@ class Users extends CI_Controller
             $this->user_model->update_user($enc_password);
 
             $user_id = $this->session->userdata['user_id'];
-            $username = $this->session->userdata['username'];
             $user_type = $this->session->userdata['user_type'];
             $this->db->where('userID', $user_id);
             $result = $this->db->get('cardholder');
             $user_data = array(
                 'user_id' => $user_id,
-                'username' => $username,
+                'username' => $result->row()->loginID,
                 'logged_in' => true,
                 'userType' => "User",
                 'first_name' => $result->row()->firstName,
