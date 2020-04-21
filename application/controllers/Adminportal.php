@@ -224,5 +224,29 @@ class Adminportal extends CI_Controller
 	public function fetchReportReservationData()
     {
         $this->load->view('adminfuncs/fetchReservation');
-    }	
+    }
+
+
+    public function confirmDeletion($itemID)
+    {
+        $data['title'] = 'Confirm Deletion';
+        $data['item'] = $this->fetch_item->getItem($itemID);
+        //print_r($data['item']);
+        $this->load->view('templates/header');
+        $this->load->view('adminfuncs/confirmDeletion', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function deleteItem($itemID)
+    {
+        //update item status to Deleted
+        $this->fetch_item->deleteItem($itemID);
+        //update total available
+        $item = $this->fetch_item->getItem($itemID);
+        $this->inventory_model->decrementTotalAvailable($item->isbn);
+
+        $this->session->set_flashdata('user_registered', 'Item has been deleted successfully');
+        redirect('adminPortal/viewTitles');
+    }
+
 }

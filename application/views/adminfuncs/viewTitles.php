@@ -69,15 +69,19 @@
                                     <th>Author</th>
                                     <th>Status</th>
                                     <th>Edit</th>
+                                    <th>Delete</th>
                                     <?php foreach ($allTitles as $title) : ?>
                                 <tr>
-                                    <td><?php echo $title->itemID; ?></td>
-                                    <td><?php echo $title->title; ?></td>
-                                    <td><?php echo $title->isbn; ?></td>
-                                    <td><?php echo $title->genre; ?></td>
-                                    <td><?php echo $title->author; ?></td>
-                                    <td><?php echo $title->status; ?></td>
-                                    <td><a href="<?php echo base_url(); ?>adminPortal/editItem/<?php echo $title->itemID; ?>" class="btn btn-success">Edit</a></td>
+                                    <?php if ($title->status != "Deleted") : ?>
+                                        <td><?php echo $title->itemID; ?></td>
+                                        <td><?php echo $title->title; ?></td>
+                                        <td><?php echo $title->isbn; ?></td>
+                                        <td><?php echo $title->genre; ?></td>
+                                        <td><?php echo $title->author; ?></td>
+                                        <td><?php echo $title->status; ?></td>
+                                        <td><a href="<?php echo base_url(); ?>adminPortal/editItem/<?php echo $title->itemID; ?>" class="btn btn-success">Edit</a></td>
+                                        <td><a href="<?php echo base_url(); ?>adminPortal/confirmDeletion/<?php echo $title->itemID; ?>" class="btn btn-danger">Delete</a></td>
+                                    <?php endif; ?>
                                 </tr>
                             <?php endforeach; ?>
 

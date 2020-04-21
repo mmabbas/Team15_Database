@@ -84,4 +84,11 @@ class Fetch_item extends CI_Model {
     $this->db->update('item', array('status' => "Available"));
     return true;
   }
+
+  public function deleteItem($itemID)
+  {
+    $this->db->where('itemID', $itemID);
+    $this->db->update('item', array('status' => "Deleted"));
+    return true;
+  }
 }
