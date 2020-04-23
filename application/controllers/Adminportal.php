@@ -259,7 +259,7 @@ class Adminportal extends CI_Controller
         $this->inventory_model->decrementTotalAvailable($item->isbn);
 
         $this->session->set_flashdata('user_registered', 'Item has been deleted successfully');
-        redirect('adminPortal/viewTitles');
+        redirect('adminportal/viewTitles');
     }
 
 }

@@ -54,13 +54,13 @@ p {
     font-family: 'Montserrat', sans-serif;
     font-size: 700%;
     color: white;
-    margin-bottom: -40px;
+    margin-bottom: 0px;
     position: relative;
     animation: text 2s 1;
 }
 
 .textTwo {
-    font-size: 20px;
+    font-size: 30px;
     color: white;
     animation: text2 2s 1;
 }
