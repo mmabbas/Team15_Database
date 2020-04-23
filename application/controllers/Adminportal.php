@@ -84,7 +84,7 @@ class Adminportal extends CI_Controller
 
             $this->admin_model->add_item();
             $this->admin_model->update_item_invID();
-            
+
             //set message
             $this->session->set_flashdata('item_added', 'Item has been added to the Library');
             redirect('adminportal/viewtitles');
@@ -104,7 +104,7 @@ class Adminportal extends CI_Controller
             $this->load->view('templates/header');
             $this->load->view('adminfuncs/editItem', $data);
             $this->load->view('templates/footer');
-            
+
     }
 
     public function update()
@@ -184,12 +184,12 @@ class Adminportal extends CI_Controller
         $this->load->view('adminfuncs/reportTest');
         $this->load->view('templates/footer');
     }
-	
+
 	    public function fetchReportData()
     {
         $this->load->view('adminfuncs/fetch');
     }
-	
+
 	public function reportCheckout()
 	{
         $data['checkOutInfo'] = $this->checkedOut_model->getCheckOutFrequencyByDay();
@@ -199,18 +199,18 @@ class Adminportal extends CI_Controller
         //print_r("<br>");
         //print_r($checkOutCount[0]['count']);
 
-        
+
 		$this->load->view('templates/header');
         $this->load->view('adminfuncs/reportCheckout', $data);
         $this->load->view('templates/footer');
-        
+
     }
-	
+
 	public function fetchReportCheckoutData()
 	{
 		$this->load->view('adminfuncs/fetchCheckout');
 	}
-	
+
 	public function reportReservation()
     {
         $data['reservationInfo'] = $this->reservation_model->getReservationFrequencyByDay();
@@ -220,19 +220,21 @@ class Adminportal extends CI_Controller
         $this->load->view('adminfuncs/reportReservation', $data);
         $this->load->view('templates/footer');
     }
-	
+
 	public function fetchReportReservationData()
     {
         $this->load->view('adminfuncs/fetchReservation');
     }
-	
+
 	public function reportFee()
 	{
-		$this->load->view('templates/header');
-        $this->load->view('adminfuncs/reportFee');
-        $this->load->view('templates/footer');   
+        $data['income'] = $this->fees_model->getPaidAmount()*5;
+        $data['owe'] = $this->fees_model->getUnpaidAmount()*5;
+		    $this->load->view('templates/header');
+        $this->load->view('adminfuncs/reportFee', $data);
+        $this->load->view('templates/footer');
     }
-	
+
 	public function fetchReportFeeData()
 	{
 		$this->load->view('adminfuncs/fetchFee');

@@ -38,7 +38,7 @@ class Fees_model extends CI_Model
         $result = $this->db->get('cardholder');
         //$endResult = $this->db->update('cardholder', array('fines' => $result->fines));
         return $result->row(0)->fines;
-    } 
+    }
 
     public function getOneFee($feeID)
     {
@@ -65,5 +65,15 @@ class Fees_model extends CI_Model
         $query = $this->db->get_where('fees', array('userID' => $userID, 'feeStatus' => 'Unpaid'));
         return $query->num_rows();
     }
-   
+    public function getPaidAmount()
+    {
+        $query = $this->db->get_where('fees', array('feeStatus' => 'Paid'));
+        return $query->num_rows();
+    }
+    public function getUnpaidAmount()
+    {
+        $query = $this->db->get_where('fees', array( 'feeStatus' => 'Unpaid'));
+        return $query->num_rows();
+    }
+
 }

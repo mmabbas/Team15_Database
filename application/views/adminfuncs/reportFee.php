@@ -26,10 +26,14 @@
     margin-top:25px;
    }
   </style>
-  
+
 
  </head>
  <body>
+   <div class="container box">
+       <h4>Total Income: $<?php echo $income; ?>.00</h4>
+       <h4>Total Owe: $<?php echo $owe; ?>.00</h4>
+   </div>
   <div class="container box">
    <h1 align="center">Fees Report</h1>
    <br />
@@ -42,7 +46,7 @@
       </div>
       <div class="col-md-4">
        <input type="text" name="end_date" id="end_date" class="form-control" />
-      </div>      
+      </div>
      </div>
      <div class="col-md-4">
       <input type="button" name="search" id="search" value="Search" class="btn btn-info" />
@@ -63,7 +67,7 @@
       </tr>
      </thead>
     </table>
-    
+
    </div>
   </div>
  </body>
@@ -73,7 +77,7 @@
 
 <script type="text/javascript" language="javascript" >
 $(document).ready(function(){
- 
+
  $('.input-daterange').datepicker({
   todayBtn:'linked',
   format: "yyyy-mm-dd",
@@ -110,7 +114,7 @@ $(document).ready(function(){
   {
    alert("Both dates are required");
   }
- }); 
- 
+ });
+
 });
 </script>
