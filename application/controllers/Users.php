@@ -98,12 +98,13 @@ class Users extends CI_Controller
             $user_id = $this->user_model->login($username, $password);
             $this->db->where('userID', $user_id);
             $result = $this->db->get('cardholder');
-            if ($result->row()->userType == 1) {
-                $user_type = "Student";
-            } else {
-                $user_type = "Faculty";
-            }
             if ($user_id) {
+                
+                if ($result->row()->userType == 1) {
+                    $user_type = "Student";
+                } else {
+                    $user_type = "Faculty";
+                }
                 //Create Session
                 $user_data = array(
                     'user_id' => $user_id,

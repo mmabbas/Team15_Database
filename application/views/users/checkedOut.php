@@ -51,7 +51,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<!-- <input class="form-control" type="text" placeholder="Filter Users..."> -->
-									<!-- <a class="btn btn-primary" href='<?php echo base_url('adminPortal/addItem'); ?>' role="button">Add Item</a> -->
+									<!-- <a class="btn btn-primary" href='<?php echo base_url('adminportal/addItem'); ?>' role="button">Add Item</a> -->
 
 								</div>
 							</div>

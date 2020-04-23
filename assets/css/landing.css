@@ -1,74 +1,105 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400');
+html,
+body {
+    height: 100%;
+    width: 100%;
+    font-family: sans-serif;
+    color: #FFF;
+}
 
-html, body {
-	height: 100%;
-	width: 100%;
-	font-family: sans-serif;
-	color: #FFF;
-}
 #home {
-	background: url(library.jpeg) no-repeat 50% 50%;
-	display: table;
-	height: 100%;
-	width: 100%;
-	background-size: cover;
+    background: url(library.jpeg) no-repeat 50% 50%;
+    display: table;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
 }
+
 .landing-text {
-	display: table-cell;
-	vertical-align: middle;
-	text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
 }
+
 h1 {
-	font-family: 'Montserrat', sans-serif;
-	font-size: 700%;
-	line-height: .9;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 700%;
+    line-height: .9;
 }
+
 h3 {
-	font-size: 260%;
-	font-weight: 500;
-	line-height: 1.2;
+    font-size: 260%;
+    font-weight: 500;
+    line-height: 1.2;
 }
+
 .btn-default {
-	background-color: #FFF;
-	color: #36342F;
-	font-size: 160%;
+    background-color: #FFF;
+    color: #36342F;
+    font-size: 120%;
+    animation: text2 2.2s 1;
 }
+
 .btn-default:hover {
-	color: #FFF;
-	background-color: #36342F;
+    color: #FFF;
+    background-color: #36342F;
 }
+
 p {
-	color: #36342F;
-	padding: 3%;
+    color: #36342F;
+    padding: 3%;
+}
+
+.textOne {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 700%;
+    color: white;
+    margin-bottom: -40px;
+    position: relative;
+    animation: text 2s 1;
+}
+
+.textTwo {
+    font-size: 20px;
+    color: white;
+    animation: text2 2s 1;
+}
+
+@keyframes text2 {
+    0% {
+        opacity: 0;
+    }
+    90% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100;
+    }
+}
+
+@keyframes text {
+    0% {
+        color: black;
+        margin-bottom: -40px;
+    }
+    30% {
+        letter-spacing: 10px;
+        margin-bottom: -40px;
+    }
+    85% {
+        letter-spacing: 8px;
+        margin-bottom: -40px;
+    }
 }
 
 @media (max-width: 768px) {
-	h1 {
-		font-size: 350%;
-	}
-	h3 {
-		font-size: 150%;
-	}
-	.btn-default {
-		font-size: 120%;
-	}
+    h1 {
+        font-size: 350%;
+    }
+    h3 {
+        font-size: 150%;
+    }
+    .btn-default {
+        font-size: 120%;
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

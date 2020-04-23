@@ -35,7 +35,7 @@
                 <div class="col-md-3">
                     <div class="list-group">
                         <a href='<?php echo base_url('adminportal/adminDashboard'); ?>' class="list-group-item"> <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard</a>
-                        <a href='<?php echo base_url('adminPortal/viewUsers'); ?>' class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Users <span class="badge"><?php echo $userCount; ?></span></a>
+                        <a href='<?php echo base_url('adminportal/viewUsers'); ?>' class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Users <span class="badge"><?php echo $userCount; ?></span></a>
                         <a href='<?php echo base_url('adminportal/viewTitles'); ?>' class="list-group-item active main-color-bg">
                             <span class="glyphicon glyphicon-book" aria-hidden="true"></span> Titles <span class="badge"><?php echo $totalTitles; ?></span>
                         </a>
@@ -55,7 +55,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <!-- <input class="form-control" type="text" placeholder="Filter Users..."> -->
-                                    <a class="btn btn-primary" href='<?php echo base_url('adminPortal/addItem'); ?>' role="button">Add Item</a>
+                                    <a class="btn btn-primary" href='<?php echo base_url('adminportal/addItem'); ?>' role="button">Add Item</a>
 
                                 </div>
                             </div>
@@ -79,8 +79,8 @@
                                         <td><?php echo $title->genre; ?></td>
                                         <td><?php echo $title->author; ?></td>
                                         <td><?php echo $title->status; ?></td>
-                                        <td><a href="<?php echo base_url(); ?>adminPortal/editItem/<?php echo $title->itemID; ?>" class="btn btn-success">Edit</a></td>
-                                        <td><a href="<?php echo base_url(); ?>adminPortal/confirmDeletion/<?php echo $title->itemID; ?>" class="btn btn-danger">Delete</a></td>
+                                        <td><a href="<?php echo base_url(); ?>adminportal/editItem/<?php echo $title->itemID; ?>" class="btn btn-success">Edit</a></td>
+                                        <td><a href="<?php echo base_url(); ?>adminportal/confirmDeletion/<?php echo $title->itemID; ?>" class="btn btn-danger">Delete</a></td>
                                     <?php endif; ?>
                                 </tr>
                             <?php endforeach; ?>

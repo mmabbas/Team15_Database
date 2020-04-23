@@ -51,8 +51,11 @@
 
   <div id="home">
     <div class="landing-text">
-      <h1>WELCOME</h1>
-      <h4>TO THE TEAM 15 LIBRARY DATABASE</h4>
+    <div class = "container">
+      <span class="textOne">WELCOME</span>
+      <br>
+      <span class="textTwo">TO THE TEAM 15 LIBRARY DATABASE</span>
+    </div>
       <br>
       <a href="<?php echo base_url(); ?>users/login" class="btn btn-default btn-lg">Login</a>
       <a href="<?php echo base_url(); ?>users/register" class="btn btn-default btn-lg">Register</a>

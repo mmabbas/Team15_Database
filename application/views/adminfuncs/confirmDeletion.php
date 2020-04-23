@@ -11,8 +11,8 @@
     </div>
     <div align="center">
         <h2>Are you sure you want to delete this title?</h2>
-        <a href="<?php echo base_url(); ?>adminPortal/deleteItem/<?php echo $item->itemID; ?>"class="btn btn-success">Yes</a>
-        <a href="<?php echo base_url(); ?>adminPortal/viewTitles" class="btn btn-danger">No</a>
+        <a href="<?php echo base_url(); ?>adminportal/deleteItem/<?php echo $item->itemID; ?>"class="btn btn-success">Yes</a>
+        <a href="<?php echo base_url(); ?>adminportal/viewTitles" class="btn btn-danger">No</a>
     </div>
 
 </div>
