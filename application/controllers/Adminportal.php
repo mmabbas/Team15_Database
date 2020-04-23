@@ -225,7 +225,18 @@ class Adminportal extends CI_Controller
     {
         $this->load->view('adminfuncs/fetchReservation');
     }
-
+	
+	public function reportFee()
+	{
+		$this->load->view('templates/header');
+        $this->load->view('adminfuncs/reportFee');
+        $this->load->view('templates/footer');   
+    }
+	
+	public function fetchReportFeeData()
+	{
+		$this->load->view('adminfuncs/fetchFee');
+	}
 
     public function confirmDeletion($itemID)
     {

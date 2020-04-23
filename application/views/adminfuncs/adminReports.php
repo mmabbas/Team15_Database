@@ -58,7 +58,8 @@
                                         <!-- <input class="form-control" type="text" placeholder="Filter Users..."> -->
                                         <!-- <a class="btn btn-primary" href='<?php echo base_url('adminPortal/addItem'); ?>' role="button">Add Item</a> -->
                                         <a class="btn btn-primary" href='<?php echo base_url('adminportal/reportReservation'); ?>' role="button">Reservation Report</a> <br><br>
-                                        <a class="btn btn-primary" href='<?php echo base_url('adminPortal/reportCheckout'); ?>' role="button">Checkout Report</a>
+                                        <a class="btn btn-primary" href='<?php echo base_url('adminPortal/reportCheckout'); ?>' role="button">Checkout Report</a> <br><br>
+										<a class="btn btn-primary" href='<?php echo base_url('adminPortal/reportFee'); ?>' role="button">Fees Report</a>
                                     </center>
                                 </div>
                             </div>
