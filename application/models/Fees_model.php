@@ -72,8 +72,37 @@ class Fees_model extends CI_Model
     }
     public function getUnpaidAmount()
     {
-        $query = $this->db->get_where('fees', array( 'feeStatus' => 'Unpaid'));
+        $query = $this->db->get_where('fees', array('feeStatus' => 'Unpaid'));
         return $query->num_rows();
     }
 
+    public function getTopFiveUsers()
+    {
+        $returnArray = array();
+
+        $query = $this->db->query('SELECT `userID`, COUNT(*) as count FROM fees GROUP BY `userID` ORDER BY count DESC LIMIT 5');
+        $result = $query->result_array();
+        //print_r($result);
+        //print_r("<br><br><br>");
+        for ($i = 0; $i < count($result); $i++) {
+            $userID = $result[$i]['userID'];
+            $count = $result[$i]['count'];
+            //print_r("<br><br><br>");
+            //print_r($result[$i]['count']);
+            $userName = $this->user_model->getName($userID);
+            $returnArray[$i]['userID'] = ''.$userName.' (User ID #'.$userID.')';
+            $returnArray[$i]['count'] = $count;
+        }
+
+        for ($i = count($result); $i < 5; $i++) {
+            $userName = 'None';
+            $count = 0;
+            //print_r("<br><br><br>");
+            //print_r($result[$i]['count']);
+            $returnArray[$i]['userID'] = $userName;
+            $returnArray[$i]['count'] = $count;
+        }
+
+        return $returnArray;
+    }
 }

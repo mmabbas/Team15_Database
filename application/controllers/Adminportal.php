@@ -230,9 +230,14 @@ class Adminportal extends CI_Controller
 	{
         $data['income'] = $this->fees_model->getPaidAmount()*5;
         $data['owe'] = $this->fees_model->getUnpaidAmount()*5;
-		    $this->load->view('templates/header');
+        $data['topFiveUsers'] = $this->fees_model->getTopFiveUsers();
+        //print_r($data['topFiveUsers']);
+        //print_r('<br><br>');
+        //print_r($data['topFiveUsers'][0]['userID']);
+        $this->load->view('templates/header');
         $this->load->view('adminfuncs/reportFee', $data);
         $this->load->view('templates/footer');
+		
     }
 
 	public function fetchReportFeeData()
