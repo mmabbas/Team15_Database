@@ -42,6 +42,10 @@
 
   </div>
   <div class="container box">
+    <canvas id="userFineChart"></canvas>
+  </div>
+
+  <div class="container box">
     <h1 align="center">Fees Report</h1>
     <br />
     <div class="table-responsive">
@@ -78,9 +82,6 @@
     </div>
   </div>
 
-  <div class="container box">
-    <canvas id="userFineChart"></canvas>
-  </div>
 </body>
 
 </html>
