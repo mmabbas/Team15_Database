@@ -93,7 +93,7 @@
         Chart.defaults.global.defaultFontColor = 'white';
 
         let fineByUserChart = new Chart(mostCheckedOutTitles, {
-            type: 'bar', //bar, horizontalBar, pie, line, doughnut, radar, polarArea
+            type: 'doughnut', //bar, horizontalBar, pie, line, doughnut, radar, polarArea
             data: {
                 labels: [
                     '<?php echo $mostCheckedOut[0]['itemName']; ?>',
@@ -133,10 +133,10 @@
                     fontSize: 15,
                 },
                 legend: {
-                    display: false,
-                    position: 'right',
+                    display: true,
+                    position: 'left',
                     labels: {
-                        fontColor: 'black'
+                        fontColor: 'white'
                     }
                 },
                 layout: {
@@ -155,7 +155,7 @@
         });
 
         let mostReservedTitlesChart = new Chart(mostReservedTitles, {
-            type: 'bar', //bar, horizontalBar, pie, line, doughnut, radar, polarArea
+            type: 'doughnut', //bar, horizontalBar, pie, line, doughnut, radar, polarArea
             data: {
                 labels: [
                     '<?php echo $mostReserved[0]['itemName']; ?>',
@@ -195,10 +195,10 @@
                     fontSize: 15,
                 },
                 legend: {
-                    display: false,
+                    display: true,
                     position: 'right',
                     labels: {
-                        fontColor: 'black'
+                        fontColor: 'white'
                     }
                 },
                 layout: {
