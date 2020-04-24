@@ -9,14 +9,13 @@ class CheckedOut_model extends CI_Model
 
     public function get_items($userID = FALSE)
     {
-        if($userID === FALSE)
-        {
+        if ($userID === FALSE) {
             //$this->db->order_by('item.userID', 'ASC');
             $query = $this->db->get('item');
             return $query->result_array();
         }
         //$this->db->order_by('item.itemID', 'DESC');
-        $query = $this->db->get_where('item', array('userID' =>$userID));
+        $query = $this->db->get_where('item', array('userID' => $userID));
         return $query->result_array();
     }
 
@@ -52,7 +51,7 @@ class CheckedOut_model extends CI_Model
     public function checkoutHistory($userID)
     {
         $this->db->order_by('loans.loanID', 'DESC');
-        $query = $this->db->get_where('loans', array('userID'=> $userID));
+        $query = $this->db->get_where('loans', array('userID' => $userID));
         return $query->result_array();
     }
     public function getActiveCheckout($userID)
@@ -83,8 +82,7 @@ class CheckedOut_model extends CI_Model
         $result = $query->result_array();
         //print_r($result);
         //print_r("<br><br><br>");
-        for($i = 0; $i < count($result); $i++)
-        {
+        for ($i = 0; $i < count($result); $i++) {
             $count = $result[$i]['count'];
             //print_r("<br><br><br>");
             //print_r($result[$i]['count']);
@@ -105,5 +103,38 @@ class CheckedOut_model extends CI_Model
         $result = $query->result_array();
         return $result;
     }
+
+    public function getCheckOutAmount()
+    {
+        $query = $this->db->query('SELECT COUNT(*) as amount FROM loans WHERE `checkOutDate` BETWEEN (CURRENT_DATE() - INTERVAL 1 MONTH) AND CURRENT_DATE()');
+        return $query->row(0)->amount;
+    }
+
+    public function mostPopularTitles()
+    {
+        $returnArray = array();
+        $query = $this->db->query('SELECT `itemID`, COUNT(*) as count FROM loans WHERE `checkOutDate` BETWEEN (CURRENT_DATE() - INTERVAL 1 MONTH) AND CURRENT_DATE() GROUP BY `userID` ORDER BY userID ASC LIMIT 5');
+        $result = $query->result_array();
+
+        for ($i = 0; $i < count($result); $i++) {
+            $itemID = $result[$i]['itemID'];
+            $count = $result[$i]['count'];
+            //print_r("<br><br><br>");
+            //print_r($result[$i]['count']);
+            $itemName = $this->fetch_item->getName($itemID);
+            $returnArray[$i]['itemName'] = $itemName;
+            $returnArray[$i]['count'] = $count;
+        }
+
+        for ($i = count($result); $i < 5; $i++) {
+            $itemName = 'None';
+            $count = 0;
+            //print_r("<br><br><br>");
+            //print_r($result[$i]['count']);
+            $returnArray[$i]['itemName'] = $itemName;
+            $returnArray[$i]['count'] = $count;
+        }
+
+        return $returnArray;
+    }
 }
-?>

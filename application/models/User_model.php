@@ -177,4 +177,10 @@ class User_model extends CI_Model
         $this->db->where('isbn', $itemisbn);
         return $this->db->update('item', $updateitem);
     }
+
+    public function getUsersAdded()
+    {
+        $query = $this->db->query('SELECT COUNT(*) as amount FROM cardholder WHERE `dateAdded` BETWEEN (CURRENT_DATE() - INTERVAL 1 MONTH) AND CURRENT_DATE()');
+        return $query->row(0)->amount;
+    }
 }

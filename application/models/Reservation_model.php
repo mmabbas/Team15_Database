@@ -52,9 +52,9 @@ class Reservation_model extends CI_Model
 
     public function getUserReservations($userID)
     {
-            $this->db->order_by('reservations.userID', 'ASC');
-            $query = $this->db->get_where('reservations', array('userID' => $userID, 'status' => "Reserved"));
-            return $query->result_array();
+        $this->db->order_by('reservations.userID', 'ASC');
+        $query = $this->db->get_where('reservations', array('userID' => $userID, 'status' => "Reserved"));
+        return $query->result_array();
     }
 
     public function getActiveUserCount($userID)
@@ -99,7 +99,7 @@ class Reservation_model extends CI_Model
     public function getHistory($userID)
     {
         $this->db->order_by('reservations.reservationID', 'DESC');
-        $query = $this->db->get_where('reservations', array('userID'=> $userID));
+        $query = $this->db->get_where('reservations', array('userID' => $userID));
         return $query->result_array();
     }
 
@@ -118,8 +118,7 @@ class Reservation_model extends CI_Model
         $result = $query->result_array();
         //print_r($result);
         //print_r("<br><br><br>");
-        for($i = 0; $i < count($result); $i++)
-        {
+        for ($i = 0; $i < count($result); $i++) {
             $count = $result[$i]['count'];
             //print_r("<br><br><br>");
             //print_r($result[$i]['count']);
@@ -139,5 +138,39 @@ class Reservation_model extends CI_Model
         $query = $this->db->query('SELECT `userID`, COUNT(*) as count FROM reservations GROUP BY `userID` ORDER BY userID ASC');
         $result = $query->result_array();
         return $result;
+    }
+
+    public function getReservationAmount()
+    {
+        $query = $this->db->query('SELECT COUNT(*) as amount FROM reservations WHERE `reservationDate` BETWEEN (CURRENT_DATE() - INTERVAL 1 MONTH) AND CURRENT_DATE()');
+        return $query->row(0)->amount;
+    }
+
+    public function mostPopularTitles()
+    {
+        $returnArray = array();
+        $query = $this->db->query('SELECT `itemID`, COUNT(*) as count FROM reservations WHERE `reservationDate` BETWEEN (CURRENT_DATE() - INTERVAL 1 MONTH) AND CURRENT_DATE() GROUP BY `userID` ORDER BY userID ASC LIMIT 5');
+        $result = $query->result_array();
+
+        for ($i = 0; $i < count($result); $i++) {
+            $itemID = $result[$i]['itemID'];
+            $count = $result[$i]['count'];
+            //print_r("<br><br><br>");
+            //print_r($result[$i]['count']);
+            $itemName = $this->fetch_item->getName($itemID);
+            $returnArray[$i]['itemName'] = $itemName;
+            $returnArray[$i]['count'] = $count;
+        }
+
+        for ($i = count($result); $i < 5; $i++) {
+            $itemName = 'None';
+            $count = 0;
+            //print_r("<br><br><br>");
+            //print_r($result[$i]['count']);
+            $returnArray[$i]['itemName'] = $itemName;
+            $returnArray[$i]['count'] = $count;
+        }
+
+        return $returnArray;
     }
 }
