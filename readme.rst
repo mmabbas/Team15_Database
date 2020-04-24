@@ -115,13 +115,13 @@ The Event Scheduler status can not be turned on in the website database due to t
 that are not granted to users. We tried to gain access to Super Privileges but the service did not offer it.
 To test the Event that creates the fees, please download the repository and set up the project on your local
 server. Please note that you will need to change the username and password to match your systems information.
-You can change those by going to \application\config\database.php. 
+You can change those by going to /application/config/database.php. 
 You will also need to change it accordingly in line #3 of the following 3 files:
 
-\application\views\adminfuncs\fetchCheckout.php
+/application/views/adminfuncs/fetchCheckout.php
 
-\application\views\adminfuncs\fetchFee.php
+/application/views/adminfuncs/fetchFee.php
 
-\application\views\adminfuncs\fetchReservation.php
+/application/views/adminfuncs/fetchReservation.php
 
 
