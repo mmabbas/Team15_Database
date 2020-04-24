@@ -63,13 +63,17 @@
                         </li>
                     <?php endif; ?>
                 </ul>
+                
+                <?php if ($this->session->userdata('logged_in')) : ?>
+                    <?php if ($this->session->userdata('userType') == "User") : ?>
+                    <form class="navbar-form navbar-right" action="<?php echo base_url(); ?>pages/search">
+                        <div class="form-group">
 
-                <form class="navbar-form navbar-right" action="<?php echo base_url(); ?>pages/search">
-                    <div class="form-group">
-
-                    </div>
-                    <button class="btn btn-info" type="button">Search</button>
-                </form>
+                        </div>
+                        <button class="btn btn-info" type="button">Search</button>
+                    </form>
+                    <?php endif; ?>
+                <?php endif; ?>
             </div>
             <!--/.nav-collapse -->
         </div>
