@@ -113,7 +113,7 @@ class CheckedOut_model extends CI_Model
     public function mostPopularTitles()
     {
         $returnArray = array();
-        $query = $this->db->query('SELECT `itemID`, COUNT(*) as count FROM loans WHERE `checkOutDate` BETWEEN (CURRENT_DATE() - INTERVAL 1 MONTH) AND CURRENT_DATE() GROUP BY `userID` ORDER BY userID ASC LIMIT 5');
+        $query = $this->db->query('SELECT `itemID`, COUNT(*) as count FROM loans WHERE `checkOutDate` BETWEEN (CURRENT_DATE() - INTERVAL 1 MONTH) AND CURRENT_DATE() GROUP BY `itemID` ORDER BY count DESC LIMIT 5');
         $result = $query->result_array();
 
         for ($i = 0; $i < count($result); $i++) {
@@ -125,14 +125,17 @@ class CheckedOut_model extends CI_Model
             $returnArray[$i]['itemName'] = $itemName;
             $returnArray[$i]['count'] = $count;
         }
-
-        for ($i = count($result); $i < 5; $i++) {
-            $itemName = 'None';
-            $count = 0;
-            //print_r("<br><br><br>");
-            //print_r($result[$i]['count']);
-            $returnArray[$i]['itemName'] = $itemName;
-            $returnArray[$i]['count'] = $count;
+        
+        if(count($result) < 5)
+        {
+            for ($i = count($result); $i < 5; $i++) {
+                $itemName = 'None';
+                $count = 0;
+                //print_r("<br><br><br>");
+                //print_r($result[$i]['count']);
+                $returnArray[$i]['itemName'] = $itemName;
+                $returnArray[$i]['count'] = $count;
+            }
         }
 
         return $returnArray;
