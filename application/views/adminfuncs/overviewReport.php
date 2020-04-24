@@ -89,7 +89,7 @@
 
         //global options
         Chart.defaults.global.defaultFontFamily = 'Segoe UI';
-        Chart.defaults.global.defaultFontSize = 10;
+        Chart.defaults.global.defaultFontSize = 15;
         Chart.defaults.global.defaultFontColor = 'white';
 
         let fineByUserChart = new Chart(mostCheckedOutTitles, {
@@ -130,7 +130,7 @@
                 title: {
                     display: true,
                     text: 'Top 5 Most Checked Out Titles From <?php echo date("M d, Y", strtotime("-1 month")); ?> to <?php echo date("M d, Y"); ?>',
-                    fontSize: 15,
+                    fontSize: 18,
                 },
                 legend: {
                     display: true,
@@ -192,7 +192,7 @@
                 title: {
                     display: true,
                     text: 'Top 5 Most Reserved Titles From <?php echo date("M d, Y", strtotime("-1 month")); ?> to <?php echo date("M d, Y"); ?>',
-                    fontSize: 15,
+                    fontSize: 18,
                 },
                 legend: {
                     display: true,
