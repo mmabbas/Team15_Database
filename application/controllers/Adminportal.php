@@ -267,4 +267,17 @@ class Adminportal extends CI_Controller
         redirect('adminportal/viewTitles');
     }
 
+    public function overviewReport(){
+        $data['usersAdded'] = $this->user_model->getUsersAdded();
+        $data['titlesAdded'] = $this->fetch_item->getTitlesAdded();
+        $data['checkOuts'] = $this->checkedOut_model->getCheckOutAmount();
+        $data['reservations'] = $this->reservation_model->getReservationAmount();
+        $data['mostCheckedOut'] = $this->checkedOut_model->mostPopularTitles();
+        $data['mostReserved'] = $this->reservation_model->mostPopularTitles();
+        //print_r($data['mostCheckedOut']);
+        $this->load->view('templates/header');
+        $this->load->view('adminfuncs/overviewReport', $data);
+        $this->load->view('templates/footer');
+    }
+
 }
