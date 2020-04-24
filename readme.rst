@@ -1,4 +1,6 @@
+###################
 COSC 3380 Library Database - Group 15
+###################
 
 ###################
 Group Members:
@@ -19,13 +21,6 @@ Karla Lemus
 J. G. Hernandez
 *******************
 
-
-Group Members:
-Muhammad Abbas
-David Seijas
-Khoa Tran
-Karla Lemus
-J. G. Hernandez
 
 
 Summary of User Roles
