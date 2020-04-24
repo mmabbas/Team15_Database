@@ -70,7 +70,6 @@
                         <th>Title</th>
                         <th>Date Checked Out</th>
                         <th>Due Date</th>
-                        <th>Over Due</th>
                         <th>Status</th>
                     </tr>
                 </thead>

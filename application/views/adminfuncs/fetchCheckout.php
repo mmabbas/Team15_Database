@@ -1,7 +1,7 @@
 <?php
 //fetch.php
 $connect = mysqli_connect("localhost", "root", "secret", "team15dbms");
-$columns = array('loanID', 'userID', 'itemID', 'itemName', 'checkOutDate', 'dueDate', 'overDue', 'status');
+$columns = array('loanID', 'userID', 'itemID', 'itemName', 'checkOutDate', 'dueDate', 'status');
 
 $query = "SELECT * FROM loans WHERE ";
 
@@ -25,7 +25,6 @@ elseif(isset($_POST["search"]["value"]))
   OR itemName LIKE "%'.$_POST["search"]["value"].'%"
   OR checkOutDate LIKE "%'.$_POST["search"]["value"].'%"
   OR dueDate LIKE "%'.$_POST["search"]["value"].'%"
-  OR overDue LIKE "%'.$_POST["search"]["value"].'%"
   OR status LIKE "%'.$_POST["search"]["value"].'%")
  ';
 }
@@ -62,7 +61,6 @@ while($row = mysqli_fetch_array($result))
  $sub_array[] = $row["itemName"];
  $sub_array[] = $row["checkOutDate"];
  $sub_array[] = $row["dueDate"];
- $sub_array[] = $row["overDue"];
  $sub_array[] = $row["status"];
  $data[] = $sub_array;
 }
