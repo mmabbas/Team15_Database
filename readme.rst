@@ -88,8 +88,7 @@ Steps to Check Out an Item
 5. Click "Search"
 6. Click on "Check Out" of any item
 7. Click "Yes" to check out a book
-8. If you go back to your dashboard, your item will show as well as 
-	when it is due
+8. If you go back to your dashboard, your item will show as well as when it is due
 
 Steps to Edit a User Profile
 1. Log in as a regular user using the "Log In" button
@@ -118,8 +117,11 @@ To test the Event that creates the fees, please download the repository and set 
 server. Please note that you will need to change the username and password to match your systems information.
 You can change those by going to \application\config\database.php. 
 You will also need to change it accordingly in line #3 of the following 3 files:
+
 \application\views\adminfuncs\fetchCheckout.php
+
 \application\views\adminfuncs\fetchFee.php
+
 \application\views\adminfuncs\fetchReservation.php
 
 
