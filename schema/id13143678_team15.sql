@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 24, 2020 at 01:24 AM
+-- Generation Time: Apr 24, 2020 at 03:10 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.12
 
@@ -51,7 +51,7 @@ CREATE TABLE `cardholder` (
 INSERT INTO `cardholder` (`userID`, `loginID`, `password`, `firstName`, `lastName`, `email`, `userType`, `age`, `fines`, `dayLimit`, `bookLimit`, `quantityCheckedOut`, `dateAdded`) VALUES
 (1, 'user1', '24c9e15e52afc47c225b757e7bee1f9d', 'Muhammad', 'Abbas', 'mabbas@dbms.com', '1', '25', 10, 3, 3, 2, '2020-04-24'),
 (2, 'ds168100', '5f4dcc3b5aa765d61d8327deb882cf99', 'David', 'Seijas', 'dseijas@dbms.com', '2', '20', 0, 5, 5, 1, '2020-04-24'),
-(3, 'user3', '92877af70a45fd6a2ed7fe81e1236b78', 'Khoa', 'Tran', 'ktran@dbms.com', '1', '20', 0, 3, 3, 0, '2020-04-24'),
+(3, 'user3', '92877af70a45fd6a2ed7fe81e1236b78', 'Khoa', 'Tran', 'ktran@dbms.com', '1', '20', 0, 3, 3, 1, '2020-04-24'),
 (4, 'user4', '3f02ebe3d7929b091e3d8ccfde2f3bc6', 'Karla', 'Lemus', 'klemus@dbms.com', '2', '20', 0, 5, 5, 0, '2020-04-24'),
 (5, 'user5', '0a791842f52a0acfbb3a783378c066b8', 'J G', 'Hernandez', 'jghernandez@dbms.com', '1', '20', 0, 3, 3, 0, '2020-04-24'),
 (7, 'tomNook', '5f4dcc3b5aa765d61d8327deb882cf99', 'Tom', 'Nook', 'tom@nookinc.com', '2', '40', 0, 5, 5, 0, '2020-04-24'),
@@ -147,14 +147,14 @@ INSERT INTO `inventory` (`inventoryID`, `isbn`, `totalCopies`, `totalAvailable`,
 (13, '10022015', 2, 1, 1, 0),
 (15, '09022016', 3, 3, 0, 0),
 (18, '04262019', 4, 3, 0, 0),
-(22, '06042013', 2, 2, 0, 0),
+(22, '06042013', 2, 1, 1, 0),
 (24, '01011998', 2, 2, 0, 0),
 (26, '01011965', 2, 2, 0, 0),
 (28, '02202018', 2, 2, 0, 0),
 (30, '043396522596', 1, 0, 1, 0),
 (31, '671027344', 1, 0, 1, 0),
 (32, 'B00AFEYUVG', 1, 0, 0, 1),
-(33, '156012197', 1, 1, 0, 0),
+(33, '156012197', 1, 0, 0, 1),
 (34, 'B01F8505M4', 1, 1, 0, 0),
 (35, '1975399366', 1, 1, 0, 0),
 (36, '704400023910', 1, 1, 0, 0),
@@ -166,8 +166,10 @@ INSERT INTO `inventory` (`inventoryID`, `isbn`, `totalCopies`, `totalAvailable`,
 (42, '0385351402', 1, 1, 0, 0),
 (43, '1451648537', 1, 1, 0, 0),
 (44, '34567890', 1, 0, 0, 0),
-(45, '0786', 1, 1, 0, 0),
-(46, 'B003O86FMW', 1, 0, 1, 0);
+(45, '0786', 1, 0, 0, 0),
+(46, 'B003O86FMW', 1, 0, 1, 0),
+(47, 'The Art of War ', 1, 1, 0, 0),
+(48, '1989201512', 1, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -219,7 +221,7 @@ INSERT INTO `item` (`itemID`, `userID`, `inventoryID`, `title`, `type`, `isbn`, 
 (19, NULL, 18, 'Avengers: Endgame', 1, '04262019', 'Deleted', '2020-04-24', NULL, NULL, NULL, 'sciencefiction', 2019, 'Joe & Anthony Russo', 'Marvel Studios'),
 (20, NULL, 18, 'Avengers: Endgame', 1, '04262019', 'Available', '2020-04-24', NULL, NULL, NULL, 'sciencefiction', 2019, 'Joe & Anthony Russo', 'Marvel Studios'),
 (21, NULL, 18, 'Avengers: Endgame', 1, '04262019', 'Available', '2020-04-24', NULL, NULL, NULL, 'sciencefiction', 2019, 'Joe & Anthony Russo', 'Marvel Studios'),
-(22, NULL, 22, 'Entwined With You', 1, '06042013', 'Available', '2020-04-24', NULL, NULL, NULL, 'romance', 2013, 'Sylvia Day', 'Penguin'),
+(22, 3, 22, 'Entwined With You', 1, '06042013', 'Unavailable', '2020-04-24', 'user3', '2020-04-24', '2020-04-27', 'romance', 2013, 'Sylvia Day', 'Penguin'),
 (23, NULL, 22, 'Entwined With You', 1, '06042013', 'Available', '2020-04-24', NULL, NULL, NULL, 'romance', 2013, 'Sylvia Day', 'Penguin'),
 (24, NULL, 24, 'Sea Swept', 1, '01011998', 'Available', '2020-04-24', NULL, NULL, NULL, 'romance', 1998, 'Nora Roberts', 'Penguin'),
 (25, NULL, 24, 'Sea Swept', 1, '01011998', 'Available', '2020-04-24', NULL, NULL, NULL, 'romance', 1998, 'Nora Roberts', 'Penguin'),
@@ -242,8 +244,9 @@ INSERT INTO `item` (`itemID`, `userID`, `inventoryID`, `title`, `type`, `isbn`, 
 (43, NULL, 42, 'The Circle', 1, '0385351402', 'Available', '2020-04-24', NULL, NULL, NULL, 'sciencefiction', 2013, 'Dave Eggers', 'Vintage'),
 (44, NULL, 43, 'Steve Jobs', 1, '1451648537', 'Available', '2020-04-24', NULL, NULL, NULL, 'nonfiction', 2011, 'Walter Isaacson', 'Simon & Schuster'),
 (45, NULL, 44, 'film1', 3, '34567890', 'Deleted', '2020-04-24', NULL, NULL, NULL, 'sciencefiction', 2010, 'werty', 'werty'),
-(46, NULL, 45, 'testing', 1, '0786', 'Available', '2020-04-24', NULL, NULL, NULL, 'sciencefiction', 2010, 'drtyhb', 'jiftyujk'),
-(47, 2, 46, 'Catching Fire', 1, 'B003O86FMW', 'Unavailable', '2020-04-24', 'ds168100', '2020-04-24', '2020-04-29', 'fantasy', 2009, 'Suzanne Collins', 'Scholastic');
+(46, NULL, 45, 'testing', 1, '0786', 'Deleted', '2020-04-24', NULL, NULL, NULL, 'sciencefiction', 2010, 'drtyhb', 'jiftyujk'),
+(47, 2, 46, 'Catching Fire', 1, 'B003O86FMW', 'Unavailable', '2020-04-24', 'ds168100', '2020-04-24', '2020-04-29', 'fantasy', 2009, 'Suzanne Collins', 'Scholastic'),
+(49, NULL, 48, 'The Art of War', 1, '1989201512', 'Available', '2020-04-24', NULL, NULL, NULL, 'nonfiction', 2018, 'Sun Tzu', 'East India Publishing Company ');
 
 --
 -- Triggers `item`
@@ -306,7 +309,11 @@ INSERT INTO `loans` (`loanID`, `userID`, `itemID`, `itemName`, `checkOutDate`, `
 (24, 2, 31, 'Spider-Man: Into the Spider-Verse', '2020-04-21', '2020-04-26', 'Checked Out'),
 (25, 1, 13, 'The Martian', '2020-04-23', '2020-04-26', 'Checked Out'),
 (26, 1, 32, 'The Perks of Being a Wallflower', '2020-04-23', '2020-04-26', 'Checked Out'),
-(27, 2, 47, 'Catching Fire', '2020-04-24', '2020-04-29', 'Checked Out');
+(27, 2, 47, 'Catching Fire', '2020-04-24', '2020-04-29', 'Checked Out'),
+(28, 8, 28, 'Educated', '2020-04-24', '2020-04-27', 'Returned'),
+(29, 8, 28, 'Educated', '2020-04-24', '2020-04-27', 'Returned'),
+(30, 8, 29, 'Educated', '2020-04-24', '2020-04-27', 'Returned'),
+(31, 3, 22, 'Entwined With You', '2020-04-24', '2020-04-27', 'Checked Out');
 
 -- --------------------------------------------------------
 
@@ -344,7 +351,10 @@ INSERT INTO `reservations` (`reservationID`, `userID`, `itemID`, `itemName`, `re
 (14, 2, 36, 'Weathering With You', '2020-04-21', '2020-04-28', 'Picked Up'),
 (15, 2, 33, 'The Perks of Being a Wallflower', '2020-04-21', '2020-04-28', 'Reserved'),
 (16, 2, 31, 'Spider-Man: Into the Spider-Verse', '2020-04-21', '2020-04-28', 'Canceled'),
-(17, 1, 42, 'The Hunger Games', '2020-04-23', '2020-04-30', 'Reserved');
+(17, 1, 42, 'The Hunger Games', '2020-04-23', '2020-04-30', 'Reserved'),
+(18, 8, 28, 'Educated', '2020-04-24', '2020-05-01', 'Picked Up'),
+(19, 8, 28, 'Educated', '2020-04-24', '2020-05-01', 'Picked Up'),
+(20, 3, 22, 'Entwined With You', '2020-04-24', '2020-05-01', 'Picked Up');
 
 --
 -- Indexes for dumped tables
@@ -390,7 +400,9 @@ ALTER TABLE `item`
 -- Indexes for table `loans`
 --
 ALTER TABLE `loans`
-  ADD PRIMARY KEY (`loanID`);
+  ADD PRIMARY KEY (`loanID`),
+  ADD KEY `loan_userID` (`userID`),
+  ADD KEY `loan_itemID` (`itemID`);
 
 --
 -- Indexes for table `reservations`
@@ -426,35 +438,56 @@ ALTER TABLE `fees`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `inventoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `inventoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `itemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `itemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `loans`
 --
 ALTER TABLE `loans`
-  MODIFY `loanID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `loanID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `reservationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `reservationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `fees`
+--
+ALTER TABLE `fees`
+  ADD CONSTRAINT `fee_itemID` FOREIGN KEY (`itemID`) REFERENCES `item` (`itemID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fee_userID` FOREIGN KEY (`userID`) REFERENCES `cardholder` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Constraints for table `item`
 --
 ALTER TABLE `item`
   ADD CONSTRAINT `item_invID` FOREIGN KEY (`inventoryID`) REFERENCES `inventory` (`inventoryID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `loans`
+--
+ALTER TABLE `loans`
+  ADD CONSTRAINT `loan_itemID` FOREIGN KEY (`itemID`) REFERENCES `item` (`itemID`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `loan_userID` FOREIGN KEY (`userID`) REFERENCES `cardholder` (`userID`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `reservations`
+--
+ALTER TABLE `reservations`
+  ADD CONSTRAINT `reservation_itemID` FOREIGN KEY (`itemID`) REFERENCES `item` (`itemID`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `reservation_userID` FOREIGN KEY (`userID`) REFERENCES `cardholder` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 DELIMITER $$
 --
