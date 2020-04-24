@@ -1,11 +1,32 @@
 COSC 3380 Library Database - Group 15
 
+###################
+Group Members:
+###################
+*******************
+Muhammad Abbas
+*******************
+*******************
+David Seijas
+*******************
+*******************
+Khoa Tran
+*******************
+*******************
+Karla Lemus
+*******************
+*******************
+J. G. Hernandez
+*******************
+
+
 Group Members:
 Muhammad Abbas
 David Seijas
 Khoa Tran
 Karla Lemus
 J. G. Hernandez
+
 
 Summary of User Roles
 Student user: The average person who has registered to be a part of the library and can search, check out, and return items 
