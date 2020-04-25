@@ -140,4 +140,5 @@ You will also need to change it accordingly in line #3 of the following 3 files:
 
 /application/views/adminfuncs/fetchReservation.php
 
-
+How we set up our Local Server:
+We installed Xampp from https://www.apachefriends.org/download.html . Then we placed our project folder (team15dbms) in xampp\htdocs . We run xampp with xampp-control.exe and start up Apache and MySQL. From there we can access http://localhost/dashboard/ on our browser which gives us access to phpmyadmin. In phpmyadmin we create a database called team15dbms and we import the schema available in our files into the database. Now we can run the project using the following URL: http://localhost/team15dbms/
